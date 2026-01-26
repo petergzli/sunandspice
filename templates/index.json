@@ -9,81 +9,384 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "tagline_section": {
+      "type": "section",
       "blocks": {
-        "text_PbdKzA": {
+        "tagline_text": {
           "type": "text",
-          "name": "t:names.heading",
           "settings": {
-            "text": "<p>Glow Pads</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h1",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
+            "text": "<h2>Sun & Spice is an Ayurvedic skincare brand creating the next generation of natural, effective solutions for radiant, healthy skin.</h2>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.75rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "uppercase",
             "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_DJyRmH": {
-          "type": "text",
-          "name": "t:names.heading",
+          }
+        }
+      },
+      "block_order": ["tagline_text"],
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "color_scheme": "scheme-1",
+        "background_media": "none",
+        "border": "none",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
+    },
+    "scrolling_banner": {
+      "type": "marquee",
+      "blocks": {
+        "icon_1": {
+          "type": "icon",
           "settings": {
-            "text": "<p>Say goodbye to hyperpigmentation, dark spots, and uneven skin</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
+            "icon": "leaf",
+            "width": 28
+          }
+        },
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>AYURVEDIC FORMULAS</p>",
+            "type_preset": "custom",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "icon_2": {
+          "type": "icon",
           "settings": {
-            "label": "BUY NOW",
-            "link": "shopify://products/✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
-            "open_in_new_tab": false,
-            "style_class": "button",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "icon": "star",
+            "width": 28
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>GLOW FROM WITHIN</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_3": {
+          "type": "icon",
+          "settings": {
+            "icon": "plant",
+            "width": 28
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>100% NATURAL</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_4": {
+          "type": "icon",
+          "settings": {
+            "icon": "heart",
+            "width": 28
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>CRUELTY FREE</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_5": {
+          "type": "icon",
+          "settings": {
+            "icon": "truck",
+            "width": 28
+          }
+        },
+        "text_5": {
+          "type": "text",
+          "settings": {
+            "text": "<p>FREE SHIPPING $50+</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_6": {
+          "type": "icon",
+          "settings": {
+            "icon": "fire",
+            "width": 28
+          }
+        },
+        "text_6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>TURMERIC POWERED</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_7": {
+          "type": "icon",
+          "settings": {
+            "icon": "return",
+            "width": 28
+          }
+        },
+        "text_7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>EASY RETURNS</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_8": {
+          "type": "icon",
+          "settings": {
+            "icon": "check",
+            "width": 28
+          }
+        },
+        "text_8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>CLINICALLY TESTED</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_9": {
+          "type": "icon",
+          "settings": {
+            "icon": "eye",
+            "width": 28
+          }
+        },
+        "text_9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>VISIBLE RESULTS</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        },
+        "icon_10": {
+          "type": "icon",
+          "settings": {
+            "icon": "recycle",
+            "width": 28
+          }
+        },
+        "text_10": {
+          "type": "text",
+          "settings": {
+            "text": "<p>SUSTAINABLE PACKAGING</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
         }
       },
       "block_order": [
-        "text_PbdKzA",
-        "text_DJyRmH",
-        "button_H9gpTf"
+        "icon_1", "text_1", "icon_2", "text_2", "icon_3", "text_3",
+        "icon_4", "text_4", "icon_5", "text_5", "icon_6", "text_6",
+        "icon_7", "text_7", "icon_8", "text_8", "icon_9", "text_9",
+        "icon_10", "text_10"
+      ],
+      "settings": {
+        "movement_direction": "normal",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 20,
+        "padding-block-end": 20,
+        "gap_between_elements": 32
+      }
+    },
+    "hero_jVaWmY": {
+      "type": "hero",
+      "blocks": {
+        "content_group": {
+          "type": "group",
+          "name": "Content",
+          "settings": {
+            "content_direction": "column",
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-end",
+            "gap": 4,
+            "width": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 48,
+            "padding-inline-end": 48
+          },
+          "blocks": {
+            "text_eyebrow": {
+              "type": "text",
+              "name": "Eyebrow",
+              "settings": {
+                "text": "<p>NEW DROP:</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.75rem",
+                "line_height": "normal",
+                "letter_spacing": "0.2em",
+                "case": "uppercase",
+                "wrap": "nowrap",
+                "color": "var(--color-foreground-heading)",
+                "padding-block-start": 0,
+                "padding-block-end": 4,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "text_headline": {
+              "type": "text",
+              "name": "Headline",
+              "settings": {
+                "text": "<p>TURMERIC GLOW PADS</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "2.5rem",
+                "line_height": "tight",
+                "letter_spacing": "tight",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "padding-block-start": 0,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "text_subtext": {
+              "type": "text",
+              "name": "Subtext",
+              "settings": {
+                "text": "<p>Ayurvedic exfoliating pads that brighten, refresh, and reveal your natural glow.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "padding-block-start": 0,
+                "padding-block-end": 16,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "button_H9gpTf": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Shop Now",
+                "link": "shopify://products/✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              }
+            }
+          },
+          "block_order": [
+            "text_eyebrow",
+            "text_headline",
+            "text_subtext",
+            "button_H9gpTf"
+          ]
+        }
+      },
+      "block_order": [
+        "content_group"
       ],
       "name": "t:names.hero",
       "settings": {
@@ -94,24 +397,24 @@
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
+        "horizontal_alignment": "flex-start",
         "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
+        "gap": 4,
+        "section_width": "full-width",
+        "section_height": "large",
         "section_height_custom": 50,
         "color_scheme": "scheme-6",
         "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
+        "overlay_color": "#00000040",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
         "padding-block-start": 100,
-        "padding-block-end": 72
+        "padding-block-end": 48
       }
     },
     "product_list_fa6P9H": {
@@ -150,59 +453,15 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+          "blocks": {},
+          "block_order": []
         },
         "static-product-card": {
           "type": "_product-card",
           "name": "t:names.product_card",
           "static": true,
           "settings": {
-            "product_card_gap": 8,
+            "product_card_gap": 10,
             "inherit_color_scheme": true,
             "color_scheme": "",
             "border": "none",
@@ -219,7 +478,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "square",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -230,60 +489,10 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "0.02em",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "0.8125rem",
-                "line_height": "normal",
-                "letter_spacing": "0.02em",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
             }
           },
           "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
+            "product_card_gallery_677WP3"
           ]
         }
       },
@@ -292,25 +501,38 @@
         "collection": "all",
         "layout_type": "grid",
         "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 16,
-        "rows_gap": 32,
+        "max_products": 3,
+        "columns": 3,
+        "mobile_columns": "1",
+        "mobile_card_size": "100cqw",
+        "columns_gap": 8,
+        "rows_gap": 8,
         "icons_style": "arrow",
         "icons_shape": "none",
-        "section_width": "page-width",
+        "section_width": "full-width",
         "horizontal_alignment": "flex-start",
-        "gap": 28,
+        "gap": 0,
         "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 8,
+        "padding-block-end": 0
+      }
+    },
+    "social_proof": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"social-proof-section\"><h2 class=\"social-proof-heading\">Why Our Community Loves Us</h2><div class=\"tiktok-grid\"><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@lilyladuebeauty/video/7595413580661476639\" data-video-id=\"7595413580661476639\" style=\"max-width: 325px;min-width: 280px;\"><section><a target=\"_blank\" title=\"@lilyladuebeauty\" href=\"https://www.tiktok.com/@lilyladuebeauty?refer=embed\">@lilyladuebeauty</a></section></blockquote><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@corissa.curated/video/7590579981206474039\" data-video-id=\"7590579981206474039\" style=\"max-width: 325px;min-width: 280px;\"><section><a target=\"_blank\" title=\"@corissa.curated\" href=\"https://www.tiktok.com/@corissa.curated?refer=embed\">@corissa.curated</a></section></blockquote><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@whatctlikes/video/7577059269829233950\" data-video-id=\"7577059269829233950\" style=\"max-width: 325px;min-width: 280px;\"><section><a target=\"_blank\" title=\"@whatctlikes\" href=\"https://www.tiktok.com/@whatctlikes?refer=embed\">@whatctlikes</a></section></blockquote></div><script async src=\"https://www.tiktok.com/embed.js\"></script></div><style>.social-proof-section{text-align:center;}.social-proof-heading{font-family:var(--font-heading--family);font-size:1.75rem;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:40px;font-weight:400;line-height:1.2;}.tiktok-grid{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}.tiktok-grid blockquote{margin:0 !important;}</style>",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding-block-start": 56,
+        "padding-block-end": 56
       }
     }
   },
   "order": [
     "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "product_list_fa6P9H",
+    "social_proof",
+    "tagline_section",
+    "scrolling_banner"
   ]
 }

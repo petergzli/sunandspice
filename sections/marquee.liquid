@@ -1,5 +1,4 @@
 
-
 <script
   src="{{ 'marquee.js' | asset_url }}"
   type="module"
@@ -16,7 +15,7 @@
     {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
     --marquee-direction: {{ section.settings.movement_direction }};
   "
-  data-speed-factor="20"
+  data-speed-factor="12"
   data-movement-direction="{{ section.settings.movement_direction }}"
 >
   <div
@@ -28,7 +27,46 @@
       ref="content"
     >
       <div class="marquee__repeated-items">
-        {% content_for 'blocks' %}
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.82-.13 2.68-.35C13.43 18.55 12 15.5 12 12c0-3.5 1.43-6.55 4.68-9.65C15.82 2.13 14.93 2 12 2z"/><path d="M17 8c-2 0-4 1-5 3 1-1 3-1.5 5-1.5s4 .5 5 1.5c-1-2-3-3-5-3z"/></svg>
+          <span class="marquee__label">AYURVEDIC FORMULAS</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4m-2.93-7.07l-2.83 2.83m-8.48 8.48l-2.83 2.83m0-14.14l2.83 2.83m8.48 8.48l2.83 2.83"/></svg>
+          <span class="marquee__label">GLOW FROM WITHIN</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L9 9l-7 1 5 5-1.5 7L12 18l6.5 4L17 15l5-5-7-1-3-7z"/></svg>
+          <span class="marquee__label">100% NATURAL</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span class="marquee__label">CRUELTY FREE</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 16h4v-5l-3-4h-3v9zM1 16h12V6H1v10z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span class="marquee__label">FREE SHIPPING $50+</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-1.5 0-3 .5-4 2-2 3 0 6 1 8l3 8 3-8c1-2 3-5 1-8-1-1.5-2.5-2-4-2z"/></svg>
+          <span class="marquee__label">TURMERIC POWERED</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h6"/><path d="M16 19l3-3-3-3m3 3h-7"/></svg>
+          <span class="marquee__label">EASY RETURNS</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          <span class="marquee__label">CLINICALLY TESTED</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="marquee__label">VISIBLE RESULTS</span>
+        </div>
+        <div class="marquee__item-group">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="marquee__label">SUSTAINABLE</span>
+        </div>
       </div>
     </div>
   </div>
@@ -72,6 +110,33 @@
 
   .marquee__repeated-items > * {
     align-content: center;
+  }
+
+  /* Vertical icon+text groups */
+  .marquee__item-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    min-width: 160px;
+    padding: 0 24px;
+  }
+
+  .marquee__item-group svg {
+    flex-shrink: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .marquee__label {
+    font-family: var(--font-body--family);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   @media (prefers-reduced-motion: no-preference) {

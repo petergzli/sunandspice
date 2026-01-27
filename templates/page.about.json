@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "about_content": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"about-page\"><h1 class=\"about-heading\">Why I Created <span class=\"about-heading-accent\">Sun & Spice</span></h1><div class=\"about-body\"><p>I created Sun & Spice after years of feeling disconnected from the skincare I was using. So many \"modern\" products were filled with harsh chemicals that left my skin irritated, stripped, and confused—yet they were marketed as the only solution.</p><p class=\"about-highlight\">I wanted something gentler. Something intentional. Something rooted in ritual.</p><p>Growing up inspired by holistic traditions, I kept returning to Ayurveda—where skincare isn't about quick fixes, but about balance, nourishment, and honoring the skin as a living organ. Sun & Spice was born from the desire to bring these ancient rituals into modern life in a way that feels accessible, elevated, and effective.</p><p>Every product is created with the belief that skincare should be healing, not harsh—a daily ritual that reconnects you to your body, your glow, and your natural rhythm.</p></div></div><style>.about-page{max-width:800px;margin:0 auto;padding:80px 24px 100px;}.about-heading{font-family:var(--font-heading--family);font-size:2.5rem;font-weight:700;text-align:center;margin:0 0 48px;line-height:1.2;letter-spacing:-0.02em;}@media screen and (min-width:750px){.about-heading{font-size:3.25rem;margin-bottom:56px;}}.about-heading-accent{color:#C193C3;display:block;font-style:italic;}.about-body{font-family:var(--font-body--family);font-size:1.125rem;line-height:1.8;color:var(--color-foreground);}.about-body p{margin:0 0 28px;}.about-body p:last-child{margin-bottom:0;}.about-highlight{font-size:1.375rem;font-weight:500;text-align:center;color:#C193C3;padding:32px 0;margin:32px 0;border-top:1px solid rgba(193,147,195,0.3);border-bottom:1px solid rgba(193,147,195,0.3);font-style:italic;}@media screen and (min-width:750px){.about-body{font-size:1.1875rem;}.about-highlight{font-size:1.5rem;padding:40px 0;margin:40px 0;}}</style>",
+        "color_scheme": "scheme-1",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "values_section": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"values-section\"><h2 class=\"values-heading\">Our Values</h2><div class=\"values-grid\"><div class=\"value-card\"><div class=\"value-icon\"><svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#C193C3\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"/><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"/></svg></div><h3 class=\"value-title\">100% Natural</h3><p class=\"value-desc\">No harsh chemicals, ever. Just pure, plant-powered ingredients.</p></div><div class=\"value-card\"><div class=\"value-icon\"><svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#C193C3\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"/></svg></div><h3 class=\"value-title\">Cruelty Free</h3><p class=\"value-desc\">Never tested on animals. Beauty that's kind to all beings.</p></div><div class=\"value-card\"><div class=\"value-icon\"><svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#C193C3\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5\"/><path d=\"M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12\"/><path d=\"m14 16-3 3 3 3\"/><path d=\"M8.293 13.596 7.196 9.5 3.1 10.598\"/><path d=\"m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 12 3a1.83 1.83 0 0 1 1.563.919l3.957 6.857\"/><path d=\"M17.5 12.5 21 11\"/><path d=\"M10.5 3.5 12 0l1.5 3.5\"/></svg></div><h3 class=\"value-title\">Sustainable</h3><p class=\"value-desc\">Eco-conscious packaging and responsibly sourced ingredients.</p></div></div></div><style>.values-section{max-width:1000px;margin:0 auto;padding:60px 24px 100px;border-top:1px solid rgba(0,0,0,0.08);}.values-heading{font-family:var(--font-heading--family);font-size:1.75rem;font-weight:700;text-align:center;margin:0 0 48px;color:#C193C3;}.values-grid{display:grid;grid-template-columns:1fr;gap:40px;}@media screen and (min-width:750px){.values-grid{grid-template-columns:repeat(3,1fr);gap:48px;}}.value-card{text-align:center;}.value-icon{margin-bottom:16px;}.value-title{font-family:var(--font-heading--family);font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 12px;}.value-desc{font-family:var(--font-body--family);font-size:0.9375rem;line-height:1.6;margin:0;opacity:0.8;}</style>",
+        "color_scheme": "scheme-1",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "about_content",
+    "values_section"
+  ]
+}

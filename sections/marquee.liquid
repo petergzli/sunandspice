@@ -145,6 +145,16 @@
     }
   }
 
+  /* Slow down marquee on mobile */
+  @media screen and (max-width: 749px) {
+    marquee-component {
+      --marquee-speed-multiplier: 5;
+    }
+    marquee-component:not([data-disabled]) .marquee__wrapper {
+      animation-duration: calc(var(--marquee-speed, 30s) * var(--marquee-speed-multiplier, 1));
+    }
+  }
+
   @keyframes marquee-motion {
     to {
       transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);

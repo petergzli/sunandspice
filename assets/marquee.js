@@ -96,8 +96,14 @@ class MarqueeComponent extends Component {
   }
 
   #calculateSpeed() {
-    const speedFactor = Number(this.getAttribute('data-speed-factor'));
+    let speedFactor = Number(this.getAttribute('data-speed-factor'));
     const marqueeWidth = this.offsetWidth;
+
+    // Slow down on mobile (under 750px)
+    if (window.innerWidth < 750) {
+      speedFactor = speedFactor / 4; // 4x slower on mobile
+    }
+
     const speed = Math.ceil(marqueeWidth / speedFactor / 2);
     return speed;
   }

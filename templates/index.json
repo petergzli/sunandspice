@@ -284,8 +284,8 @@
           "name": "Content",
           "settings": {
             "content_direction": "column",
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-end",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 4,
             "width": "fill",
             "height": "fit",
@@ -296,28 +296,6 @@
             "padding-inline-end": 48
           },
           "blocks": {
-            "text_eyebrow": {
-              "type": "text",
-              "name": "Eyebrow",
-              "settings": {
-                "text": "<p>NEW DROP:</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.75rem",
-                "line_height": "normal",
-                "letter_spacing": "0.2em",
-                "case": "uppercase",
-                "wrap": "nowrap",
-                "color": "var(--color-foreground-heading)",
-                "padding-block-start": 0,
-                "padding-block-end": 4,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              }
-            },
             "text_headline": {
               "type": "text",
               "name": "Headline",
@@ -325,7 +303,7 @@
                 "text": "<p>TURMERIC GLOW PADS</p>",
                 "width": "fit-content",
                 "max_width": "normal",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
                 "font_size": "2.5rem",
@@ -347,7 +325,7 @@
                 "text": "<p>Ayurvedic exfoliating pads that brighten, refresh, and reveal your natural glow.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
                 "font_size": "0.9375rem",
@@ -369,7 +347,7 @@
                 "label": "Shop Now",
                 "link": "shopify://products/✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
                 "open_in_new_tab": false,
-                "style_class": "link",
+                "style_class": "button-secondary",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -378,7 +356,6 @@
             }
           },
           "block_order": [
-            "text_eyebrow",
             "text_headline",
             "text_subtext",
             "button_H9gpTf"
@@ -397,19 +374,19 @@
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-end",
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
         "gap": 4,
         "section_width": "full-width",
         "section_height": "large",
         "section_height_custom": 50,
         "color_scheme": "scheme-6",
         "toggle_overlay": true,
-        "overlay_color": "#00000040",
-        "overlay_style": "gradient",
+        "overlay_color": "#00000080",
+        "overlay_style": "solid",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
@@ -461,15 +438,15 @@
           "name": "t:names.product_card",
           "static": true,
           "settings": {
-            "product_card_gap": 10,
+            "product_card_gap": 12,
             "inherit_color_scheme": true,
             "color_scheme": "",
             "border": "none",
-            "border_width": 1,
+            "border_width": 0,
             "border_opacity": 100,
-            "border_radius": 0,
+            "border_radius": 16,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 16,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -480,19 +457,65 @@
               "settings": {
                 "image_ratio": "square",
                 "border": "none",
-                "border_width": 1,
+                "border_width": 0,
                 "border_opacity": 100,
-                "border_radius": 0,
+                "border_radius": 16,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "product_title_block": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "padding-block-start": 12,
+                "padding-block-end": 0,
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
+              }
+            },
+            "product_price_block": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "center",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
+              }
             }
           },
           "block_order": [
-            "product_card_gallery_677WP3"
+            "product_card_gallery_677WP3",
+            "product_title_block",
+            "product_price_block"
           ]
         }
       },
@@ -505,16 +528,16 @@
         "columns": 3,
         "mobile_columns": "1",
         "mobile_card_size": "100cqw",
-        "columns_gap": 8,
-        "rows_gap": 8,
+        "columns_gap": 40,
+        "rows_gap": 40,
         "icons_style": "arrow",
         "icons_shape": "none",
-        "section_width": "full-width",
+        "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 0,
         "color_scheme": "scheme-1",
-        "padding-block-start": 8,
-        "padding-block-end": 0
+        "padding-block-start": 56,
+        "padding-block-end": 56
       }
     },
     "social_proof": {
@@ -526,12 +549,30 @@
         "padding-block-start": 56,
         "padding-block-end": 56
       }
+    },
+    "featured_product_section": {
+      "type": "homepage-product-purchase",
+      "settings": {
+        "product": "✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
+        "custom_title": "Brightening Turmeric & Kojic Acid Pads",
+        "layout": "media-left",
+        "benefit_1": "immediate brightening effect",
+        "benefit_2": "eliminates acne & hyperpigmentation in a week",
+        "benefit_3": "100% natural, gentle cleanse",
+        "benefit_4": "",
+        "button_text": "Add to Cart",
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "product_list_fa6P9H",
     "social_proof",
+    "featured_product_section",
     "tagline_section",
     "scrolling_banner"
   ]

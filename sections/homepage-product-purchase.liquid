@@ -1,0 +1,577 @@
+{% comment %}
+  Homepage Product Purchase Section
+  A section that allows direct product purchase from the homepage
+{% endcomment %}
+
+{% liquid
+  assign product = section.settings.product
+  if product == blank and request.visual_preview_mode
+    assign product = collections.all.products.first
+  endif
+
+  assign variant = product.selected_or_first_available_variant
+  assign inventory_quantity = variant.inventory_quantity
+  assign inventory_policy = variant.inventory_policy
+
+  if variant.inventory_management == 'shopify'
+    assign inventory_managed = true
+  endif
+
+  if variant.quantity_rule.min > variant.inventory_quantity and inventory_managed and inventory_policy == 'deny'
+    assign quantity_rule_soldout = true
+  endif
+
+  if inventory_managed
+    if inventory_quantity <= 0 and inventory_policy == 'deny' or quantity_rule_soldout
+      assign can_add_to_cart = false
+      assign add_to_cart_text = 'products.product.sold_out' | t
+    else
+      assign can_add_to_cart = true
+      assign add_to_cart_text = 'products.product.add_to_cart' | t
+    endif
+  else
+    if product.selected_or_first_available_variant != null
+      assign can_add_to_cart = true
+      assign add_to_cart_text = 'products.product.add_to_cart' | t
+    else
+      assign can_add_to_cart = false
+      assign add_to_cart_text = 'products.product.unavailable' | t
+    endif
+  endif
+
+  # Calculate discount percentage if on sale
+  assign discount_percentage = 0
+  if product.compare_at_price > product.price
+    assign price_diff = product.compare_at_price | minus: product.price
+    assign discount_percentage = price_diff | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="homepage-product-purchase section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="homepage-product-purchase__grid {% if section.settings.layout == 'media-right' %}homepage-product-purchase__grid--media-right{% endif %}">
+    {% comment %} Product Image {% endcomment %}
+    <div class="homepage-product-purchase__media">
+      {% if product.featured_media %}
+        <img
+          src="{{ product.featured_media | image_url: width: 800 }}"
+          alt="{{ product.featured_media.alt | escape }}"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+          loading="lazy"
+          class="homepage-product-purchase__image"
+        >
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'homepage-product-purchase__placeholder' }}
+      {% endif %}
+    </div>
+
+    {% comment %} Product Details {% endcomment %}
+    <div class="homepage-product-purchase__details">
+      <div class="homepage-product-purchase__content">
+        {% comment %} Product Title {% endcomment %}
+        <h2 class="homepage-product-purchase__title">{{ section.settings.custom_title | default: product.title }}</h2>
+
+        {% comment %} Price {% endcomment %}
+        <div class="homepage-product-purchase__price">
+          {% if product.compare_at_price > product.price %}
+            <span class="homepage-product-purchase__price-label">Regular price</span>
+            <span class="homepage-product-purchase__price-compare">{{ product.compare_at_price | money }}</span>
+            <span class="homepage-product-purchase__price-label">Sale price</span>
+            <span class="homepage-product-purchase__price-sale">{{ product.price | money }}</span>
+            {% if discount_percentage > 0 %}
+              <span class="homepage-product-purchase__discount-badge">{{ discount_percentage }}% off</span>
+            {% endif %}
+          {% else %}
+            <span class="homepage-product-purchase__price-regular">{{ product.price | money }}</span>
+          {% endif %}
+        </div>
+
+        {% comment %} Bullet Points {% endcomment %}
+        <ul class="homepage-product-purchase__benefits">
+          {% if section.settings.benefit_1 != blank %}
+            <li class="homepage-product-purchase__benefit">
+              <span class="homepage-product-purchase__benefit-checkbox">
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{{ section.settings.benefit_1 }}</span>
+            </li>
+          {% endif %}
+          {% if section.settings.benefit_2 != blank %}
+            <li class="homepage-product-purchase__benefit">
+              <span class="homepage-product-purchase__benefit-checkbox">
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{{ section.settings.benefit_2 }}</span>
+            </li>
+          {% endif %}
+          {% if section.settings.benefit_3 != blank %}
+            <li class="homepage-product-purchase__benefit">
+              <span class="homepage-product-purchase__benefit-checkbox">
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{{ section.settings.benefit_3 }}</span>
+            </li>
+          {% endif %}
+          {% if section.settings.benefit_4 != blank %}
+            <li class="homepage-product-purchase__benefit">
+              <span class="homepage-product-purchase__benefit-checkbox">
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>{{ section.settings.benefit_4 }}</span>
+            </li>
+          {% endif %}
+        </ul>
+
+        {% comment %} Buy Form {% endcomment %}
+        {% if product != blank %}
+          {%- assign product_form_id = 'HomepageProductForm-' | append: section.id -%}
+          <product-form-component
+            data-section-id="{{ section.id }}"
+            data-product-id="{{ product.id }}"
+            data-product-url="{{ product.url }}"
+            on:submit="/handleSubmit"
+            data-quantity-default="{% if product.selected_or_first_available_variant.quantity_rule.min %}{{ product.selected_or_first_available_variant.quantity_rule.min }}{% else %}1{% endif %}"
+          >
+            <div
+              class="visually-hidden"
+              aria-live="assertive"
+              role="status"
+              aria-atomic="true"
+              ref="liveRegion"
+            ></div>
+            {%- form 'product', product, id: product_form_id, data-type: 'add-to-cart-form' -%}
+              <input
+                type="hidden"
+                name="id"
+                ref="variantId"
+                value="{{ product.selected_or_first_available_variant.id }}"
+              >
+              <input type="hidden" name="quantity" value="1">
+
+              {% comment %} Add to Cart Button {% endcomment %}
+              <div class="homepage-product-purchase__buttons">
+                <button
+                  type="submit"
+                  name="add"
+                  class="homepage-product-purchase__add-button"
+                  {% unless can_add_to_cart %}disabled{% endunless %}
+                >
+                  <span class="homepage-product-purchase__add-button-text">{{ section.settings.button_text | default: add_to_cart_text }}</span>
+                </button>
+              </div>
+            {%- endform -%}
+          </product-form-component>
+
+          {% comment %} View Full Details Link {% endcomment %}
+          <a href="{{ product.url }}" class="homepage-product-purchase__view-details">
+            <span>View full details</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% else %}
+          <div class="homepage-product-purchase__no-product">
+            <p>Select a product in the section settings.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .homepage-product-purchase__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-xl);
+    align-items: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .homepage-product-purchase__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-2xl);
+    }
+  }
+
+  .homepage-product-purchase__grid--media-right .homepage-product-purchase__media {
+    order: 2;
+  }
+
+  .homepage-product-purchase__grid--media-right .homepage-product-purchase__details {
+    order: 1;
+  }
+
+  .homepage-product-purchase__media {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .homepage-product-purchase__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .homepage-product-purchase__placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--color-background-secondary);
+  }
+
+  .homepage-product-purchase__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .homepage-product-purchase__details {
+      padding-left: var(--padding-xl);
+    }
+  }
+
+  .homepage-product-purchase__content {
+    max-width: 480px;
+  }
+
+  .homepage-product-purchase__title {
+    font-family: var(--font-heading--family);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    margin: 0 0 20px;
+    line-height: 1.23;
+    word-break: break-word;
+  }
+
+  @media screen and (min-width: 750px) {
+    .homepage-product-purchase__title {
+      font-size: 1.95rem;
+    }
+  }
+
+  .homepage-product-purchase__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    font-size: 0.875rem;
+  }
+
+  .homepage-product-purchase__price-label {
+    color: var(--color-foreground);
+    opacity: 0.6;
+  }
+
+  .homepage-product-purchase__price-regular {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .homepage-product-purchase__price-compare {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .homepage-product-purchase__price-sale {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+  }
+
+  .homepage-product-purchase__discount-badge {
+    display: inline-block;
+    background: #C193C3;
+    color: #ffffff;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .homepage-product-purchase__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+  }
+
+  .homepage-product-purchase__benefit {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .homepage-product-purchase__benefit:last-child {
+    border-bottom: none;
+  }
+
+  .homepage-product-purchase__benefit-checkbox {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #C193C3;
+    border-radius: 50%;
+  }
+
+  .homepage-product-purchase__benefit-checkbox svg {
+    width: 12px;
+    height: 10px;
+  }
+
+  .homepage-product-purchase__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+
+  .homepage-product-purchase__add-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 49px;
+    min-height: 49px;
+    padding: 0 30px;
+    font-family: var(--font-body--family);
+    font-size: 19px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 22.8px;
+    background: #C193C3;
+    color: #ffffff;
+    border: 2px solid #C193C3;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.4s ease;
+  }
+
+  .homepage-product-purchase__add-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    transition: width 0.4s ease;
+    z-index: 0;
+  }
+
+  .homepage-product-purchase__add-button:hover::before {
+    width: 100%;
+  }
+
+  .homepage-product-purchase__add-button:hover {
+    color: #C193C3;
+  }
+
+  .homepage-product-purchase__add-button-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .homepage-product-purchase__add-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .homepage-product-purchase__add-button:disabled::before {
+    display: none;
+  }
+
+  .homepage-product-purchase__view-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    text-decoration: none;
+    transition: gap 0.3s ease;
+  }
+
+  .homepage-product-purchase__view-details:hover {
+    gap: 12px;
+  }
+
+  .homepage-product-purchase__view-details:hover span {
+    text-decoration: underline;
+  }
+
+  .homepage-product-purchase__view-details svg {
+    transition: transform 0.3s ease;
+  }
+
+  .homepage-product-purchase__view-details:hover svg {
+    transform: translateX(4px);
+  }
+
+  .homepage-product-purchase__no-product {
+    padding: var(--padding-2xl);
+    background: var(--color-background-secondary);
+    text-align: center;
+    border-radius: var(--border-radius);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Purchase",
+  "tag": "section",
+  "class": "homepage-product-purchase-section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "custom_title",
+      "label": "Custom title",
+      "info": "Leave blank to use product title"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Media position",
+      "options": [
+        {
+          "value": "media-left",
+          "label": "Left"
+        },
+        {
+          "value": "media-right",
+          "label": "Right"
+        }
+      ],
+      "default": "media-left"
+    },
+    {
+      "type": "header",
+      "content": "Product benefits"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "immediate brightening effect"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "eliminates acne & hyperpigmentation in a week"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "100% natural, gentle cleanse"
+    },
+    {
+      "type": "text",
+      "id": "benefit_4",
+      "label": "Benefit 4"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "Page width"
+        },
+        {
+          "value": "full-width",
+          "label": "Full width"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Purchase",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

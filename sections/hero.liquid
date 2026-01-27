@@ -441,6 +441,48 @@
       }
     }
   }
+
+  /* Hero Shop Now button custom styles */
+  .hero .button-secondary {
+    background: #ffffff;
+    border: none;
+    color: #000000;
+    padding: 14px 32px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .hero .button-secondary::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 12px;
+    opacity: 0;
+    margin-left: 0;
+    transition: all 0.3s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='12' viewBox='0 0 32 12' fill='none' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='0' y1='6' x2='28' y2='6'%3E%3C/line%3E%3Cpolyline points='22 1 28 6 22 11'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .hero .button-secondary:hover {
+    background: #ffffff;
+    color: #000000;
+    gap: 12px;
+  }
+
+  .hero .button-secondary:hover::after {
+    width: 32px;
+    opacity: 1;
+    margin-left: 4px;
+  }
 {% endstylesheet %}
 
 {% schema %}

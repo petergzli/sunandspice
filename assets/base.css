@@ -1324,6 +1324,194 @@ input::placeholder {
   color: var(--color-input-text);
 }
 
+/* Custom email input styling for pink color scheme */
+.color-scheme-announcement-pink .email-signup__input {
+  appearance: none;
+  background-color: #A070A2 !important;
+  border: 1px solid rgb(255, 255, 255) !important;
+  border-radius: 6px;
+  color: rgb(255, 255, 255);
+  height: 54px;
+  padding: 15px;
+  letter-spacing: 0.4px;
+  font-size: 16px;
+  box-shadow: none !important;
+  text-align: left;
+}
+
+.color-scheme-announcement-pink .email-signup__input::placeholder {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  opacity: 1;
+}
+
+.color-scheme-announcement-pink .email-signup__input:hover {
+  background-color: rgb(171, 78, 104);
+}
+
+.color-scheme-announcement-pink .email-signup__input:focus,
+.color-scheme-announcement-pink .email-signup__input:focus-visible {
+  outline: none;
+  border: 1px solid rgb(255, 255, 255) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Stack input and button vertically for pink color scheme */
+.color-scheme-announcement-pink .email-signup__input-group {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* Floating label for email input in pink color scheme */
+.color-scheme-announcement-pink .email-signup__input-group {
+  position: relative;
+}
+
+/* Floating label that animates from placeholder position to top */
+.color-scheme-announcement-pink .email-signup__input-group::before {
+  content: 'Email';
+  position: absolute;
+  left: 15px;
+  top: 27px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  pointer-events: none;
+  transition: top 0.25s ease, transform 0.25s ease, font-size 0.25s ease;
+  z-index: 2;
+}
+
+/* When focused or has value, move label to top inside input */
+.color-scheme-announcement-pink .email-signup__input-group:focus-within::before,
+.color-scheme-announcement-pink .email-signup__input-group:has(.email-signup__input:not(:placeholder-shown))::before {
+  top: 8px;
+  transform: translateY(0);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+
+/* Hide the actual placeholder */
+.color-scheme-announcement-pink .email-signup__input::placeholder {
+  color: transparent !important;
+}
+
+/* Adjust padding on focus or when has value to make room for label */
+.color-scheme-announcement-pink .email-signup__input:focus,
+.color-scheme-announcement-pink .email-signup__input:not(:placeholder-shown) {
+  padding-top: 26px !important;
+  padding-bottom: 10px !important;
+}
+
+/* Keep background primary pink always - prevent hover color change */
+.color-scheme-announcement-pink .email-signup__input,
+.color-scheme-announcement-pink .email-signup__input:hover,
+.color-scheme-announcement-pink .email-signup__input:focus {
+  background-color: #A070A2 !important;
+}
+
+/* Submit button styling for pink color scheme - sweep left to right */
+.color-scheme-announcement-pink .email-signup__button,
+.color-scheme-announcement-pink .email-signup__button.button,
+.color-scheme-announcement-pink button.email-signup__button {
+  background: linear-gradient(to right, #A070A2 50%, #ffffff 50%) !important;
+  background-size: 200% 100% !important;
+  background-position: right !important;
+  color: #A070A2 !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 6px !important;
+  padding: 14px 32px !important;
+  font-weight: bold !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  width: 100% !important;
+  transition: background-position 0.4s ease, color 0.4s ease !important;
+}
+
+.color-scheme-announcement-pink .email-signup__button:hover,
+.color-scheme-announcement-pink .email-signup__button.button:hover {
+  background-position: left !important;
+  color: #ffffff !important;
+  cursor: pointer;
+}
+
+/* Footer wave styling */
+.footer-wave {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.footer-wave__svg {
+  width: 100%;
+  height: 70px;
+  display: block;
+}
+
+/* Lightest pink layer */
+.footer-wave__parallax1 > use {
+  animation: footer-move-forever 25s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Light-medium pink layer */
+.footer-wave__parallax2 > use {
+  animation: footer-move-forever 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Medium pink layer */
+.footer-wave__parallax3 > use {
+  animation: footer-move-forever 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Primary pink layer (front) */
+.footer-wave__parallax4 > use {
+  animation: footer-move-forever 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes footer-move-forever {
+  0% { transform: translate3d(-90px, 0, 0); }
+  100% { transform: translate3d(85px, 0, 0); }
+}
+
+/* Center payment icons and footer utilities in pink scheme */
+.color-scheme-announcement-pink .payment-icons__list {
+  justify-content: center !important;
+}
+
+.color-scheme-announcement-pink .footer-utilities {
+  justify-content: center !important;
+  text-align: center !important;
+  border-top: none !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.color-scheme-announcement-pink .footer-utilities__group {
+  justify-content: center !important;
+  text-align: center !important;
+  width: auto !important;
+  flex: none !important;
+}
+
+.color-scheme-announcement-pink .footer-utilities__group--left,
+.color-scheme-announcement-pink .footer-utilities__group--right {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.color-scheme-announcement-pink .list-payment {
+  justify-content: center !important;
+}
+
 textarea:not(:placeholder-shown)::placeholder,
 input:not(:placeholder-shown)::placeholder {
   opacity: 0;

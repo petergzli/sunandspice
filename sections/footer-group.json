@@ -14,18 +14,6 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "divider_hFm3am": {
-          "type": "_divider",
-          "name": "t:names.divider",
-          "settings": {
-            "thickness": 1,
-            "corner_radius": "square",
-            "width_percent": 100,
-            "padding-block-start": 0,
-            "padding-block-end": 0
-          },
-          "blocks": {}
-        },
         "group_tbFfTQ": {
           "type": "group",
           "name": "Email signup",
@@ -34,10 +22,10 @@
             "open_in_new_tab": false,
             "content_direction": "column",
             "vertical_on_mobile": true,
-            "horizontal_alignment": "center",
+            "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
+            "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 24,
             "width": "fill",
@@ -73,10 +61,10 @@
                 "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
-                "horizontal_alignment": "center",
+                "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "center",
+                "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 8,
                 "width": "fit-content",
@@ -108,10 +96,10 @@
                   "type": "text",
                   "name": "Heading",
                   "settings": {
-                    "text": "<p>STAY IN THE KNOW</p>",
+                    "text": "<p><strong>STAY IN THE KNOW</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
-                    "alignment": "center",
+                    "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-primary--family)",
                     "font_size": "0.875rem",
@@ -137,7 +125,7 @@
                     "text": "<p>Be the first to discover new drops, special offers, and all things Sun & Spice.</p>",
                     "width": "fit-content",
                     "max_width": "narrow",
-                    "alignment": "center",
+                    "alignment": "left",
                     "type_preset": "rte",
                     "font": "var(--font-primary--family)",
                     "font_size": "0.8125rem",
@@ -170,14 +158,14 @@
                 "custom_width": 40,
                 "inherit_color_scheme": true,
                 "color_scheme": "scheme-1",
-                "border_style": "underline",
-                "border_width": 1,
-                "border_radius": 0,
+                "border_style": "none",
+                "border_width": 0,
+                "border_radius": 6,
                 "input_type_preset": "paragraph",
-                "style_class": "button-unstyled",
-                "display_type": "arrow",
-                "label": "Sign up",
-                "integrated_button": true,
+                "style_class": "button",
+                "display_type": "text",
+                "label": "Sign Up",
+                "integrated_button": false,
                 "button_type_preset": "paragraph",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -191,6 +179,15 @@
             "group_4aCyy7",
             "email_signup_NcLwNb"
           ]
+        },
+        "payment_icons_AbC123": {
+          "type": "payment-icons",
+          "settings": {
+            "horizontal_alignment": "center",
+            "gap": 10,
+            "padding-block-start": 24,
+            "padding-block-end": 12
+          }
         },
         "footer_utilities_KRaGcH": {
           "type": "footer-utilities",
@@ -279,8 +276,8 @@
         }
       },
       "block_order": [
-        "divider_hFm3am",
         "group_tbFfTQ",
+        "payment_icons_AbC123",
         "footer_utilities_KRaGcH"
       ],
       "name": "Footer",
@@ -295,11 +292,11 @@
         "gap": 32,
         "section_width": "page-width",
         "section_height": "",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-announcement-pink",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
-        "padding-block-start": 48,
+        "padding-block-start": 16,
         "padding-block-end": 48
       }
     }

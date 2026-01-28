@@ -20,7 +20,7 @@
             "text": "Free Shipping on Orders $50+",
             "link": "",
             "font": "var(--font-heading--family)",
-            "font_size": "1.25rem",
+            "font_size": "1.125rem",
             "weight": "bold",
             "letter_spacing": "normal",
             "case": "uppercase"

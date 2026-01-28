@@ -382,7 +382,7 @@
         "gap": 4,
         "section_width": "full-width",
         "section_height": "custom",
-        "section_height_custom": 55,
+        "section_height_custom": 70,
         "color_scheme": "scheme-6",
         "toggle_overlay": true,
         "overlay_color": "#000000b0",

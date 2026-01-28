@@ -1453,6 +1453,12 @@ input::placeholder {
   display: block;
 }
 
+@media screen and (max-width: 749px) {
+  .footer-wave__svg {
+    height: 35px;
+  }
+}
+
 /* Lightest pink layer */
 .footer-wave__parallax1 > use {
   animation: footer-move-forever 25s ease-in-out infinite alternate;

@@ -9,234 +9,6 @@
  */
 {
   "sections": {
-    "scrolling_banner": {
-      "type": "marquee",
-      "blocks": {
-        "icon_1": {
-          "type": "icon",
-          "settings": {
-            "icon": "leaf",
-            "width": 28
-          }
-        },
-        "text_1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>AYURVEDIC FORMULAS</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_2": {
-          "type": "icon",
-          "settings": {
-            "icon": "star",
-            "width": 28
-          }
-        },
-        "text_2": {
-          "type": "text",
-          "settings": {
-            "text": "<p>GLOW FROM WITHIN</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_3": {
-          "type": "icon",
-          "settings": {
-            "icon": "plant",
-            "width": 28
-          }
-        },
-        "text_3": {
-          "type": "text",
-          "settings": {
-            "text": "<p>100% NATURAL</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_4": {
-          "type": "icon",
-          "settings": {
-            "icon": "heart",
-            "width": 28
-          }
-        },
-        "text_4": {
-          "type": "text",
-          "settings": {
-            "text": "<p>CRUELTY FREE</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_5": {
-          "type": "icon",
-          "settings": {
-            "icon": "truck",
-            "width": 28
-          }
-        },
-        "text_5": {
-          "type": "text",
-          "settings": {
-            "text": "<p>FREE SHIPPING $50+</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_6": {
-          "type": "icon",
-          "settings": {
-            "icon": "fire",
-            "width": 28
-          }
-        },
-        "text_6": {
-          "type": "text",
-          "settings": {
-            "text": "<p>TURMERIC POWERED</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_7": {
-          "type": "icon",
-          "settings": {
-            "icon": "return",
-            "width": 28
-          }
-        },
-        "text_7": {
-          "type": "text",
-          "settings": {
-            "text": "<p>EASY RETURNS</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_8": {
-          "type": "icon",
-          "settings": {
-            "icon": "check",
-            "width": 28
-          }
-        },
-        "text_8": {
-          "type": "text",
-          "settings": {
-            "text": "<p>CLINICALLY TESTED</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_9": {
-          "type": "icon",
-          "settings": {
-            "icon": "eye",
-            "width": 28
-          }
-        },
-        "text_9": {
-          "type": "text",
-          "settings": {
-            "text": "<p>VISIBLE RESULTS</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        },
-        "icon_10": {
-          "type": "icon",
-          "settings": {
-            "icon": "recycle",
-            "width": 28
-          }
-        },
-        "text_10": {
-          "type": "text",
-          "settings": {
-            "text": "<p>SUSTAINABLE PACKAGING</p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "tight",
-            "letter_spacing": "0.12em",
-            "case": "uppercase",
-            "wrap": "nowrap",
-            "width": "fit-content"
-          }
-        }
-      },
-      "block_order": [
-        "icon_1", "text_1", "icon_2", "text_2", "icon_3", "text_3",
-        "icon_4", "text_4", "icon_5", "text_5", "icon_6", "text_6",
-        "icon_7", "text_7", "icon_8", "text_8", "icon_9", "text_9",
-        "icon_10", "text_10"
-      ],
-      "settings": {
-        "movement_direction": "normal",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 20,
-        "padding-block-end": 20,
-        "gap_between_elements": 32
-      }
-    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -244,13 +16,36 @@
           "type": "group",
           "name": "Content",
           "settings": {
+            "link": "",
+            "open_in_new_tab": false,
             "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 4,
             "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
             "height": "fit",
+            "custom_height": 100,
             "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 48,
@@ -273,11 +68,15 @@
                 "case": "uppercase",
                 "wrap": "pretty",
                 "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 8,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              }
+              },
+              "blocks": {}
             },
             "text_subtext": {
               "type": "text",
@@ -295,11 +94,15 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 16,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              }
+              },
+              "blocks": {}
             },
             "button_H9gpTf": {
               "type": "button",
@@ -313,7 +116,8 @@
                 "custom_width": 100,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -329,7 +133,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/can-you-have-them-all-together-like-a-group-photo-instead-of-as-separate-portraits.png",
+        "image_1": "shopify://shop_images/Gemini_Generated_Image_f74xkwf74xkwf74x.png",
         "media_type_2": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -353,6 +157,93 @@
         "reflection_opacity": 75,
         "padding-block-start": 48,
         "padding-block-end": 48
+      }
+    },
+    "featured_product_section": {
+      "type": "homepage-product-purchase",
+      "settings": {
+        "product": "✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
+        "custom_title": "Brightening Turmeric & Kojic Acid Pads",
+        "layout": "media-left",
+        "benefit_1": "immediate brightening effect",
+        "benefit_2": "eliminates acne & hyperpigmentation in a week",
+        "benefit_3": "100% natural, gentle cleanse",
+        "benefit_4": "",
+        "button_text": "Add to Cart",
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
+    },
+    "tagline_section": {
+      "type": "section",
+      "blocks": {
+        "tagline_text": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Sun & Spice is an Ayurvedic skincare brand creating the next generation of natural, effective solutions for radiant, healthy skin.</h2>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.75rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "uppercase",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "tagline_text"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-announcement-pink",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
+    },
+    "social_proof": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"social-proof-section\"><h2 class=\"social-proof-heading\">Why Our Community Loves Us</h2><div class=\"tiktok-scroll-container\"><div class=\"tiktok-grid\"><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@lilyladuebeauty/video/7595413580661476639\" data-video-id=\"7595413580661476639\" data-autoplay=\"true\" style=\"max-width:325px;min-width:325px;\"><section><a target=\"_blank\" title=\"@lilyladuebeauty\" href=\"https://www.tiktok.com/@lilyladuebeauty?refer=embed\">@lilyladuebeauty</a></section></blockquote><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@corissa.curated/video/7590579981206474039\" data-video-id=\"7590579981206474039\" data-autoplay=\"true\" style=\"max-width:325px;min-width:325px;\"><section><a target=\"_blank\" title=\"@corissa.curated\" href=\"https://www.tiktok.com/@corissa.curated?refer=embed\">@corissa.curated</a></section></blockquote><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@whatctlikes/video/7577059269829233950\" data-video-id=\"7577059269829233950\" data-autoplay=\"true\" style=\"max-width:325px;min-width:325px;\"><section><a target=\"_blank\" title=\"@whatctlikes\" href=\"https://www.tiktok.com/@whatctlikes?refer=embed\">@whatctlikes</a></section></blockquote></div></div><script async src=\"https://www.tiktok.com/embed.js\"></script></div><style>.social-proof-section{text-align:center;}.social-proof-heading{font-family:var(--font-heading--family);font-size:1.75rem;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:32px;font-weight:400;line-height:1.2;}.tiktok-scroll-container{width:100%;}.tiktok-grid{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}.tiktok-grid blockquote{margin:0 !important;flex-shrink:0;width:325px;}.tiktok-grid iframe{width:325px !important;max-width:325px !important;}@media (max-width:749px){.tiktok-scroll-container{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;margin:0 -16px;padding:0 16px;}.tiktok-scroll-container::-webkit-scrollbar{display:none;}.tiktok-grid{flex-wrap:nowrap;justify-content:flex-start;gap:16px;width:max-content;padding-right:16px;}}</style>",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding-block-start": 24,
+        "padding-block-end": 56
       }
     },
     "product_list_fa6P9H": {
@@ -391,8 +282,7 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {},
-          "block_order": []
+          "blocks": {}
         },
         "static-product-card": {
           "type": "_product-card",
@@ -444,11 +334,14 @@
                 "wrap": "pretty",
                 "color": "var(--color-foreground)",
                 "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 12,
                 "padding-block-end": 0,
                 "padding-inline-start": 12,
                 "padding-inline-end": 12
-              }
+              },
+              "blocks": {}
             },
             "product_price_block": {
               "type": "price",
@@ -470,7 +363,8 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 12,
                 "padding-inline-end": 12
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -501,70 +395,388 @@
         "padding-block-end": 56
       }
     },
-    "tagline_section": {
-      "type": "section",
+    "scrolling_banner": {
+      "type": "marquee",
       "blocks": {
-        "tagline_text": {
+        "icon_1": {
+          "type": "icon",
+          "settings": {
+            "icon": "leaf",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_1": {
           "type": "text",
           "settings": {
-            "text": "<h2>Sun & Spice is an Ayurvedic skincare brand creating the next generation of natural, effective solutions for radiant, healthy skin.</h2>",
-            "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
+            "text": "<p>AYURVEDIC FORMULAS</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
             "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "1.75rem",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
             "line_height": "tight",
-            "letter_spacing": "tight",
+            "letter_spacing": "0.12em",
             "case": "uppercase",
-            "wrap": "pretty",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
-          }
+          },
+          "blocks": {}
+        },
+        "icon_2": {
+          "type": "icon",
+          "settings": {
+            "icon": "star",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>GLOW FROM WITHIN</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_3": {
+          "type": "icon",
+          "settings": {
+            "icon": "plant",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>100% NATURAL</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_4": {
+          "type": "icon",
+          "settings": {
+            "icon": "heart",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>CRUELTY FREE</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_5": {
+          "type": "icon",
+          "settings": {
+            "icon": "truck",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_5": {
+          "type": "text",
+          "settings": {
+            "text": "<p>FREE SHIPPING $50+</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_6": {
+          "type": "icon",
+          "settings": {
+            "icon": "fire",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>TURMERIC POWERED</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_7": {
+          "type": "icon",
+          "settings": {
+            "icon": "return",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>EASY RETURNS</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_8": {
+          "type": "icon",
+          "settings": {
+            "icon": "check",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>CLINICALLY TESTED</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_9": {
+          "type": "icon",
+          "settings": {
+            "icon": "eye",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>VISIBLE RESULTS</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "icon_10": {
+          "type": "icon",
+          "settings": {
+            "icon": "recycle",
+            "width": 28,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        },
+        "text_10": {
+          "type": "text",
+          "settings": {
+            "text": "<p>SUSTAINABLE PACKAGING</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "0.12em",
+            "case": "uppercase",
+            "wrap": "nowrap",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
-      "block_order": ["tagline_text"],
+      "block_order": [
+        "icon_1",
+        "text_1",
+        "icon_2",
+        "text_2",
+        "icon_3",
+        "text_3",
+        "icon_4",
+        "text_4",
+        "icon_5",
+        "text_5",
+        "icon_6",
+        "text_6",
+        "icon_7",
+        "text_7",
+        "icon_8",
+        "text_8",
+        "icon_9",
+        "text_9",
+        "icon_10",
+        "text_10"
+      ],
       "settings": {
-        "content_direction": "column",
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "full-width",
-        "section_height": "",
-        "color_scheme": "scheme-announcement-pink",
-        "background_media": "none",
-        "border": "none",
-        "padding-block-start": 56,
-        "padding-block-end": 56
-      }
-    },
-    "social_proof": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div class=\"social-proof-section\"><h2 class=\"social-proof-heading\">Why Our Community Loves Us</h2><div class=\"tiktok-scroll-container\"><div class=\"tiktok-grid\"><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@lilyladuebeauty/video/7595413580661476639\" data-video-id=\"7595413580661476639\" data-autoplay=\"true\" style=\"max-width:325px;min-width:325px;\"><section><a target=\"_blank\" title=\"@lilyladuebeauty\" href=\"https://www.tiktok.com/@lilyladuebeauty?refer=embed\">@lilyladuebeauty</a></section></blockquote><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@corissa.curated/video/7590579981206474039\" data-video-id=\"7590579981206474039\" data-autoplay=\"true\" style=\"max-width:325px;min-width:325px;\"><section><a target=\"_blank\" title=\"@corissa.curated\" href=\"https://www.tiktok.com/@corissa.curated?refer=embed\">@corissa.curated</a></section></blockquote><blockquote class=\"tiktok-embed\" cite=\"https://www.tiktok.com/@whatctlikes/video/7577059269829233950\" data-video-id=\"7577059269829233950\" data-autoplay=\"true\" style=\"max-width:325px;min-width:325px;\"><section><a target=\"_blank\" title=\"@whatctlikes\" href=\"https://www.tiktok.com/@whatctlikes?refer=embed\">@whatctlikes</a></section></blockquote></div></div><script async src=\"https://www.tiktok.com/embed.js\"></script></div><style>.social-proof-section{text-align:center;}.social-proof-heading{font-family:var(--font-heading--family);font-size:1.75rem;letter-spacing:-0.02em;text-transform:uppercase;margin-bottom:32px;font-weight:400;line-height:1.2;}.tiktok-scroll-container{width:100%;}.tiktok-grid{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}.tiktok-grid blockquote{margin:0 !important;flex-shrink:0;width:325px;}.tiktok-grid iframe{width:325px !important;max-width:325px !important;}@media (max-width:749px){.tiktok-scroll-container{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;margin:0 -16px;padding:0 16px;}.tiktok-scroll-container::-webkit-scrollbar{display:none;}.tiktok-grid{flex-wrap:nowrap;justify-content:flex-start;gap:16px;width:max-content;padding-right:16px;}}</style>",
+        "movement_direction": "normal",
         "color_scheme": "scheme-1",
-        "section_width": "page-width",
-        "padding-block-start": 24,
-        "padding-block-end": 56
-      }
-    },
-    "featured_product_section": {
-      "type": "homepage-product-purchase",
-      "settings": {
-        "product": "✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
-        "custom_title": "Brightening Turmeric & Kojic Acid Pads",
-        "layout": "media-left",
-        "benefit_1": "immediate brightening effect",
-        "benefit_2": "eliminates acne & hyperpigmentation in a week",
-        "benefit_3": "100% natural, gentle cleanse",
-        "benefit_4": "",
-        "button_text": "Add to Cart",
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 80,
-        "padding-block-end": 80
+        "padding-block-start": 20,
+        "padding-block-end": 20,
+        "gap_between_elements": 32
       }
     }
   },

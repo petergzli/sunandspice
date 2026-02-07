@@ -551,7 +551,7 @@
         "text_5": {
           "type": "text",
           "settings": {
-            "text": "<p>FREE SHIPPING $50+</p>",
+            "text": "<p>FREE SHIPPING ON ALL ORDERS</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",

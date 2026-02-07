@@ -2,6 +2,7 @@
 
 {% assign block_settings = block.settings %}
 <div
+  id="contact_form"
   class="email-signup-block size-style spacing-style"
   style="{% render 'size-style', settings: block_settings %}{% render 'spacing-style', settings: block_settings %}"
   {{ block.shopify_attributes }}
@@ -11,7 +12,8 @@
       {{ block_settings.heading | escape }}
     </div>
   {% endif %}
-  {%- form 'customer', class: 'email-signup__form spacing-style' %}
+  <iframe name="email-signup-iframe-{{ block.id }}" style="display:none;" aria-hidden="true" tabindex="-1"></iframe>
+  {%- form 'customer', class: 'email-signup__form spacing-style', id: block.id %}
     <div
       class="email-signup__input-group {% if block_settings.inherit_color_scheme == false %}color-{{ block_settings.color_scheme }}{% endif %}"
       style="--border-width: {{ block_settings.border_width }}px; --border-radius: {{ block_settings.border_radius }}px;"
@@ -32,15 +34,9 @@
         autocomplete="email"
         placeholder="{{ 'blocks.email_signup.placeholder' | t }}"
         required
-        {% if form.errors %}
-          autofocus
-          aria-invalid="true"
-          aria-describedby="Email-signup__message-error-{{ block.id }}"
-        {% elsif form.posted_successfully? %}
-          aria-describedby="Email-signup__message-success-{{ block.id }}"
-        {% endif %}
       >
       <button
+        type="submit"
         class="email-signup__button {% if block_settings.integrated_button or block_settings.border_style == 'underline' %}email-signup__button--integrated{% endif %} email-signup__button--{{ block_settings.display_type }} {{ block_settings.button_type_preset }} {{ block_settings.style_class }} {{ block_settings.style_class }}--{{ block.id }} {% if block_settings.inherit_color_scheme == false %}color-{{ block_settings.color_scheme }}{% endif %}"
         {% if block_settings.display_type != 'text' %}
           aria-label="{{ 'actions.sign_up' | t }}"
@@ -62,39 +58,41 @@
       </button>
     </div>
 
-    {%- if form.errors -%}
-      <div
-        id="Email-signup__message-error-{{ block.id }}"
-        class="email-signup__message email-signup__message--error"
-        tabindex="-1"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-          focusable="false"
-          aria-hidden="true"
-          class="icon-error"
-        >
-          {%- render 'icon', icon: 'error'  -%}
-        </svg>
-        {{- form.errors.translated_fields.email | capitalize }}
-        {{ form.errors.messages.email -}}
-      </div>
-    {%- endif -%}
+    <div class="email-signup__message email-signup__message--error" style="display:none;" id="Email-signup__message-error-{{ block.id }}">
+      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" class="icon-error">
+        {%- render 'icon', icon: 'error' -%}
+      </svg>
+      <span class="email-signup__message-text"></span>
+    </div>
 
-    {%- if form.posted_successfully? -%}
-      <div
-        id="Email-signup__message-success-{{ block.id }}"
-        class="email-signup__message email-signup__message--success"
-        tabindex="-1"
-      >
-        <span class="svg-wrapper icon-success">
-          {{ 'icon-checkmark.svg' | inline_asset_content }}
-        </span>
-        <p class="email-signup__message-text">{{ 'blocks.email_signup.success' | t }}</p>
-      </div>
-    {%- endif -%}
+    <div class="email-signup__message email-signup__message--success" style="display:none;" id="Email-signup__message-success-{{ block.id }}">
+      <span class="svg-wrapper icon-success">
+        {{ 'icon-checkmark.svg' | inline_asset_content }}
+      </span>
+      <p class="email-signup__message-text">{{ 'blocks.email_signup.success' | t }}</p>
+    </div>
   {% endform %}
+
+  <script>
+    (function() {
+      var form = document.getElementById('{{ block.id }}');
+      if (!form) return;
+      var iframeName = 'email-signup-iframe-{{ block.id }}';
+      var iframe = document.querySelector('iframe[name="' + iframeName + '"]');
+      form.setAttribute('target', iframeName);
+      var submitted = false;
+      form.addEventListener('submit', function() {
+        submitted = true;
+      });
+      iframe.addEventListener('load', function() {
+        if (!submitted) return;
+        var successEl = document.getElementById('Email-signup__message-success-{{ block.id }}');
+        var inputGroup = form.querySelector('.email-signup__input-group');
+        inputGroup.style.display = 'none';
+        successEl.style.display = 'flex';
+      });
+    })();
+  </script>
 </div>
 
 {% stylesheet %}

@@ -9,45 +9,6 @@
  */
 {
   "sections": {
-    "tagline_section": {
-      "type": "section",
-      "blocks": {
-        "tagline_text": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>Sun & Spice is an Ayurvedic skincare brand creating the next generation of natural, effective solutions for radiant, healthy skin.</h2>",
-            "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "1.75rem",
-            "line_height": "tight",
-            "letter_spacing": "tight",
-            "case": "uppercase",
-            "wrap": "pretty",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          }
-        }
-      },
-      "block_order": ["tagline_text"],
-      "settings": {
-        "content_direction": "column",
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "color_scheme": "scheme-1",
-        "background_media": "none",
-        "border": "none",
-        "padding-block-start": 56,
-        "padding-block-end": 56
-      }
-    },
     "scrolling_banner": {
       "type": "marquee",
       "blocks": {
@@ -536,6 +497,45 @@
         "horizontal_alignment": "flex-start",
         "gap": 0,
         "color_scheme": "scheme-1",
+        "padding-block-start": 24,
+        "padding-block-end": 56
+      }
+    },
+    "tagline_section": {
+      "type": "section",
+      "blocks": {
+        "tagline_text": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Sun & Spice is an Ayurvedic skincare brand creating the next generation of natural, effective solutions for radiant, healthy skin.</h2>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.75rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "uppercase",
+            "wrap": "pretty",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        }
+      },
+      "block_order": ["tagline_text"],
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "color_scheme": "scheme-announcement-pink",
+        "background_media": "none",
+        "border": "none",
         "padding-block-start": 56,
         "padding-block-end": 56
       }
@@ -563,17 +563,17 @@
         "button_text": "Add to Cart",
         "section_width": "page-width",
         "color_scheme": "scheme-1",
-        "padding-block-start": 56,
-        "padding-block-end": 56
+        "padding-block-start": 80,
+        "padding-block-end": 80
       }
     }
   },
   "order": [
     "hero_jVaWmY",
-    "product_list_fa6P9H",
-    "social_proof",
     "featured_product_section",
     "tagline_section",
+    "social_proof",
+    "product_list_fa6P9H",
     "scrolling_banner"
   ]
 }

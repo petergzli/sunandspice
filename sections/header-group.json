@@ -17,7 +17,7 @@
         "announcement_shipping": {
           "type": "_announcement",
           "settings": {
-            "text": "Free Shipping on Orders $50+",
+            "text": "FREE SHIPPING ON ALL ORDERS",
             "link": "",
             "font": "var(--font-heading--family)",
             "font_size": "1.125rem",

@@ -4,6 +4,40 @@
   <rte-formatter>
     {{ article.content }}
   </rte-formatter>
+
+  {% if block.settings.cta_text != blank and block.settings.cta_link != blank %}
+    <div class="blog-cta">
+      <p>{{ block.settings.cta_text }}</p>
+      <a href="{{ block.settings.cta_link }}">{{ block.settings.cta_button_label }}</a>
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_share %}
+    <hr class="blog-share-divider">
+    <div class="blog-share">
+      <span class="blog-share-label">Share</span>
+      {% if block.settings.share_x %}
+        <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ article.url }}&text={{ article.title | url_encode }}" target="_blank" rel="noopener" aria-label="Share on X">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      {% endif %}
+      {% if block.settings.share_facebook %}
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" target="_blank" rel="noopener" aria-label="Share on Facebook">
+          <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+        </a>
+      {% endif %}
+      {% if block.settings.share_pinterest %}
+        <a href="https://pinterest.com/pin/create/button/?url={{ shop.url }}{{ article.url }}&description={{ article.title | url_encode }}" target="_blank" rel="noopener" aria-label="Share on Pinterest">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+        </a>
+      {% endif %}
+      {% if block.settings.share_email %}
+        <a href="mailto:?subject={{ article.title | url_encode }}&body=Check%20out%20this%20article%20from%20Sun%20%26%20Spice%3A%20{{ shop.url }}{{ article.url }}" aria-label="Share via Email">
+          <svg viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
 </div>
 
 {% stylesheet %}
@@ -11,12 +45,148 @@
     max-width: var(--normal-content-width);
     margin: 0 auto;
   }
+
+  .blog-cta {
+    text-align: center;
+    margin: 3em 0 2em;
+    padding: 2.5em 1.5em;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 4px;
+  }
+
+  .blog-cta p {
+    margin-bottom: 0.75em;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  .blog-cta a {
+    display: inline-block;
+    font-family: var(--font-heading--family);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1em 2.5em;
+    border: 1px solid var(--color-foreground);
+    color: var(--color-foreground);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-top: 0.5em;
+  }
+
+  .blog-cta a:hover {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .blog-share-divider {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin: 3em 0 0;
+  }
+
+  .blog-share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+    padding: 2em 0 0;
+  }
+
+  .blog-share-label {
+    font-family: var(--font-heading--family);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .blog-share a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--color-foreground);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .blog-share a:hover {
+    background: var(--color-foreground);
+    color: var(--color-background);
+    border-color: var(--color-foreground);
+  }
+
+  .blog-share a svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:names.content",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "This is what Ayurveda always promised. We're just making it easier to experience."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_label",
+      "label": "CTA button label",
+      "default": "Shop the Turmeric Glow Pads"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Social sharing"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share",
+      "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "share_x",
+      "label": "X (Twitter)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "share_facebook",
+      "label": "Facebook",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "share_pinterest",
+      "label": "Pinterest",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "share_email",
+      "label": "Email",
+      "default": true
+    }
+  ],
   "presets": [
     {
       "name": "t:names.content"

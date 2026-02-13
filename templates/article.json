@@ -78,7 +78,16 @@
         "blog-post-content": {
           "type": "_blog-post-content",
           "static": true,
-          "settings": {},
+          "settings": {
+            "cta_text": "This is what Ayurveda always promised. We're just making it easier to experience.",
+            "cta_button_label": "Shop the Turmeric Glow Pads",
+            "cta_link": "shopify://products/✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
+            "show_share": true,
+            "share_x": true,
+            "share_facebook": true,
+            "share_pinterest": true,
+            "share_email": true
+          },
           "blocks": {}
         }
       },

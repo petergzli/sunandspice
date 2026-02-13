@@ -1,0 +1,13 @@
+client_id = "8d20edd10a5003efc663d57865834f64"
+name = "blog-generator"
+application_url = "http://localhost:3000"
+embedded = false
+
+[access_scopes]
+scopes = "write_content,read_content"
+
+[auth]
+redirect_urls = ["http://localhost:3000/callback"]
+
+[webhooks]
+api_version = "2026-01"

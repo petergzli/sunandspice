@@ -12,6 +12,7 @@ const WATER_NEEDED = 3;
 const MAX_WATER_BEFORE_RUIN = 4;
 const MAX_WATER = 30;
 const WATER_REGEN_MS = 3000;
+const WELL_PER_TAP = 1;
 
 class TurmericGameComponent extends HTMLElement {
   connectedCallback() {
@@ -35,11 +36,14 @@ class TurmericGameComponent extends HTMLElement {
     this.pauseOverlay = this.querySelector('#tg-pauseOverlay');
     this.pauseBtn = this.querySelector('#tg-pauseBtn');
     this.endBtn = this.querySelector('#tg-endBtn');
+    this.wellBtn = this.querySelector('#tg-wellBtn');
 
     this.spawnPetals();
     this.buildGrid();
     this.bindTools();
     this.bindOverlayButtons();
+    this.bindWell();
+    this.bindShare();
   }
 
   disconnectedCallback() {
@@ -317,6 +321,74 @@ class TurmericGameComponent extends HTMLElement {
     this.timerEl.textContent = m + ':' + s;
     if (this.timeLeft <= 15) this.timerEl.classList.add('danger');
     if (this.timeLeft <= 0) this.endGame();
+  }
+
+  // --- Well (tap-to-fill) ---
+  bindWell() {
+    this.wellBtn.addEventListener('click', () => this.useWell());
+  }
+
+  useWell() {
+    if (!this.gameActive || this.paused) return;
+    if (this.water >= MAX_WATER) return;
+    this.water = Math.min(this.water + WELL_PER_TAP, MAX_WATER);
+    this.updateWater();
+    this.playBounce(this.wellBtn);
+  }
+
+  // --- Share ---
+  bindShare() {
+    this.querySelector('#tg-shareHudBtn').addEventListener('click', () => this.shareGame());
+    this.querySelector('#tg-shareX').addEventListener('click', () => this.shareToX());
+    this.querySelector('#tg-shareFb').addEventListener('click', () => this.shareToFb());
+    this.querySelector('#tg-shareCopy').addEventListener('click', () => this.copyLink());
+  }
+
+  getShareUrl() {
+    return window.location.href.split('?')[0];
+  }
+
+  getShareText(withScore) {
+    const base = 'Play the Turmeric Harvest game on Sun & Spice!';
+    if (withScore && this.score > 0) return 'I harvested ' + this.score + ' turmeric on Sun & Spice! Can you beat my score?';
+    return base;
+  }
+
+  shareGame() {
+    const url = this.getShareUrl();
+    const text = this.getShareText(false);
+    if (navigator.share) {
+      navigator.share({ title: 'Turmeric Harvest', text: text, url: url }).catch(() => {});
+    } else {
+      this.copyToClipboard(url);
+    }
+  }
+
+  shareToX() {
+    const url = this.getShareUrl();
+    const text = this.getShareText(true);
+    window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
+  }
+
+  shareToFb() {
+    const url = this.getShareUrl();
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank');
+  }
+
+  copyLink() {
+    const url = this.getShareUrl();
+    const text = this.getShareText(true) + ' ' + url;
+    this.copyToClipboard(text);
+    const btn = this.querySelector('#tg-shareCopy');
+    btn.classList.add('copied');
+    btn.textContent = '✓';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '🔗'; }, 1500);
+  }
+
+  copyToClipboard(text) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).catch(() => {});
+    }
   }
 
   // --- Game lifecycle ---

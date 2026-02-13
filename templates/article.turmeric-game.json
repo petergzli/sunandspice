@@ -102,20 +102,10 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
-    },
-    "video": {
-      "type": "youtube-embed",
-      "settings": {
-        "video_url": "https://www.youtube.com/embed/o644MRSlX7I",
-        "heading": "See It in Action",
-        "padding-block-start": 0,
-        "padding-block-end": 40
-      }
     }
   },
   "order": [
     "game",
-    "main",
-    "video"
+    "main"
   ]
 }

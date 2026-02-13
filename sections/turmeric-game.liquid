@@ -26,6 +26,7 @@
     <div class="tg-hud-item tg-timer" id="tg-timer">1:30</div>
     <div class="tg-hud-item"><span class="tg-icon">💧</span> <span id="tg-water">20</span></div>
     <div class="tg-hud-controls">
+      <button class="tg-hud-btn" id="tg-shareHudBtn" title="Share game">↗</button>
       <button class="tg-hud-btn" id="tg-pauseBtn" style="display:none;">⏸</button>
       <button class="tg-hud-btn" id="tg-endBtn" style="display:none;">⏹</button>
     </div>
@@ -43,6 +44,7 @@
     <button class="tg-tool-btn" data-tool="water"><span class="tg-emoji">💧</span> Water</button>
     <button class="tg-tool-btn" data-tool="harvest"><span class="tg-emoji">✂️</span> Harvest</button>
     <button class="tg-tool-btn" data-tool="remove"><span class="tg-emoji">🧹</span> Remove</button>
+    <button class="tg-tool-btn tg-well-btn" id="tg-wellBtn"><span class="tg-emoji">🪣</span> Well</button>
   </div>
 
   <!-- Farm grid -->
@@ -59,7 +61,8 @@
         🌱 <b>Plant</b> seeds in empty soil<br>
         💧 <b>Water</b> exactly 3 times to grow<br>
         ✂️ <b>Harvest</b> only when ready (wiggling!)<br>
-        🧹 <b>Remove</b> ruined crops to replant<br><br>
+        🧹 <b>Remove</b> ruined crops to replant<br>
+        🪣 <b>Well</b> tap to refill water (+1 per tap)<br><br>
         ⚠️ <b>Over-water</b> (4+ waters) = crop ruined!<br>
         ⚠️ <b>Early harvest</b> = crop ruined!
       </div>
@@ -83,6 +86,14 @@
       <div class="tg-score-display" id="tg-finalScore">0</div>
       <p id="tg-endMsg"></p>
       <p id="tg-endStats" style="font-size:0.85rem; opacity:0.7;"></p>
+      <div class="tg-share-row">
+        <span class="tg-share-label">Share your score:</span>
+        <div class="tg-share-links">
+          <button class="tg-share-btn" id="tg-shareX" title="Share on X">𝕏</button>
+          <button class="tg-share-btn" id="tg-shareFb" title="Share on Facebook">f</button>
+          <button class="tg-share-btn" id="tg-shareCopy" title="Copy link">🔗</button>
+        </div>
+      </div>
       <button class="tg-overlay-btn" id="tg-restartBtn">🔄 Farm Again!</button>
     </div>
   </div>
@@ -315,6 +326,23 @@
   }
   .tg-overlay-btn:hover { transform: scale(1.06); }
   .tg-overlay-btn:active { transform: scale(0.96); }
+
+  /* Share UI */
+  .tg-share-row { margin: 16px 0; }
+  .tg-share-label {
+    display: block; font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #795548; margin-bottom: 8px; font-weight: 700;
+  }
+  .tg-share-links { display: flex; justify-content: center; gap: 10px; }
+  .tg-share-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(0,0,0,0.06); border: 2px solid rgba(0,0,0,0.1);
+    font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; color: #5D4037; font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+  }
+  .tg-share-btn:hover { background: rgba(196,160,201,0.2); border-color: #C4A0C9; transform: scale(1.1); }
+  .tg-share-btn.copied { background: #4CAF50; color: #fff; border-color: #4CAF50; }
 
   .tg-float-text {
     position: fixed; font-family: 'Lilita One', cursive; font-size: 1.5rem;

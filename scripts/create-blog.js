@@ -99,9 +99,10 @@ async function findArticle(blogId, title) {
 // Edit your blog post here
 // ============================================================
 const post = {
-  title: "The Ancient Science of Ayurveda — And Why Turmeric Is Its Golden Star",
+  title: "From Soil to Skin: How Turmeric Is Grown & Harvested",
   author: "Sun & Spice",
-  tags: "ayurveda, turmeric, skincare, wellness, ingredients",
+  tags: "turmeric, ayurveda, ingredients, sustainability, interactive",
+  template_suffix: "turmeric-game",
   body_html: `
 <style>
   .ss-article { font-size: 1.0625rem; line-height: 1.8; color: var(--color-foreground); }
@@ -112,52 +113,55 @@ const post = {
   .ss-article ul { list-style: none; padding: 0; margin: 1.5em 0 2em; display: flex; flex-direction: column; gap: 1em; }
   .ss-article ul li { padding: 1.25em 1.5em; background: rgba(0,0,0,0.02); border-left: 2px solid var(--color-foreground); line-height: 1.6; }
   .ss-article ul li strong { display: block; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25em; }
-  .ss-article em { font-style: italic; }
   .ss-article .ss-pullquote { font-family: var(--font-heading--family); font-size: 1.375rem; text-align: center; padding: 2.5em 1.5em; margin: 2.5em 0; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); letter-spacing: -0.01em; line-height: 1.5; font-weight: 400; }
-  .ss-video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 2.5em 0; border-radius: 4px; }
-  .ss-video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 </style>
 
 <div class="ss-article">
 
-<p class="ss-lead">Long before modern skincare labs and clinical trials, there was Ayurveda — a 5,000-year-old system of natural healing rooted in the belief that true beauty starts from within. Originating in India, Ayurveda (meaning "the science of life") isn't just medicine. It's a philosophy. A way of living in harmony with your body, your environment, and the natural world.</p>
+<p class="ss-lead">Every Sun &amp; Spice product starts with a single, remarkable root. Before turmeric becomes the golden ingredient in your skincare routine, it spends months growing in rich tropical soil, absorbing the sun and nutrients that give it extraordinary healing power. Here's the journey from earth to your skin.</p>
 
-<p>At Sun &amp; Spice, Ayurveda isn't a trend we're borrowing. It's the foundation everything we create is built on.</p>
+<h2>Where Turmeric Grows</h2>
 
-<h2>What Is Ayurvedic Medicine?</h2>
+<p>Turmeric (<em>Curcuma longa</em>) thrives in warm, humid climates with plenty of rainfall. The world's largest producers are India, Bangladesh, and parts of Southeast Asia. It needs temperatures between 20-30&deg;C and well-drained, fertile soil rich in organic matter.</p>
 
-<p>Ayurveda is one of the world's oldest holistic healing systems. It's built on the idea that health and wellness depend on a delicate balance between mind, body, and spirit. Rather than treating symptoms, Ayurveda addresses the root cause — using natural ingredients, dietary wisdom, and daily rituals to restore balance.</p>
+<p>The plant belongs to the ginger family &mdash; and like ginger, the prized part grows underground as a rhizome (a thick, knobby root system). Above ground, turmeric produces stunning broad green leaves and, occasionally, beautiful white or pink flower spikes.</p>
 
-<p>Central to Ayurveda is the concept of the three doshas — <strong>Vata</strong>, <strong>Pitta</strong>, and <strong>Kapha</strong> — energies that govern everything from your digestion to your skin type. When your doshas are balanced, your skin glows. When they're not, inflammation, dullness, and breakouts follow.</p>
+<h2>Planting &amp; Growing</h2>
 
-<div class="ss-pullquote">This is where the right ingredients make all the difference.</div>
-
-<h2>Turmeric: The Golden Goddess of Ayurveda</h2>
-
-<p>If Ayurveda had a single MVP ingredient, it would be turmeric. Known as <em>Haridra</em> in Sanskrit — literally "the golden one" — turmeric has been used for thousands of years in Ayurvedic practice for everything from wound healing to skin brightening to reducing inflammation.</p>
+<p>Turmeric is propagated by planting small pieces of rhizome &mdash; called "seed rhizomes" or "fingers" &mdash; about 5-7 cm deep in prepared beds. Planting typically happens at the start of the monsoon season (May-June in India).</p>
 
 <ul>
-  <li><strong>Curcumin</strong>Turmeric's active compound is a potent anti-inflammatory and antioxidant. It fights the free radicals that cause premature aging and dull skin.</li>
-  <li><strong>Natural Brightening</strong>Inhibits excess melanin production, helping to even out skin tone and fade hyperpigmentation over time.</li>
-  <li><strong>Antibacterial</strong>Fights acne-causing bacteria without stripping your skin's natural moisture barrier.</li>
-  <li><strong>Universal Balance</strong>One of the rare Ayurvedic ingredients that balances all three doshas — works for every skin type.</li>
+  <li><strong>Month 1-2</strong>The rhizome sends up its first shoots. Farmers keep the soil moist and weed carefully around the young plants.</li>
+  <li><strong>Month 3-5</strong>The plant grows vigorously, developing large leaves up to a meter long. The underground rhizome network begins to expand.</li>
+  <li><strong>Month 6-8</strong>This is the critical period of rhizome development. The roots swell with curcumin &mdash; the compound that gives turmeric its intense golden color and potent anti-inflammatory properties.</li>
+  <li><strong>Month 9-10</strong>The leaves begin to yellow and dry out, signaling that the rhizomes below are mature and ready for harvest.</li>
 </ul>
 
-<p>In traditional Ayurvedic practice, brides would apply turmeric paste before their wedding for radiant, glowing skin. That ritual wasn't just ceremonial — it was science passed down through generations.</p>
+<div class="ss-pullquote">It takes 8 to 10 months of patient cultivation for a single turmeric plant to develop the curcumin-rich rhizomes we use in our products.</div>
 
-<h2>See It in Action</h2>
+<h2>Harvesting</h2>
 
-<p>Want a deeper dive into what makes turmeric so remarkable? Watch this:</p>
+<p>Harvest is a hands-on process. Farmers carefully lift the entire plant and its root cluster from the soil, usually with a simple spade or by hand. Timing is everything &mdash; harvest too early and the curcumin content is low; too late and the rhizomes become fibrous and woody.</p>
 
-<div class="ss-video-wrapper">
-  <iframe src="https://www.youtube.com/embed/V9ll-bsBRd8" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
-</div>
+<p>A healthy plant yields about 200-300 grams of fresh rhizomes. The roots are separated from the mother plant, washed clean of soil, and sorted by size and quality.</p>
 
-<h2>Why We Built Sun &amp; Spice Around It</h2>
+<h2>Processing: From Root to Powder</h2>
 
-<p>We created Sun &amp; Spice because we believe the next generation of skincare doesn't come from a lab — it comes from the earth. Turmeric is our hero ingredient because it works. Not in a vague, "wellness buzzword" way. In a visible, feel-it-on-your-skin way.</p>
+<p>Fresh turmeric rhizomes must be processed quickly to preserve their potency. The traditional method involves:</p>
 
-<p>Our <strong>Ayurvedic Turmeric Glow Pads</strong> combine turmeric with kojic acid for a one-two punch: ancient Ayurvedic wisdom meets modern efficacy. The result? Brighter skin, reduced hyperpigmentation, and a natural glow — no harsh chemicals required.</p>
+<ul>
+  <li><strong>Boiling</strong>Rhizomes are boiled in water for 30-45 minutes until soft. This activates enzymes that enhance curcumin availability and creates the uniform golden color throughout.</li>
+  <li><strong>Drying</strong>The boiled rhizomes are spread in the sun for 10-15 days, turning them regularly. Sun-drying is preferred because it preserves more of the active compounds than mechanical drying.</li>
+  <li><strong>Polishing &amp; Grinding</strong>Dried rhizomes are polished to remove rough outer skin, then ground into the fine golden powder used in cooking, supplements, and skincare formulations.</li>
+</ul>
+
+<h2>Why This Matters for Your Skin</h2>
+
+<p>The curcumin content of turmeric &mdash; the compound responsible for its anti-inflammatory, antioxidant, and brightening properties &mdash; is directly tied to how well the plant was grown and harvested. Stressed plants, premature harvests, or poor processing all reduce the potency of the final ingredient.</p>
+
+<p>At Sun &amp; Spice, we source our turmeric from farms that follow traditional Ayurvedic cultivation practices: organic soil, natural rainfall, hand harvesting at peak maturity. This means every pad you press against your skin delivers the highest concentration of active curcumin possible.</p>
+
+<p>Now that you know the journey &mdash; scroll up and test your turmeric instincts in the harvest game!</p>
 
 </div>
   `,
@@ -167,7 +171,7 @@ const post = {
 // ============================================================
 
 // Set to an article ID to update instead of create, or leave null to create new
-const UPDATE_ARTICLE_ID = 595036143849;
+const UPDATE_ARTICLE_ID = null;
 
 async function main() {
   console.log("Connecting to Shopify...\n");

@@ -1,0 +1,709 @@
+<script src="{{ 'toner-pad-game.js' | asset_url }}" type="module"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<toner-pad-game-component
+  class="section"
+  style="
+    display: block;
+    {%- render 'spacing-style', settings: section.settings %};
+  "
+>
+  <!-- Custom cursor (toner pad) -->
+  <div class="tp-toner-cursor" id="tp-cursor">
+    <div class="tp-pad">PAD</div>
+  </div>
+
+  <!-- Start screen -->
+  <div class="tp-overlay" id="tp-startScreen">
+    <div class="tp-overlay-card">
+      <h1>Turmeric Glow</h1>
+      <p style="margin-bottom:8px; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase;">Scratch & Tone Game</p>
+      <p>Rub away dark spots with our Turmeric Toner Pads before time runs out!</p>
+      <div class="tp-how-to">
+        <div>
+          <div class="tp-icon-box">&#127919;</div>
+          <div class="tp-desc"><strong>Scrub dark spots</strong> &#8212; click & drag over hyperpigmentation to clear them away</div>
+        </div>
+        <div>
+          <div class="tp-icon-box">&#9889;</div>
+          <div class="tp-desc"><strong>Don't waste pads!</strong> &#8212; scrubbing clear skin uses up a toner pad for nothing</div>
+        </div>
+        <div>
+          <div class="tp-icon-box">&#128722;</div>
+          <div class="tp-desc"><strong>Restock</strong> &#8212; buy more pads when you run low (costs 2 seconds!)</div>
+        </div>
+      </div>
+      <button class="tp-btn tp-btn-start" id="tp-startBtn">Start Glowing &#10024;</button>
+    </div>
+  </div>
+
+  <!-- Game over screen -->
+  <div class="tp-overlay tp-hidden" id="tp-endScreen">
+    <div class="tp-overlay-card">
+      <h2>Time's Up!</h2>
+      <div class="tp-score-label">Spots Cleared</div>
+      <div class="tp-final-score" id="tp-finalScore">0</div>
+      <p id="tp-endMessage">Great job treating that skin!</p>
+      <button class="tp-btn tp-btn-start" id="tp-restartBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Pause screen -->
+  <div class="tp-pause-overlay tp-hidden" id="tp-pauseScreen">
+    <div class="tp-pause-card">
+      <h2>Paused</h2>
+      <p>Take a breather &#8212; your skin isn't going anywhere!</p>
+      <div class="tp-pause-buttons">
+        <button class="tp-btn-resume" id="tp-resumeBtn">Resume</button>
+        <button class="tp-btn-quit" id="tp-quitBtn">Stop Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game UI -->
+  <div class="tp-game-container">
+    <div class="tp-header">
+      <div class="tp-brand">
+        Turmeric Glow
+        <span>Toner Pad Game</span>
+      </div>
+      <button class="tp-btn-pause" id="tp-pauseBtn">
+        <span class="tp-pause-icon">&#9208;</span>
+        <span>Pause</span>
+      </button>
+    </div>
+
+    <div class="tp-stats-bar">
+      <div class="tp-stat">
+        <div class="tp-stat-label">Time</div>
+        <div class="tp-stat-value tp-timer" id="tp-timerDisplay">30</div>
+      </div>
+      <div class="tp-stat">
+        <div class="tp-stat-label">Pads Left</div>
+        <div class="tp-stat-value tp-pads-count" id="tp-padsDisplay">5</div>
+        <div class="tp-pad-stack" id="tp-padStack"></div>
+      </div>
+      <div class="tp-stat">
+        <div class="tp-stat-label">Score</div>
+        <div class="tp-stat-value tp-score" id="tp-scoreDisplay">0</div>
+      </div>
+      <div class="tp-stat">
+        <div class="tp-stat-label">Wasted</div>
+        <div class="tp-stat-value tp-wasted" id="tp-wastedDisplay">0</div>
+      </div>
+    </div>
+
+    <div class="tp-canvas-wrapper" id="tp-canvasWrapper">
+      <canvas id="tp-gameCanvas"></canvas>
+    </div>
+
+    <div class="tp-controls">
+      <button class="tp-btn tp-btn-restock" id="tp-restockBtn">
+        &#128722; Restock Pads
+        <span class="tp-restock-cost">-2 seconds</span>
+      </button>
+    </div>
+  </div>
+</toner-pad-game-component>
+
+{% stylesheet %}
+  /* === TONER PAD GAME — all classes prefixed tp- to avoid conflicts === */
+
+  toner-pad-game-component {
+    --tp-primary: #C4A0C9;
+    --tp-primary-light: #DFC8E3;
+    --tp-primary-dark: #9B7AA0;
+    --tp-primary-deep: #8A6990;
+    --tp-primary-glow: #E8D5EB;
+    --tp-skin-base: #D4A574;
+    --tp-skin-light: #E8C4A0;
+    --tp-skin-warm: #C49060;
+    --tp-dark-spot: #8B6240;
+    --tp-bg: #FFFFFF;
+    --tp-bg-card: #F7F0F8;
+    --tp-text: #2D1F33;
+    --tp-text-dim: #8A7A90;
+    --tp-green: #6DBF6D;
+    --tp-red: #E05555;
+    --tp-pad-bg: #F0E4F2;
+
+    position: relative;
+    display: block;
+    height: 80vh;
+    height: 80svh;
+    max-height: 700px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--tp-bg);
+    color: var(--tp-text);
+  }
+
+  /* GAME CONTAINER */
+  .tp-game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  /* HEADER */
+  .tp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    padding: 4px 0;
+  }
+
+  .tp-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--tp-primary), var(--tp-primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+  }
+
+  .tp-brand span {
+    font-weight: 400;
+    font-size: 0.75rem;
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-text-fill-color: var(--tp-text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* STATS BAR */
+  .tp-stats-bar {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tp-stat {
+    background: var(--tp-bg-card);
+    border: 1px solid rgba(196,160,201,0.2);
+    border-radius: 10px;
+    padding: 5px 12px;
+    text-align: center;
+    min-width: 80px;
+    flex: 1;
+  }
+
+  .tp-stat-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--tp-text-dim);
+    margin-bottom: 2px;
+  }
+
+  .tp-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--tp-primary);
+  }
+
+  .tp-timer { color: var(--tp-text); }
+  .tp-timer.tp-warning { color: var(--tp-red); animation: tp-pulse 0.5s infinite; }
+  .tp-pads-count { color: var(--tp-primary-dark); }
+  .tp-score { color: var(--tp-green); }
+  .tp-wasted { color: var(--tp-red); }
+
+  @keyframes tp-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* CANVAS AREA */
+  .tp-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    flex: 1;
+    min-height: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid rgba(196,160,201,0.3);
+    box-shadow: 0 0 40px rgba(196,160,201,0.1), inset 0 0 60px rgba(0,0,0,0.05);
+    cursor: none;
+  }
+
+  .tp-canvas-wrapper canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* CUSTOM CURSOR */
+  .tp-toner-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+
+  .tp-toner-cursor .tp-pad {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--tp-pad-bg), var(--tp-primary-light));
+    border: 2px solid var(--tp-primary-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: var(--tp-primary-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.1s;
+  }
+
+  .tp-toner-cursor.tp-pressing .tp-pad {
+    transform: scale(0.85);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  .tp-toner-cursor.tp-cursor-empty .tp-pad {
+    background: radial-gradient(circle at 35% 35%, #ddd, #bbb);
+    border-color: #999;
+    opacity: 0.5;
+  }
+
+  /* CONTROLS */
+  .tp-controls {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px;
+  }
+
+  .tp-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 14px;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tp-btn-restock {
+    background: linear-gradient(135deg, var(--tp-primary), var(--tp-primary-dark));
+    color: white;
+    flex: 1;
+    max-width: 200px;
+    box-shadow: 0 4px 20px rgba(196,160,201,0.3);
+  }
+
+  .tp-btn-restock:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(196,160,201,0.5);
+  }
+
+  .tp-btn-restock:active { transform: translateY(0); }
+
+  .tp-restock-cost {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  .tp-btn-start {
+    background: linear-gradient(135deg, var(--tp-primary), var(--tp-primary-dark));
+    color: white;
+    flex: 1;
+    max-width: 260px;
+    font-size: 1rem;
+    padding: 18px 32px;
+  }
+
+  .tp-btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(196,160,201,0.4);
+  }
+
+  /* OVERLAYS */
+  .tp-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+
+  .tp-overlay.tp-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tp-overlay-card {
+    background: var(--tp-bg-card);
+    border: 1px solid rgba(196,160,201,0.25);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  }
+
+  .tp-overlay-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--tp-primary), var(--tp-primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  .tp-overlay-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--tp-primary-dark);
+    margin-bottom: 12px;
+  }
+
+  .tp-overlay-card p {
+    color: var(--tp-text-dim);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .tp-final-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--tp-primary-dark);
+    margin: 12px 0;
+  }
+
+  .tp-score-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--tp-text-dim);
+  }
+
+  .tp-how-to {
+    text-align: left;
+    margin: 16px 0;
+  }
+
+  .tp-how-to div {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .tp-icon-box {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 8px;
+    background: rgba(196,160,201,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .tp-desc {
+    color: var(--tp-text-dim);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .tp-desc strong {
+    color: var(--tp-text);
+  }
+
+  /* PAUSE */
+  .tp-btn-pause {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid var(--tp-primary);
+    background: transparent;
+    color: var(--tp-primary-dark);
+    border-radius: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tp-btn-pause:hover {
+    background: var(--tp-primary);
+    color: white;
+  }
+
+  .tp-pause-icon { font-size: 0.9rem; }
+
+  .tp-pause-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  .tp-pause-overlay.tp-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tp-pause-card {
+    background: var(--tp-bg-card);
+    border: 1px solid rgba(196,160,201,0.25);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    max-width: 340px;
+    width: 85%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  }
+
+  .tp-pause-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--tp-primary-dark);
+    margin-bottom: 8px;
+  }
+
+  .tp-pause-card p {
+    color: var(--tp-text-dim);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .tp-pause-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tp-btn-resume {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, var(--tp-primary), var(--tp-primary-dark));
+    color: white;
+    box-shadow: 0 4px 16px rgba(196,160,201,0.3);
+  }
+
+  .tp-btn-resume:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196,160,201,0.5);
+  }
+
+  .tp-btn-quit {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--tp-red);
+    background: transparent;
+    color: var(--tp-red);
+    border-radius: 14px;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tp-btn-quit:hover {
+    background: var(--tp-red);
+    color: white;
+  }
+
+  /* PAD COUNTER */
+  .tp-pad-stack {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    margin-top: 4px;
+  }
+
+  .tp-pad-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tp-primary);
+    transition: all 0.2s;
+  }
+
+  .tp-pad-dot.tp-empty {
+    background: rgba(196,160,201,0.2);
+  }
+
+  /* RESTOCK FLASH */
+  .tp-restock-flash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(196,160,201,0.3), transparent);
+    z-index: 10;
+    pointer-events: none;
+    animation: tp-restock-glow 0.5s ease-out forwards;
+    border-radius: 20px;
+  }
+
+  @keyframes tp-restock-glow {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* EFFECTS (appended to body, need global styles) */
+  .tp-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    font-size: 1.2rem;
+    animation: tp-sparkle-fly 0.8s ease-out forwards;
+  }
+
+  @keyframes tp-sparkle-fly {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+  }
+
+  .tp-penalty-flash {
+    position: fixed;
+    pointer-events: none;
+    z-index: 998;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--tp-red, #E05555);
+    animation: tp-penalty-pop 0.7s ease-out forwards;
+  }
+
+  @keyframes tp-penalty-pop {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-40px) scale(0.8); opacity: 0; }
+  }
+
+  .tp-score-pop {
+    position: fixed;
+    pointer-events: none;
+    z-index: 998;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #9B7AA0;
+    font-family: 'Playfair Display', serif;
+    animation: tp-score-float 0.8s ease-out forwards;
+  }
+
+  @keyframes tp-score-float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-50px) scale(1.2); opacity: 0; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-height: 700px) {
+    .tp-stat { padding: 4px 10px; }
+    .tp-stat-value { font-size: 1rem; }
+    .tp-overlay-card { padding: 24px; }
+    .tp-overlay-card h1 { font-size: 1.4rem; }
+    .tp-btn { padding: 8px 20px; font-size: 0.8rem; }
+    .tp-brand { font-size: 1rem; }
+  }
+
+  @media (max-height: 560px) {
+    toner-pad-game-component { height: 100vh; height: 100svh; max-height: none; }
+    .tp-game-container { padding: 4px 8px; gap: 4px; }
+    .tp-header { padding: 2px 0; }
+    .tp-stat { padding: 3px 8px; }
+    .tp-stat-label { font-size: 0.5rem; }
+    .tp-stat-value { font-size: 0.9rem; }
+    .tp-pad-stack { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Toner Pad Game",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Toner Pad Game"
+    }
+  ]
+}
+{% endschema %}

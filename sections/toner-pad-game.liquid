@@ -125,7 +125,10 @@
     --tp-text-dim: #8A7A90;
     --tp-green: #6DBF6D;
     --tp-red: #E05555;
-    --tp-pad-bg: #F0E4F2;
+    --tp-pad-bg: #F5D76E;
+    --tp-pad-light: #FCE9A0;
+    --tp-pad-dark: #C9A825;
+    --tp-pad-deep: #8B7518;
 
     position: relative;
     display: block;
@@ -217,7 +220,7 @@
 
   .tp-timer { color: var(--tp-text); }
   .tp-timer.tp-warning { color: var(--tp-red); animation: tp-pulse 0.5s infinite; }
-  .tp-pads-count { color: var(--tp-primary-dark); }
+  .tp-pads-count { color: var(--tp-pad-dark); }
   .tp-score { color: var(--tp-green); }
   .tp-wasted { color: var(--tp-red); }
 
@@ -261,15 +264,15 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, var(--tp-pad-bg), var(--tp-primary-light));
-    border: 2px solid var(--tp-primary-dark);
+    background: radial-gradient(circle at 35% 35%, var(--tp-pad-light), var(--tp-pad-bg));
+    border: 2px solid var(--tp-pad-dark);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.5rem;
     font-weight: 700;
-    color: var(--tp-primary-deep);
+    color: var(--tp-pad-deep);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: transform 0.1s;
@@ -580,12 +583,12 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--tp-primary);
+    background: var(--tp-pad-bg);
     transition: all 0.2s;
   }
 
   .tp-pad-dot.tp-empty {
-    background: rgba(196,160,201,0.2);
+    background: rgba(201,168,37,0.2);
   }
 
   /* RESTOCK FLASH */

@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * Arcade / Games hub page.
+ * Assign template_suffix "arcade" to the page in Shopify Admin.
+ * ------------------------------------------------------------
+ */{
+  "sections": {
+    "arcade_hero": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"arcade-hero\"><p class=\"arcade-eyebrow\">Sun & Spice</p><h1 class=\"arcade-title\">Arcade</h1><p class=\"arcade-subtitle\">Learn about Ayurvedic skincare the fun way — play our mini-games while you explore the power of turmeric.</p></div><style>.arcade-hero{max-width:720px;margin:0 auto;padding:72px 24px 40px;text-align:center;}.arcade-eyebrow{font-family:var(--font-body--family);font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:#C193C3;margin:0 0 12px;}.arcade-title{font-family:var(--font-heading--family);font-size:3rem;font-weight:700;margin:0 0 20px;letter-spacing:-0.02em;line-height:1.1;}.arcade-subtitle{font-family:var(--font-body--family);font-size:1.05rem;line-height:1.7;color:rgba(0,0,0,0.55);margin:0 auto;max-width:520px;}@media screen and (min-width:750px){.arcade-title{font-size:3.5rem;}}</style>",
+        "color_scheme": "scheme-1",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "arcade_grid": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"arcade-grid\"><a href=\"/blogs/learn/from-soil-to-skin-how-turmeric-is-grown-harvested\" class=\"arcade-card\"><div class=\"arcade-card-visual arcade-card-harvest\"><div class=\"arcade-card-emoji\">🌱</div></div><div class=\"arcade-card-body\"><span class=\"arcade-card-tag\">Farming</span><h2 class=\"arcade-card-name\">Turmeric Harvest</h2><p class=\"arcade-card-desc\">Plant, water, and harvest turmeric on your own Ayurvedic farm. Learn how the golden root goes from soil to skincare.</p><span class=\"arcade-card-cta\">Play Now &rarr;</span></div></a><a href=\"/blogs/learn/the-science-of-glow-how-turmeric-toner-pads-fight-hyperpigmentation\" class=\"arcade-card\"><div class=\"arcade-card-visual arcade-card-glow\"><div class=\"arcade-card-emoji\">✨</div></div><div class=\"arcade-card-body\"><span class=\"arcade-card-tag\">Skincare</span><h2 class=\"arcade-card-name\">Turmeric Glow</h2><p class=\"arcade-card-desc\">Scrub away dark spots with turmeric toner pads before time runs out. See the science of brightening in action.</p><span class=\"arcade-card-cta\">Play Now &rarr;</span></div></a></div><style>.arcade-grid{max-width:960px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:1fr;gap:28px;}@media screen and (min-width:750px){.arcade-grid{grid-template-columns:repeat(2,1fr);gap:32px;}}.arcade-card{display:flex;flex-direction:column;border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;text-decoration:none;color:inherit;transition:transform 0.25s ease,box-shadow 0.25s ease;}.arcade-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.1);}.arcade-card-visual{height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}.arcade-card-harvest{background:linear-gradient(145deg,#F5E6D0,#E8D4B8,#D4A574);}.arcade-card-glow{background:linear-gradient(145deg,#E8C4A0,#D4A574,#C49060);}.arcade-card-emoji{font-size:4.5rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));transition:transform 0.3s ease;}.arcade-card:hover .arcade-card-emoji{transform:scale(1.12);}.arcade-card-body{padding:28px 28px 32px;display:flex;flex-direction:column;gap:8px;flex:1;}.arcade-card-tag{font-family:var(--font-body--family);font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:#C193C3;font-weight:600;}.arcade-card-name{font-family:var(--font-heading--family);font-size:1.5rem;font-weight:700;margin:0;letter-spacing:-0.01em;line-height:1.2;}.arcade-card-desc{font-family:var(--font-body--family);font-size:0.9rem;line-height:1.65;color:rgba(0,0,0,0.55);margin:0;flex:1;}.arcade-card-cta{font-family:var(--font-body--family);font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C193C3;margin-top:8px;transition:color 0.2s;}.arcade-card:hover .arcade-card-cta{color:#9B7AA0;}@media screen and (max-width:749px){.arcade-card-visual{height:180px;}.arcade-card-emoji{font-size:3.5rem;}.arcade-card-body{padding:20px 20px 24px;}.arcade-card-name{font-size:1.3rem;}}</style>",
+        "color_scheme": "scheme-1",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "arcade_hero",
+    "arcade_grid"
+  ]
+}

@@ -221,7 +221,15 @@ class ToneMixerGame extends HTMLElement {
       }
       if (d.y > this.ch + 20) {
         d.missed = true;
-        if (!d.isBad) { S.combo = 0; this.updateUI(); }
+        if (!d.isBad) {
+          const penalty = d.item.points;
+          S.score -= penalty;
+          S.combo = 0;
+          const rect = this.areaEl.getBoundingClientRect();
+          this.spawnFlash(rect.left + d.x, rect.bottom - 20, `-${penalty}`, '#D9534F');
+          if (S.score < 0) { S.playing = false; setTimeout(() => this.showEnd(), 400); }
+          this.updateUI();
+        }
       }
     });
 
@@ -523,6 +531,7 @@ class ToneMixerGame extends HTMLElement {
     else if (S.level >= 5) msg = 'Impressive! You made it to ' + this.getLevelConfig(S.level).name + '!';
     else if (S.batches >= 1) msg = 'Nice batch! Keep practicing to reach higher levels.';
     else if (S.caught > 10) msg = 'Good catching! Almost had a full formula.';
+    else if (S.score < 0) msg = 'Too many missed ingredients \u2014 your score went negative!';
     else msg = 'Those contaminants got you \u2014 try again!';
     this.endMsg.textContent = msg;
     this.endScreen.classList.remove('tm-hidden');

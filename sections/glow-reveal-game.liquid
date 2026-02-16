@@ -1,0 +1,631 @@
+<script src="{{ 'glow-reveal-game.js' | asset_url }}" type="module"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<glow-reveal-game-component
+  class="section"
+  style="
+    display: block;
+    {%- render 'spacing-style', settings: section.settings %};
+  "
+>
+  <!-- Cursor -->
+  <div class="gr-pad-cursor" id="gr-cursor">
+    <div class="gr-pad-shape"><span class="gr-pad-label">PAD</span></div>
+  </div>
+
+  <!-- Start screen -->
+  <div class="gr-overlay" id="gr-startScreen">
+    <div class="gr-modal">
+      <h1>Glow Reveal</h1>
+      <div class="gr-tagline">Turmeric Toner Scratch-Off</div>
+      <p>Drag your turmeric toner pad across the golden layer to reveal glowing skin &#8212; but watch out for breakout bombs!</p>
+      <div class="gr-rules">
+        <div class="gr-rule">
+          <div class="gr-rule-icon">&#128070;</div>
+          <div class="gr-rule-text"><strong>Click & drag</strong> to scrub away the golden layer with your toner pad</div>
+        </div>
+        <div class="gr-rule">
+          <div class="gr-rule-icon">&#10024;</div>
+          <div class="gr-rule-text"><strong>Reveal glowing skin</strong> underneath &#8212; clear them all to win!</div>
+        </div>
+        <div class="gr-rule">
+          <div class="gr-rule-icon">&#128163;</div>
+          <div class="gr-rule-text"><strong>Breakout bombs</strong> are hidden &#8212; hit one and lose a life</div>
+        </div>
+        <div class="gr-rule">
+          <div class="gr-rule-icon">&#129524;</div>
+          <div class="gr-rule-text"><strong>Each reveal uses a pad</strong> &#8212; restock if you run low (costs a life)</div>
+        </div>
+      </div>
+      <button class="gr-btn-play" id="gr-startBtn">Start Scratching &#10024;</button>
+    </div>
+  </div>
+
+  <!-- Game Over -->
+  <div class="gr-overlay gr-hidden" id="gr-endScreen">
+    <div class="gr-modal">
+      <h1 id="gr-endTitle">Game Over</h1>
+      <div class="gr-big-score-label">Final Score</div>
+      <div class="gr-big-score" id="gr-endScore">0</div>
+      <div class="gr-end-stats">
+        <div class="gr-end-stat"><div class="gr-num" id="gr-endGlow">0%</div><div class="gr-lbl">Glow</div></div>
+        <div class="gr-end-stat"><div class="gr-num" id="gr-endBombs">0</div><div class="gr-lbl">Bombs Hit</div></div>
+        <div class="gr-end-stat"><div class="gr-num" id="gr-endPads">0</div><div class="gr-lbl">Pads Used</div></div>
+      </div>
+      <p id="gr-endMsg"></p>
+      <button class="gr-btn-play" id="gr-restartBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Pause -->
+  <div class="gr-overlay gr-hidden" id="gr-pauseScreen">
+    <div class="gr-modal">
+      <h1>Paused</h1>
+      <p>Your glow-up is on hold &#10024;</p>
+      <div class="gr-pause-btns">
+        <button class="gr-btn-play" id="gr-resumeBtn">Resume</button>
+        <button class="gr-btn-quit" id="gr-quitBtn">Stop Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game UI -->
+  <div class="gr-app">
+    <div class="gr-header">
+      <div class="gr-logo">Glow Reveal<small>Turmeric Toner Scratch-Off</small></div>
+      <button class="gr-btn-icon" id="gr-pauseBtn">&#9208;</button>
+    </div>
+
+    <div class="gr-stats">
+      <div class="gr-stat-pill">
+        <div class="gr-label">Pads</div>
+        <div class="gr-value gr-value-pads" id="gr-padsVal">18</div>
+      </div>
+      <div class="gr-stat-pill">
+        <div class="gr-label">Lives</div>
+        <div class="gr-value gr-value-lives" id="gr-livesVal">3</div>
+        <div class="gr-hearts" id="gr-heartsRow"></div>
+      </div>
+      <div class="gr-stat-pill">
+        <div class="gr-label">Score</div>
+        <div class="gr-value gr-value-score" id="gr-scoreVal">0</div>
+      </div>
+      <div class="gr-stat-pill">
+        <div class="gr-label">Glow</div>
+        <div class="gr-value gr-value-glow" id="gr-glowVal">0%</div>
+      </div>
+    </div>
+
+    <div class="gr-progress-wrap">
+      <div class="gr-progress-bar" id="gr-progressBar" style="width:0%"></div>
+    </div>
+
+    <div class="gr-scratch-area" id="gr-scratchArea">
+      <canvas id="gr-skinCanvas"></canvas>
+      <canvas id="gr-coverCanvas"></canvas>
+    </div>
+
+    <div class="gr-controls">
+      <button class="gr-btn-restock" id="gr-restockBtn">
+        &#128722; Restock Pads (+5)
+        <span class="gr-sub">Costs 1 life</span>
+      </button>
+    </div>
+  </div>
+</glow-reveal-game-component>
+
+{% stylesheet %}
+  glow-reveal-game-component {
+    --gr-primary: #C4A0C9;
+    --gr-primary-light: #E0CCE3;
+    --gr-primary-dark: #9B7AA0;
+    --gr-primary-deep: #7A5E80;
+    --gr-turmeric: #E8A830;
+    --gr-turmeric-light: #F5CC6A;
+    --gr-turmeric-dark: #C08820;
+    --gr-gold: #D4A843;
+    --gr-bg: #FEFCFE;
+    --gr-card-bg: #F9F3FA;
+    --gr-text: #2D1F33;
+    --gr-text-dim: #9088A0;
+    --gr-green: #72BF72;
+    --gr-red: #D95050;
+
+    position: relative;
+    display: block;
+    height: 80vh;
+    height: 80svh;
+    max-height: 750px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    font-family: 'Outfit', sans-serif;
+    background: var(--gr-bg);
+    color: var(--gr-text);
+  }
+
+  .gr-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 14px 12px;
+    gap: 10px;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .gr-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .gr-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--gr-primary-deep);
+    line-height: 1.1;
+  }
+
+  .gr-logo small {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 0.55rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gr-text-dim);
+  }
+
+  .gr-btn-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    border: 1.5px solid var(--gr-primary-light);
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s;
+    color: var(--gr-primary-dark);
+  }
+
+  .gr-btn-icon:hover { background: var(--gr-primary-light); }
+
+  /* STATS */
+  .gr-stats {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .gr-stat-pill {
+    flex: 1;
+    background: var(--gr-card-bg);
+    border: 1px solid rgba(196,160,201,0.15);
+    border-radius: 14px;
+    padding: 8px 6px;
+    text-align: center;
+  }
+
+  .gr-label {
+    font-size: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gr-text-dim);
+    margin-bottom: 1px;
+  }
+
+  .gr-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .gr-value-pads { color: var(--gr-turmeric-dark); }
+  .gr-value-lives { color: var(--gr-red); }
+  .gr-value-score { color: var(--gr-green); }
+  .gr-value-glow { color: var(--gr-gold); }
+
+  .gr-hearts { display: flex; gap: 2px; justify-content: center; margin-top: 2px; }
+  .gr-heart { font-size: 0.65rem; transition: all 0.3s; }
+  .gr-heart.gr-lost { opacity: 0.15; transform: scale(0.7); }
+
+  /* PROGRESS */
+  .gr-progress-wrap {
+    width: 100%;
+    background: rgba(196,160,201,0.1);
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(196,160,201,0.12);
+  }
+
+  .gr-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gr-primary-light), var(--gr-primary));
+    border-radius: 20px;
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* SCRATCH AREA */
+  .gr-scratch-area {
+    position: relative;
+    width: 100%;
+    max-width: min(100%, calc(100vh - 280px));
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid rgba(196,160,201,0.2);
+    box-shadow: 0 8px 40px rgba(196,160,201,0.12);
+    cursor: none;
+    touch-action: none;
+    flex-shrink: 1;
+    min-height: 0;
+  }
+
+  .gr-scratch-area canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #gr-skinCanvas { z-index: 1; }
+  #gr-coverCanvas { z-index: 2; }
+
+  /* CURSOR */
+  .gr-pad-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    width: 56px;
+    height: 56px;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+
+  .gr-pad-shape {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 35%, #FFEAA0, var(--gr-turmeric-light) 40%, var(--gr-turmeric) 80%, var(--gr-turmeric-dark));
+    border: 2.5px solid var(--gr-turmeric-dark);
+    box-shadow: 0 4px 16px rgba(200,140,30,0.35), inset 0 -2px 4px rgba(0,0,0,0.08), inset 0 2px 4px rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .gr-pad-label {
+    font-size: 0.38rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: rgba(120,70,0,0.6);
+    text-shadow: 0 0.5px 0 rgba(255,255,255,0.3);
+  }
+
+  .gr-pad-cursor.gr-pressing .gr-pad-shape {
+    transform: scale(0.82);
+    box-shadow: 0 2px 6px rgba(200,140,30,0.25), inset 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  .gr-pad-cursor.gr-empty .gr-pad-shape {
+    background: radial-gradient(circle at 35% 35%, #eee, #ccc);
+    border-color: #aaa;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    opacity: 0.5;
+  }
+
+  /* CONTROLS */
+  .gr-controls {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 540px;
+  }
+
+  .gr-btn-restock {
+    flex: 1;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    border: none;
+    border-radius: 14px;
+    padding: 13px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, var(--gr-primary), var(--gr-primary-dark));
+    color: white;
+    box-shadow: 0 4px 16px rgba(196,160,201,0.3);
+  }
+
+  .gr-btn-restock:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196,160,201,0.45);
+  }
+
+  .gr-btn-restock:active { transform: translateY(0); }
+
+  .gr-sub {
+    display: block;
+    font-size: 0.55rem;
+    font-weight: 300;
+    opacity: 0.8;
+    margin-top: 1px;
+  }
+
+  .gr-btn-restock:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* OVERLAYS */
+  .gr-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+
+  .gr-overlay.gr-hidden { opacity: 0; pointer-events: none; }
+
+  .gr-modal {
+    background: white;
+    border: 1px solid rgba(196,160,201,0.2);
+    border-radius: 28px;
+    padding: 36px 30px;
+    text-align: center;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 24px 80px rgba(100,60,120,0.08);
+  }
+
+  .gr-modal h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gr-primary-deep);
+    margin-bottom: 4px;
+  }
+
+  .gr-tagline {
+    font-size: 0.6rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gr-text-dim);
+    margin-bottom: 18px;
+  }
+
+  .gr-modal p {
+    color: var(--gr-text-dim);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .gr-big-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gr-primary-dark);
+    line-height: 1;
+    margin: 8px 0 4px;
+  }
+
+  .gr-big-score-label {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gr-text-dim);
+  }
+
+  .gr-end-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 16px 0;
+  }
+
+  .gr-end-stat { text-align: center; }
+
+  .gr-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--gr-text);
+  }
+
+  .gr-lbl {
+    font-size: 0.5rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gr-text-dim);
+  }
+
+  .gr-btn-play {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 16px;
+    padding: 16px 40px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--gr-primary), var(--gr-primary-dark));
+    color: white;
+    box-shadow: 0 6px 24px rgba(196,160,201,0.35);
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .gr-btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(196,160,201,0.5);
+  }
+
+  .gr-rules { text-align: left; margin: 14px 0; }
+
+  .gr-rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .gr-rule-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 8px;
+    background: var(--gr-card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .gr-rule-text {
+    color: var(--gr-text-dim);
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .gr-rule-text strong { color: var(--gr-text); }
+
+  .gr-pause-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+
+  .gr-btn-quit {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    border: 2px solid var(--gr-red);
+    background: transparent;
+    color: var(--gr-red);
+    border-radius: 14px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .gr-btn-quit:hover { background: var(--gr-red); color: white; }
+
+  /* EFFECTS */
+  .gr-float-text {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    animation: gr-floatUp 0.8s ease-out forwards;
+  }
+
+  @keyframes gr-floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-50px) scale(1.1); opacity: 0; }
+  }
+
+  .gr-spark {
+    position: fixed;
+    pointer-events: none;
+    z-index: 998;
+    font-size: 1rem;
+    animation: gr-sparkFly 0.7s ease-out forwards;
+  }
+
+  @keyframes gr-sparkFly {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+  }
+
+  .gr-shake { animation: gr-shakeIt 0.4s; }
+
+  @keyframes gr-shakeIt {
+    0%, 100% { transform: translate(0); }
+    15% { transform: translate(-4px, -2px); }
+    30% { transform: translate(4px, 2px); }
+    45% { transform: translate(-3px, 3px); }
+    60% { transform: translate(3px, -2px); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-height: 700px) {
+    .gr-stat-pill { padding: 5px 4px; }
+    .gr-value { font-size: 1.1rem; }
+    .gr-modal { padding: 24px 20px; }
+    .gr-modal h1 { font-size: 1.5rem; }
+    .gr-btn-play { padding: 12px 28px; font-size: 0.85rem; }
+    .gr-logo { font-size: 1.1rem; }
+  }
+
+  @media (max-height: 560px) {
+    glow-reveal-game-component { height: 100vh; height: 100svh; max-height: none; }
+    .gr-app { padding: 4px 8px; gap: 4px; }
+    .gr-header { padding: 2px 0; }
+    .gr-stat-pill { padding: 3px 4px; }
+    .gr-label { font-size: 0.45rem; }
+    .gr-value { font-size: 0.9rem; }
+    .gr-hearts { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Glow Reveal Game",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Glow Reveal Game"
+    }
+  ]
+}
+{% endschema %}

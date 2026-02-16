@@ -9,9 +9,8 @@ class TonerPadGame extends HTMLElement {
       score: 0,
       pads: 5,
       maxPads: 5,
-      timer: 30,
+      timer: 60,
       wasted: 0,
-      level: 1,
       isPlaying: false,
       isPaused: false,
       isMouseDown: false,
@@ -194,30 +193,35 @@ class TonerPadGame extends HTMLElement {
 
   generateSpots() {
     this.state.spots = [];
+    const numSpots = 8;
+    for (let i = 0; i < numSpots; i++) {
+      this.spawnSpot();
+    }
+  }
+
+  spawnSpot() {
     const w = this.canvas.width / window.devicePixelRatio;
     const h = this.canvas.height / window.devicePixelRatio;
-    const numSpots = 6 + this.state.level * 3;
     const padding = 40;
+    const activeSpots = this.state.spots.filter(s => !s.cleared);
 
-    for (let i = 0; i < numSpots; i++) {
-      let spot, attempts = 0;
-      do {
-        spot = {
-          x: padding + Math.random() * (w - padding * 2),
-          y: padding + Math.random() * (h - padding * 2),
-          radius: 14 + Math.random() * 22,
-          opacity: 0.5 + Math.random() * 0.4,
-          scrubbed: 0,
-          cleared: false,
-          hue: Math.random() > 0.5 ? 25 : 15,
-        };
-        attempts++;
-      } while (attempts < 50 && this.state.spots.some(s => {
-        const dist = Math.hypot(s.x - spot.x, s.y - spot.y);
-        return dist < s.radius + spot.radius + 10;
-      }));
-      this.state.spots.push(spot);
-    }
+    let spot, attempts = 0;
+    do {
+      spot = {
+        x: padding + Math.random() * (w - padding * 2),
+        y: padding + Math.random() * (h - padding * 2),
+        radius: 14 + Math.random() * 22,
+        opacity: 0.5 + Math.random() * 0.4,
+        scrubbed: 0,
+        cleared: false,
+        hue: Math.random() > 0.5 ? 25 : 15,
+      };
+      attempts++;
+    } while (attempts < 50 && activeSpots.some(s => {
+      const dist = Math.hypot(s.x - spot.x, s.y - spot.y);
+      return dist < s.radius + spot.radius + 10;
+    }));
+    this.state.spots.push(spot);
   }
 
   drawSpots() {
@@ -257,8 +261,10 @@ class TonerPadGame extends HTMLElement {
   }
 
   drawClearedGlow() {
-    this.state.spots.forEach(spot => {
-      if (!spot.cleared) return;
+    // Only show glow for recently cleared spots (keep last 10)
+    const cleared = this.state.spots.filter(s => s.cleared);
+    const recent = cleared.slice(-10);
+    recent.forEach(spot => {
       this.ctx.save();
       this.ctx.globalAlpha = 0.15;
       const glow = this.ctx.createRadialGradient(spot.x, spot.y, 0, spot.x, spot.y, spot.radius * 1.2);
@@ -310,13 +316,8 @@ class TonerPadGame extends HTMLElement {
           this.spawnSparkles(cx, cy);
           this.spawnScorePop(cx, cy, '+10');
 
-          // All cleared → next wave
-          if (this.state.spots.every(s => s.cleared)) {
-            this.state.level++;
-            this.state.timer = Math.min(this.state.timer + 5, 30);
-            this.generateSpots();
-            this.updateUI();
-          }
+          // Spawn a replacement spot
+          this.spawnSpot();
         }
       }
     });
@@ -421,9 +422,8 @@ class TonerPadGame extends HTMLElement {
   startGame() {
     this.state.score = 0;
     this.state.pads = 5;
-    this.state.timer = 30;
+    this.state.timer = 60;
     this.state.wasted = 0;
-    this.state.level = 1;
     this.state.isPlaying = true;
     this.state.isPaused = false;
     this.state.clearedSpots = 0;
@@ -454,9 +454,10 @@ class TonerPadGame extends HTMLElement {
 
     let msg = '';
     if (this.state.score === 0) msg = "No worries \u2014 grab some pads and try again!";
-    else if (this.state.score < 50) msg = "Good start! Those spots didn't stand a chance.";
-    else if (this.state.score < 100) msg = "Impressive glow-up! Your skin is thanking you.";
-    else msg = "Skincare pro! That's some serious turmeric power! \uD83C\uDFC6";
+    else if (this.state.score < 100) msg = "Good start! Keep scrubbing for a higher score.";
+    else if (this.state.score < 200) msg = "Impressive glow-up! Can you beat that next round?";
+    else if (this.state.score < 400) msg = "Skincare pro! That's some serious turmeric power! \uD83C\uDFC6";
+    else msg = "Legendary glow! You're a turmeric master! \uD83C\uDFC6\u2728";
     this.endMessageEl.textContent = msg;
 
     this.endScreen.classList.remove('tp-hidden');

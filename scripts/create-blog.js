@@ -99,10 +99,10 @@ async function findArticle(blogId, title) {
 // Edit your blog post here
 // ============================================================
 const post = {
-  title: "The Science of Glow: How Turmeric Toner Pads Fight Hyperpigmentation",
+  title: "The Evening Glow Ritual: How to Build a Brightening Routine That Works",
   author: "Sun & Spice",
-  tags: "turmeric, skincare, hyperpigmentation, toner pads, ingredients, interactive",
-  template_suffix: "toner-pad-game",
+  tags: "turmeric, skincare, routine, brightening, glow, evening skincare, hyperpigmentation",
+  template_suffix: "glow-reveal-game",
   body_html: `
 <style>
   .ss-article { font-size: 1.0625rem; line-height: 1.8; color: var(--color-foreground); }
@@ -118,72 +118,77 @@ const post = {
 
 <div class="ss-article">
 
-<p class="ss-lead">Dark spots, uneven patches, stubborn post-acne marks &mdash; if you've ever looked in the mirror and wished your skin tone was more uniform, you're not alone. Hyperpigmentation is one of the most common skin concerns worldwide, and it doesn't discriminate by age, gender, or skin type. The good news? Nature has been offering a solution for thousands of years. It's golden, it's powerful, and it's the star of every Sun &amp; Spice product: turmeric.</p>
+<p class="ss-lead">Morning skincare gets all the attention. But if you're serious about fading dark spots, evening out your tone, and waking up with genuinely brighter skin, what you do at night matters more. Your skin repairs itself while you sleep &mdash; and with the right evening ritual, you can turn those overnight hours into your most powerful brightening treatment.</p>
 
-<h2>What Is Hyperpigmentation?</h2>
+<h2>Why Nighttime Is When the Magic Happens</h2>
 
-<p>Hyperpigmentation is the medical term for patches of skin that become darker than the surrounding area. It happens when your skin produces excess melanin &mdash; the pigment responsible for your natural skin color. While it's almost always harmless, it can be a major source of frustration and self-consciousness.</p>
+<p>Between 10 PM and 2 AM, your skin enters peak repair mode. Blood flow to the skin increases, cell turnover accelerates, and your body produces more collagen and growth hormones than at any other time of day. This is when your skin is most receptive to active ingredients.</p>
 
-<p>There are three main types you're likely to encounter:</p>
+<p>During the day, your skin is in defense mode &mdash; fighting UV radiation, pollution, and environmental stress. At night, it switches to offense. It's actively rebuilding, shedding damaged cells, and generating fresh ones. If you're applying brightening ingredients during this window, they're working with your body's natural rhythm instead of against environmental interference.</p>
 
-<ul>
-  <li><strong>Sunspots (Solar Lentigines)</strong>Caused by years of UV exposure, these flat brown spots appear on areas that get the most sun &mdash; face, hands, shoulders, and chest. They're sometimes called age spots or liver spots, though they have nothing to do with your liver.</li>
-  <li><strong>Post-Inflammatory Hyperpigmentation (PIH)</strong>This is the dark mark left behind after a pimple, cut, burn, or any skin injury heals. The inflammation triggers your melanocytes (pigment-producing cells) to go into overdrive, leaving a shadow that can linger for months.</li>
-  <li><strong>Melasma</strong>Often called "the mask of pregnancy," melasma creates larger, symmetrical patches of discoloration &mdash; usually on the cheeks, forehead, and upper lip. It's driven by hormonal changes and made worse by sun exposure.</li>
-</ul>
+<p>This is also why exfoliating at night makes more sense than in the morning. When you remove dead, pigmented surface cells before bed, you give your skin a clean slate to work with during its most regenerative hours. The new cells that surface overnight are fresher, more evenly toned, and better able to absorb your other products.</p>
 
-<div class="ss-pullquote">Hyperpigmentation isn't a flaw &mdash; it's your skin telling a story. But if you want to rewrite the ending, turmeric is the pen.</div>
+<h2>Step 1: Double Cleanse to Reset</h2>
 
-<h2>Why Does Hyperpigmentation Happen?</h2>
+<p>Your evening routine starts with a clean canvas. Throughout the day, your skin accumulates layers of sunscreen, makeup, excess sebum, pollution particles, and sweat. A single cleanser often can't cut through all of it &mdash; especially if you're wearing SPF (which you should be).</p>
 
-<p>At the cellular level, hyperpigmentation starts with an enzyme called <em>tyrosinase</em>. When triggered by UV rays, hormones, or inflammation, tyrosinase kicks off a chain reaction that converts the amino acid tyrosine into melanin. The more active your tyrosinase, the more melanin is produced &mdash; and the darker those spots become.</p>
+<p>Start with an oil-based cleanser or micellar water to dissolve makeup and sunscreen. Follow with a gentle water-based cleanser to remove any remaining residue. Your skin should feel clean but never tight or stripped &mdash; if it does, your cleanser is too harsh and may actually be triggering more pigmentation by damaging your skin barrier.</p>
 
-<p>This is why sunscreen alone isn't enough. While SPF blocks UV-triggered melanin production going forward, it doesn't address the melanin that's already been deposited in the skin. To truly fade existing spots, you need ingredients that work on the tyrosinase pathway itself.</p>
+<div class="ss-pullquote">A brightening routine is only as effective as the cleanse that comes before it. Active ingredients can't penetrate through a layer of yesterday's sunscreen.</div>
 
-<h2>Enter Turmeric: Nature's Brightening Powerhouse</h2>
+<h2>Step 2: Exfoliate and Tone with Turmeric Glow Pads</h2>
 
-<p>Turmeric (<em>Curcuma longa</em>) has been used in Ayurvedic beauty rituals for over 4,000 years. Indian brides still apply turmeric paste before their wedding day for luminous, even-toned skin. But this isn't just tradition &mdash; modern science backs it up.</p>
+<p>This is the centerpiece of the ritual. After cleansing, pull a Turmeric Glow Pad from the jar and sweep it across your entire face, starting from the center and working outward. Pay extra attention to areas where you notice uneven tone &mdash; cheeks, forehead, around the nose, and along the jawline.</p>
 
-<p>The magic lies in <em>curcumin</em>, the primary bioactive compound in turmeric. Research has shown that curcumin:</p>
+<p>Each pad does three things simultaneously. The textured surface provides gentle physical exfoliation, buffing away the dead cells sitting on the surface. The toning solution contains curcumin and kojic acid, which inhibit the enzyme (tyrosinase) responsible for overproducing melanin. And the hydrating base ensures your skin stays balanced and doesn't overcompensate by producing more oil or inflammation.</p>
 
-<ul>
-  <li><strong>Inhibits Tyrosinase Activity</strong>Curcumin directly blocks the tyrosinase enzyme, slowing the production of new melanin at its source. Multiple studies have demonstrated that curcumin is comparable to hydroquinone (a prescription-grade brightener) but without the harsh side effects.</li>
-  <li><strong>Reduces Inflammation</strong>Since inflammation is a major trigger for PIH, curcumin's powerful anti-inflammatory properties help prevent new dark marks from forming after breakouts or irritation.</li>
-  <li><strong>Fights Free Radicals</strong>As a potent antioxidant, curcumin neutralizes the free radicals generated by UV exposure &mdash; the same free radicals that signal your skin to produce excess melanin as a defense mechanism.</li>
-  <li><strong>Promotes Cell Turnover</strong>By supporting healthy skin renewal, curcumin helps your body naturally shed the pigmented surface cells and replace them with fresh, evenly-toned skin beneath.</li>
-</ul>
+<p>One pad, one swipe, three mechanisms. This is the step that does the heavy lifting for pigmentation &mdash; and it takes about 30 seconds.</p>
 
-<h2>Why Toner Pads Are the Ideal Delivery System</h2>
+<h2>Step 3: Targeted Treatment for Stubborn Spots</h2>
 
-<p>Here's the thing about curcumin: it's notoriously difficult to absorb through the skin in its raw form. Simply rubbing turmeric powder on your face (as social media sometimes suggests) mostly just stains your skin yellow without delivering meaningful amounts of active curcumin to where it's needed.</p>
-
-<p>This is where formulation science matters. Our Turmeric Glow Pads are pre-soaked in a concentrated formula that solves the bioavailability problem. Each pad delivers:</p>
+<p>After toning, your skin is primed for active ingredients. If you have particularly stubborn dark marks &mdash; the kind that have been hanging around for months &mdash; this is when to apply a targeted serum. Look for ingredients that complement turmeric's brightening action:</p>
 
 <ul>
-  <li><strong>Optimized Curcumin Concentration</strong>Our formula uses a stabilized curcumin complex at the precise concentration shown in clinical studies to inhibit tyrosinase without irritating the skin.</li>
-  <li><strong>Gentle Chemical Exfoliation</strong>The toning solution includes mild AHAs that dissolve the "glue" holding dead, pigmented skin cells to the surface &mdash; revealing brighter skin underneath while improving curcumin penetration.</li>
-  <li><strong>Physical Exfoliation</strong>The textured pad surface provides gentle mechanical exfoliation as you swipe, buffing away dull surface cells in one satisfying step.</li>
-  <li><strong>Hydrating Base</strong>Hyaluronic acid and aloe in the formula ensure your skin stays plump and moisturized &mdash; because dehydrated skin actually looks more uneven and makes hyperpigmentation more visible.</li>
+  <li><strong>Niacinamide (Vitamin B3)</strong>Reduces the transfer of melanin from melanocytes to surrounding skin cells. It works on a different part of the pigmentation pathway than curcumin, so they complement each other rather than overlapping. Also strengthens the skin barrier and regulates oil production.</li>
+  <li><strong>Vitamin C (L-Ascorbic Acid)</strong>Another tyrosinase inhibitor that also provides antioxidant protection. Use it in the evening if your formulation is stable, or save it for mornings under SPF. Pairs well with turmeric since both are antioxidants but work through slightly different mechanisms.</li>
+  <li><strong>Alpha Arbutin</strong>A gentle, stable brightener derived from bearberry plant. It slowly releases hydroquinone in small, non-irritating doses to suppress melanin production over time. Ideal for sensitive skin that can't tolerate stronger actives.</li>
+  <li><strong>Tranexamic Acid</strong>Originally developed to reduce bleeding, this ingredient has become a skincare favorite for its ability to interrupt melanin production triggered by UV and hormonal changes. Especially effective for melasma, which is notoriously difficult to treat.</li>
 </ul>
 
-<div class="ss-pullquote">One pad. Two types of exfoliation. A concentrated dose of curcumin. That's the three-step fade in a single swipe.</div>
+<p>A note on layering: apply your thinnest, most watery serums first, then move to thicker ones. Give each product about 30 seconds to absorb before the next. You don't need all four of these &mdash; pick one or two that address your specific concerns.</p>
 
-<h2>How to Use Turmeric Toner Pads for Best Results</h2>
+<h2>Step 4: Lock It In with Moisture</h2>
 
-<p>Consistency is everything when treating hyperpigmentation. Melanin didn't build up overnight, and it won't fade overnight either. Here's how to get the most out of your pads:</p>
+<p>Hydration isn't just about comfort &mdash; it directly affects how bright your skin looks. Dehydrated skin scatters light unevenly, making pigmentation look worse and giving your complexion a dull, flat appearance. Well-moisturized skin reflects light uniformly, creating the "lit from within" effect that we associate with healthy, glowing skin.</p>
+
+<p>Choose a moisturizer that seals in your actives without clogging pores. Ingredients like hyaluronic acid, squalane, and ceramides are your friends here. Apply while your serums are still slightly damp to lock in hydration.</p>
+
+<p>If your skin runs dry, consider adding a facial oil as the final step. Rosehip, jojoba, and marula oil are all non-comedogenic options that create an occlusive barrier to prevent overnight water loss. In Ayurvedic practice, facial oils have been used for centuries &mdash; the act of gently pressing oil into the skin (called <em>abhyanga</em>) is considered both a physical and spiritual act of self-care.</p>
+
+<div class="ss-pullquote">Glowing skin isn't one product &mdash; it's a ritual. Each step builds on the last, and consistency is what turns a routine into results.</div>
+
+<h2>Step 5: The Overnight Advantage</h2>
+
+<p>Once your routine is complete, your skin spends the next 7&ndash;8 hours doing what it does best: repairing and renewing. The curcumin from your toner pad is actively inhibiting melanin production. Your serums are penetrating deeper without competing with sunscreen or environmental stress. And the fresh, exfoliated surface is turning over faster, pushing pigmented cells out and pulling brighter ones up.</p>
+
+<p>This is why you'll often notice the biggest difference in your skin first thing in the morning &mdash; especially after 2&ndash;3 weeks of consistent use. That "morning glow" isn't a myth. It's the visible result of your skin's overnight repair cycle working in tandem with your evening routine.</p>
+
+<h2>What to Expect: A Realistic Timeline</h2>
+
+<p>Brightening takes patience. Here's a realistic timeline of what consistent evening use looks like:</p>
 
 <ul>
-  <li><strong>Cleanse First</strong>Always start with a clean face. Removing makeup, sunscreen, and daily grime ensures the active ingredients can actually reach your skin &mdash; not sit on top of a barrier of product buildup.</li>
-  <li><strong>Swipe, Don't Scrub</strong>Pull a pad from the jar and gently swipe across your entire face, paying extra attention to areas of discoloration. Let the pad and formula do the work &mdash; aggressive rubbing can actually trigger more inflammation and pigmentation.</li>
-  <li><strong>Let It Absorb</strong>Don't rinse. The toning solution continues working as it absorbs into your skin. Wait 30 seconds before applying your next product (serum, moisturizer, etc.).</li>
-  <li><strong>SPF Is Non-Negotiable</strong>In the morning, always follow with broad-spectrum SPF 30 or higher. UV exposure is the number-one trigger for melanin production. Using brightening products without sunscreen is like mopping the floor with the faucet still running.</li>
+  <li><strong>Week 1&ndash;2</strong>Your skin feels smoother and looks more even in texture. The exfoliation is clearing surface buildup, and your products are absorbing better. You may notice a subtle "freshness" to your complexion, even if dark spots haven't visibly changed yet.</li>
+  <li><strong>Week 3&ndash;4</strong>Newer, lighter spots start to fade noticeably. Your overall tone looks more uniform. This is your skin's first full turnover cycle with consistent active ingredients, and it's the point where most people start getting compliments.</li>
+  <li><strong>Week 6&ndash;8</strong>Deeper, older spots begin to lighten. The cumulative effect of nightly curcumin + exfoliation becomes clearly visible. If you've been patient and consistent, this is your payoff period.</li>
+  <li><strong>Month 3+</strong>Significant improvement in overall radiance and tone. Stubborn melasma and deep PIH marks continue to fade gradually. At this stage, you're in maintenance mode &mdash; keeping your skin bright rather than actively correcting it.</li>
 </ul>
 
-<p>Most people start noticing a difference in tone and texture within 2&ndash;4 weeks of daily use. Significant fading of darker spots typically takes 6&ndash;8 weeks. The key is not to give up early &mdash; those melanocytes are stubborn, but curcumin is stubborn-er.</p>
+<h2>The Non-Negotiable Morning Follow-Up</h2>
 
-<h2>Try It Yourself &mdash; Virtually</h2>
+<p>No evening brightening routine works without daytime sun protection. UV exposure is the single biggest trigger for melanin production, and it can undo weeks of progress in a single afternoon. Every morning, apply a broad-spectrum SPF 30 or higher as the final step in your morning routine &mdash; even on cloudy days, even if you're staying indoors near windows.</p>
 
-<p>Before you reach for a pad in real life, scroll up and try our Scratch &amp; Tone game! Use a virtual turmeric toner pad to scrub away dark spots before the clock runs out. It's a fun way to see what our pads are designed to do &mdash; minus the satisfying glow afterward. For that, you'll need the real thing.</p>
+<p>Think of it this way: your evening routine is offense (actively fading spots), and your morning SPF is defense (preventing new ones). You need both to win.</p>
 
 </div>
   `,

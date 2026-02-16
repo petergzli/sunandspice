@@ -18,16 +18,45 @@
     "arcade_grid": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class=\"arcade-grid\"><a href=\"/blogs/learn/from-soil-to-skin-how-turmeric-is-grown-harvested\" class=\"arcade-card\"><div class=\"arcade-card-visual arcade-card-harvest\"><div class=\"arcade-card-emoji\">🌱</div></div><div class=\"arcade-card-body\"><span class=\"arcade-card-tag\">Farming</span><h2 class=\"arcade-card-name\">Turmeric Harvest</h2><p class=\"arcade-card-desc\">Plant, water, and harvest turmeric on your own Ayurvedic farm. Learn how the golden root goes from soil to skincare.</p><span class=\"arcade-card-cta\">Play Now &rarr;</span></div></a><a href=\"/blogs/learn/the-science-of-glow-how-turmeric-toner-pads-fight-hyperpigmentation\" class=\"arcade-card\"><div class=\"arcade-card-visual arcade-card-glow\"><div class=\"arcade-card-emoji\">✨</div></div><div class=\"arcade-card-body\"><span class=\"arcade-card-tag\">Skincare</span><h2 class=\"arcade-card-name\">Turmeric Glow</h2><p class=\"arcade-card-desc\">Scrub away dark spots with turmeric toner pads before time runs out. See the science of brightening in action.</p><span class=\"arcade-card-cta\">Play Now &rarr;</span></div></a></div><style>.arcade-grid{max-width:960px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:1fr;gap:28px;}@media screen and (min-width:750px){.arcade-grid{grid-template-columns:repeat(2,1fr);gap:32px;}}.arcade-card{display:flex;flex-direction:column;border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;text-decoration:none;color:inherit;transition:transform 0.25s ease,box-shadow 0.25s ease;}.arcade-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.1);}.arcade-card-visual{height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}.arcade-card-harvest{background:linear-gradient(145deg,#F5E6D0,#E8D4B8,#D4A574);}.arcade-card-glow{background:linear-gradient(145deg,#E8C4A0,#D4A574,#C49060);}.arcade-card-emoji{font-size:4.5rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));transition:transform 0.3s ease;}.arcade-card:hover .arcade-card-emoji{transform:scale(1.12);}.arcade-card-body{padding:28px 28px 32px;display:flex;flex-direction:column;gap:8px;flex:1;}.arcade-card-tag{font-family:var(--font-body--family);font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:#C193C3;font-weight:600;}.arcade-card-name{font-family:var(--font-heading--family);font-size:1.5rem;font-weight:700;margin:0;letter-spacing:-0.01em;line-height:1.2;}.arcade-card-desc{font-family:var(--font-body--family);font-size:0.9rem;line-height:1.65;color:rgba(0,0,0,0.55);margin:0;flex:1;}.arcade-card-cta{font-family:var(--font-body--family);font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C193C3;margin-top:8px;transition:color 0.2s;}.arcade-card:hover .arcade-card-cta{color:#9B7AA0;}@media screen and (max-width:749px){.arcade-card-visual{height:180px;}.arcade-card-emoji{font-size:3.5rem;}.arcade-card-body{padding:20px 20px 24px;}.arcade-card-name{font-size:1.3rem;}}</style>",
+        "custom_liquid": "<div class=\"arcade-grid\"><a href=\"/blogs/learn/from-soil-to-skin-how-turmeric-is-grown-harvested\" class=\"arcade-card\"><div class=\"arcade-card-visual arcade-card-harvest\"><div class=\"arcade-card-emoji\">🌱</div></div><div class=\"arcade-card-body\"><span class=\"arcade-card-tag\">Farming</span><h2 class=\"arcade-card-name\">Turmeric Harvest</h2><p class=\"arcade-card-desc\">Plant, water, and harvest turmeric on your own Ayurvedic farm. Learn how the golden root goes from soil to skincare.</p><span class=\"arcade-card-cta\">Play Now &rarr;</span></div></a><a href=\"/blogs/learn/the-science-of-glow-how-turmeric-toner-pads-fight-hyperpigmentation\" class=\"arcade-card\"><div class=\"arcade-card-visual arcade-card-glow\"><div class=\"arcade-card-emoji\">✨</div></div><div class=\"arcade-card-body\"><span class=\"arcade-card-tag\">Skincare</span><h2 class=\"arcade-card-name\">Turmeric Glow</h2><p class=\"arcade-card-desc\">Scrub away dark spots with turmeric toner pads before time runs out. See the science of brightening in action.</p><span class=\"arcade-card-cta\">Play Now &rarr;</span></div></a><a href=\"/blogs/learn/the-evening-glow-ritual-how-to-build-a-brightening-routine-that-works\" class=\"arcade-card\"><div class=\"arcade-card-visual arcade-card-reveal\"><div class=\"arcade-card-emoji\">🎟️</div></div><div class=\"arcade-card-body\"><span class=\"arcade-card-tag\">Scratch-Off</span><h2 class=\"arcade-card-name\">Glow Reveal</h2><p class=\"arcade-card-desc\">Scratch away the cover layer to reveal glowing skin underneath — but dodge the hidden breakout bombs!</p><span class=\"arcade-card-cta\">Play Now &rarr;</span></div></a></div><style>.arcade-grid{max-width:1100px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:1fr;gap:28px;}@media screen and (min-width:750px){.arcade-grid{grid-template-columns:repeat(3,1fr);gap:28px;}}.arcade-card{display:flex;flex-direction:column;border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);background:#fff;text-decoration:none;color:inherit;transition:transform 0.25s ease,box-shadow 0.25s ease;}.arcade-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.1);}.arcade-card-visual{height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}.arcade-card-harvest{background:linear-gradient(145deg,#F5E6D0,#E8D4B8,#D4A574);}.arcade-card-glow{background:linear-gradient(145deg,#E8C4A0,#D4A574,#C49060);}.arcade-card-reveal{background:linear-gradient(145deg,#FFF2D9,#F5CC6A,#E8A830);}.arcade-card-emoji{font-size:4.5rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));transition:transform 0.3s ease;}.arcade-card:hover .arcade-card-emoji{transform:scale(1.12);}.arcade-card-body{padding:28px 28px 32px;display:flex;flex-direction:column;gap:8px;flex:1;}.arcade-card-tag{font-family:var(--font-body--family);font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:#C193C3;font-weight:600;}.arcade-card-name{font-family:var(--font-heading--family);font-size:1.5rem;font-weight:700;margin:0;letter-spacing:-0.01em;line-height:1.2;}.arcade-card-desc{font-family:var(--font-body--family);font-size:0.9rem;line-height:1.65;color:rgba(0,0,0,0.55);margin:0;flex:1;}.arcade-card-cta{font-family:var(--font-body--family);font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#C193C3;margin-top:8px;transition:color 0.2s;}.arcade-card:hover .arcade-card-cta{color:#9B7AA0;}@media screen and (max-width:749px){.arcade-card-visual{height:180px;}.arcade-card-emoji{font-size:3.5rem;}.arcade-card-body{padding:20px 20px 24px;}.arcade-card-name{font-size:1.3rem;}}</style>",
         "color_scheme": "scheme-1",
         "section_width": "full-width",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "arcade_tagline": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"arcade-tagline\"><div class=\"arcade-tagline-inner\"><p class=\"arcade-tagline-eyebrow\">The real thing</p><h2 class=\"arcade-tagline-heading\">The turmeric in our games? We put it in a pad.</h2></div></div><style>.arcade-tagline{max-width:640px;margin:0 auto;padding:0 24px;text-align:center;}.arcade-tagline-inner{border-top:1px solid rgba(0,0,0,0.08);padding-top:56px;}.arcade-tagline-eyebrow{font-family:var(--font-body--family);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#C193C3;margin:0 0 16px;}.arcade-tagline-heading{font-family:var(--font-heading--family);font-size:1.75rem;font-weight:700;margin:0;letter-spacing:-0.02em;line-height:1.25;}@media screen and (min-width:750px){.arcade-tagline-heading{font-size:2rem;}}</style>",
+        "color_scheme": "scheme-1",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "arcade_product": {
+      "type": "homepage-product-purchase",
+      "settings": {
+        "product": "✨-sun-spice-ayurvedic-turmeric-glow-pads-exfoliate-brighten-refresh",
+        "custom_title": "Brightening Turmeric & Kojic Acid Pads",
+        "layout": "media-left",
+        "benefit_1": "immediate brightening effect",
+        "benefit_2": "eliminates acne & hyperpigmentation in a week",
+        "benefit_3": "100% natural, gentle cleanse",
+        "benefit_4": "",
+        "button_text": "Add to Cart",
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
     }
   },
   "order": [
     "arcade_hero",
-    "arcade_grid"
+    "arcade_grid",
+    "arcade_tagline",
+    "arcade_product"
   ]
 }

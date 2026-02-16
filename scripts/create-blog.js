@@ -99,10 +99,10 @@ async function findArticle(blogId, title) {
 // Edit your blog post here
 // ============================================================
 const post = {
-  title: "The Evening Glow Ritual: How to Build a Brightening Routine That Works",
+  title: "What's Actually In Our Turmeric Toner Pads? Every Ingredient, Explained",
   author: "Sun & Spice",
-  tags: "turmeric, skincare, routine, brightening, glow, evening skincare, hyperpigmentation",
-  template_suffix: "glow-reveal-game",
+  tags: "turmeric, ingredients, natural skincare, kojic acid, chamomile, vitamin c, clean beauty, organic",
+  template_suffix: "tone-mixer-game",
   body_html: `
 <style>
   .ss-article { font-size: 1.0625rem; line-height: 1.8; color: var(--color-foreground); }
@@ -118,77 +118,67 @@ const post = {
 
 <div class="ss-article">
 
-<p class="ss-lead">Morning skincare gets all the attention. But if you're serious about fading dark spots, evening out your tone, and waking up with genuinely brighter skin, what you do at night matters more. Your skin repairs itself while you sleep &mdash; and with the right evening ritual, you can turn those overnight hours into your most powerful brightening treatment.</p>
+<p class="ss-lead">We believe you should know exactly what you're putting on your skin &mdash; and why it's there. Every ingredient in our Turmeric Glow Pads was chosen for a reason: it works, it's natural, and it belongs in a formula designed to brighten, exfoliate, and protect without a single harsh chemical in sight.</p>
 
-<h2>Why Nighttime Is When the Magic Happens</h2>
+<h2>The Star: Turmeric &amp; Turmeric Extract</h2>
 
-<p>Between 10 PM and 2 AM, your skin enters peak repair mode. Blood flow to the skin increases, cell turnover accelerates, and your body produces more collagen and growth hormones than at any other time of day. This is when your skin is most receptive to active ingredients.</p>
+<p>Turmeric has been the cornerstone of Ayurvedic beauty for over 4,000 years &mdash; and modern science has caught up to explain why. The active compound, curcumin, is one of nature's most potent anti-inflammatory and antioxidant agents. It directly inhibits tyrosinase, the enzyme responsible for melanin overproduction, which makes it remarkably effective at fading dark spots and evening out skin tone.</p>
 
-<p>During the day, your skin is in defense mode &mdash; fighting UV radiation, pollution, and environmental stress. At night, it switches to offense. It's actively rebuilding, shedding damaged cells, and generating fresh ones. If you're applying brightening ingredients during this window, they're working with your body's natural rhythm instead of against environmental interference.</p>
+<p>We use both whole turmeric and concentrated turmeric extract in our formula. The whole plant brings a spectrum of curcuminoids and essential oils that support skin health broadly, while the extract delivers a higher concentration of pure curcumin for targeted brightening action. Together, they provide both immediate radiance and long-term pigmentation correction.</p>
 
-<p>This is also why exfoliating at night makes more sense than in the morning. When you remove dead, pigmented surface cells before bed, you give your skin a clean slate to work with during its most regenerative hours. The new cells that surface overnight are fresher, more evenly toned, and better able to absorb your other products.</p>
-
-<h2>Step 1: Double Cleanse to Reset</h2>
-
-<p>Your evening routine starts with a clean canvas. Throughout the day, your skin accumulates layers of sunscreen, makeup, excess sebum, pollution particles, and sweat. A single cleanser often can't cut through all of it &mdash; especially if you're wearing SPF (which you should be).</p>
-
-<p>Start with an oil-based cleanser or micellar water to dissolve makeup and sunscreen. Follow with a gentle water-based cleanser to remove any remaining residue. Your skin should feel clean but never tight or stripped &mdash; if it does, your cleanser is too harsh and may actually be triggering more pigmentation by damaging your skin barrier.</p>
-
-<div class="ss-pullquote">A brightening routine is only as effective as the cleanse that comes before it. Active ingredients can't penetrate through a layer of yesterday's sunscreen.</div>
-
-<h2>Step 2: Exfoliate and Tone with Turmeric Glow Pads</h2>
-
-<p>This is the centerpiece of the ritual. After cleansing, pull a Turmeric Glow Pad from the jar and sweep it across your entire face, starting from the center and working outward. Pay extra attention to areas where you notice uneven tone &mdash; cheeks, forehead, around the nose, and along the jawline.</p>
-
-<p>Each pad does three things simultaneously. The textured surface provides gentle physical exfoliation, buffing away the dead cells sitting on the surface. The toning solution contains curcumin and kojic acid, which inhibit the enzyme (tyrosinase) responsible for overproducing melanin. And the hydrating base ensures your skin stays balanced and doesn't overcompensate by producing more oil or inflammation.</p>
-
-<p>One pad, one swipe, three mechanisms. This is the step that does the heavy lifting for pigmentation &mdash; and it takes about 30 seconds.</p>
-
-<h2>Step 3: Targeted Treatment for Stubborn Spots</h2>
-
-<p>After toning, your skin is primed for active ingredients. If you have particularly stubborn dark marks &mdash; the kind that have been hanging around for months &mdash; this is when to apply a targeted serum. Look for ingredients that complement turmeric's brightening action:</p>
+<h2>The Brightening Allies</h2>
 
 <ul>
-  <li><strong>Niacinamide (Vitamin B3)</strong>Reduces the transfer of melanin from melanocytes to surrounding skin cells. It works on a different part of the pigmentation pathway than curcumin, so they complement each other rather than overlapping. Also strengthens the skin barrier and regulates oil production.</li>
-  <li><strong>Vitamin C (L-Ascorbic Acid)</strong>Another tyrosinase inhibitor that also provides antioxidant protection. Use it in the evening if your formulation is stable, or save it for mornings under SPF. Pairs well with turmeric since both are antioxidants but work through slightly different mechanisms.</li>
-  <li><strong>Alpha Arbutin</strong>A gentle, stable brightener derived from bearberry plant. It slowly releases hydroquinone in small, non-irritating doses to suppress melanin production over time. Ideal for sensitive skin that can't tolerate stronger actives.</li>
-  <li><strong>Tranexamic Acid</strong>Originally developed to reduce bleeding, this ingredient has become a skincare favorite for its ability to interrupt melanin production triggered by UV and hormonal changes. Especially effective for melasma, which is notoriously difficult to treat.</li>
+  <li><strong>Kojic Acid</strong>Derived from fungi during the fermentation of rice (a process used in Japanese sake brewing for centuries), kojic acid is one of the most effective natural brighteners available. Like curcumin, it inhibits tyrosinase &mdash; but through a different mechanism, which means the two work synergistically. Where curcumin blocks the enzyme's activity, kojic acid chelates the copper ions the enzyme needs to function. Double the suppression, zero harsh bleaching.</li>
+  <li><strong>Vitamin C</strong>The gold standard antioxidant. Vitamin C intercepts free radicals before they can trigger inflammation-driven pigmentation, and it brightens existing dark spots by interrupting melanin synthesis at yet another point in the pathway. It also stimulates collagen production, improving skin texture and firmness alongside tone.</li>
+  <li><strong>Lemon Peel &amp; Orange Peel</strong>Citrus peels are naturally rich in alpha-hydroxy acids (AHAs) and vitamin C. They provide gentle chemical exfoliation, helping to dissolve the bonds between dead skin cells so they shed more easily. The result is smoother, more luminous skin after every use &mdash; without the irritation of synthetic acid peels.</li>
+  <li><strong>Grapefruit Extract</strong>A natural source of antioxidants and fruit acids that complement the citrus peels. Grapefruit extract helps protect the skin from environmental oxidative stress while supporting the gentle exfoliation process. It also contributes to the formula's fresh, clean scent &mdash; no synthetic fragrance needed.</li>
 </ul>
 
-<p>A note on layering: apply your thinnest, most watery serums first, then move to thicker ones. Give each product about 30 seconds to absorb before the next. You don't need all four of these &mdash; pick one or two that address your specific concerns.</p>
+<div class="ss-pullquote">Every brightening ingredient in our formula attacks hyperpigmentation from a different angle. That's not an accident &mdash; it's the whole strategy.</div>
 
-<h2>Step 4: Lock It In with Moisture</h2>
-
-<p>Hydration isn't just about comfort &mdash; it directly affects how bright your skin looks. Dehydrated skin scatters light unevenly, making pigmentation look worse and giving your complexion a dull, flat appearance. Well-moisturized skin reflects light uniformly, creating the "lit from within" effect that we associate with healthy, glowing skin.</p>
-
-<p>Choose a moisturizer that seals in your actives without clogging pores. Ingredients like hyaluronic acid, squalane, and ceramides are your friends here. Apply while your serums are still slightly damp to lock in hydration.</p>
-
-<p>If your skin runs dry, consider adding a facial oil as the final step. Rosehip, jojoba, and marula oil are all non-comedogenic options that create an occlusive barrier to prevent overnight water loss. In Ayurvedic practice, facial oils have been used for centuries &mdash; the act of gently pressing oil into the skin (called <em>abhyanga</em>) is considered both a physical and spiritual act of self-care.</p>
-
-<div class="ss-pullquote">Glowing skin isn't one product &mdash; it's a ritual. Each step builds on the last, and consistency is what turns a routine into results.</div>
-
-<h2>Step 5: The Overnight Advantage</h2>
-
-<p>Once your routine is complete, your skin spends the next 7&ndash;8 hours doing what it does best: repairing and renewing. The curcumin from your toner pad is actively inhibiting melanin production. Your serums are penetrating deeper without competing with sunscreen or environmental stress. And the fresh, exfoliated surface is turning over faster, pushing pigmented cells out and pulling brighter ones up.</p>
-
-<p>This is why you'll often notice the biggest difference in your skin first thing in the morning &mdash; especially after 2&ndash;3 weeks of consistent use. That "morning glow" isn't a myth. It's the visible result of your skin's overnight repair cycle working in tandem with your evening routine.</p>
-
-<h2>What to Expect: A Realistic Timeline</h2>
-
-<p>Brightening takes patience. Here's a realistic timeline of what consistent evening use looks like:</p>
+<h2>The Soothers &amp; Hydrators</h2>
 
 <ul>
-  <li><strong>Week 1&ndash;2</strong>Your skin feels smoother and looks more even in texture. The exfoliation is clearing surface buildup, and your products are absorbing better. You may notice a subtle "freshness" to your complexion, even if dark spots haven't visibly changed yet.</li>
-  <li><strong>Week 3&ndash;4</strong>Newer, lighter spots start to fade noticeably. Your overall tone looks more uniform. This is your skin's first full turnover cycle with consistent active ingredients, and it's the point where most people start getting compliments.</li>
-  <li><strong>Week 6&ndash;8</strong>Deeper, older spots begin to lighten. The cumulative effect of nightly curcumin + exfoliation becomes clearly visible. If you've been patient and consistent, this is your payoff period.</li>
-  <li><strong>Month 3+</strong>Significant improvement in overall radiance and tone. Stubborn melasma and deep PIH marks continue to fade gradually. At this stage, you're in maintenance mode &mdash; keeping your skin bright rather than actively correcting it.</li>
+  <li><strong>Chamomile</strong>Bisabolol and chamazulene &mdash; the active compounds in chamomile &mdash; are among the gentlest anti-inflammatories found in nature. Chamomile calms redness, reduces irritation, and helps the skin recover from exfoliation. It's the ingredient that makes our pads safe for sensitive skin types that normally can't tolerate active brightening products.</li>
+  <li><strong>Panthenol (Vitamin B5)</strong>Panthenol is a humectant that draws moisture into the skin and holds it there. Once absorbed, it converts to pantothenic acid, which supports the skin's natural barrier repair process. This means your skin stays hydrated and resilient even while being actively exfoliated &mdash; no dryness, no flaking, no compromise.</li>
+  <li><strong>Vegetable Glycerin</strong>A plant-derived humectant that creates a moisture reservoir on the skin's surface. Glycerin prevents transepidermal water loss (TEWL) and keeps the skin supple and plump throughout the day. It also helps the other active ingredients distribute evenly across the pad and onto your skin.</li>
+  <li><strong>Aqua</strong>Purified water forms the base of the toning solution. It acts as the solvent that carries all other ingredients and ensures they're delivered in the right concentration. Simple, essential, and the foundation everything else builds on.</li>
 </ul>
 
-<h2>The Non-Negotiable Morning Follow-Up</h2>
+<h2>The Gentle Cleanser</h2>
 
-<p>No evening brightening routine works without daytime sun protection. UV exposure is the single biggest trigger for melanin production, and it can undo weeks of progress in a single afternoon. Every morning, apply a broad-spectrum SPF 30 or higher as the final step in your morning routine &mdash; even on cloudy days, even if you're staying indoors near windows.</p>
+<ul>
+  <li><strong>Coco Glucoside</strong>Derived from coconut oil and fruit sugars, coco glucoside is one of the mildest surfactants (cleansing agents) that exists. It removes dirt, oil, and impurities without stripping the skin's protective acid mantle. Unlike sulfates, which can leave skin feeling tight and dry, coco glucoside cleanses while actually supporting hydration. It's biodegradable, non-toxic, and approved for even the most sensitive skin formulations.</li>
+</ul>
 
-<p>Think of it this way: your evening routine is offense (actively fading spots), and your morning SPF is defense (preventing new ones). You need both to win.</p>
+<h2>The Microbiome Supporter</h2>
+
+<ul>
+  <li><strong>Lactobacillus (Probiotic Ferment)</strong>Your skin has its own microbiome &mdash; a living ecosystem of beneficial bacteria that protects against pathogens, regulates inflammation, and maintains pH balance. Lactobacillus ferment supports this ecosystem by providing postbiotic compounds that strengthen the skin's natural defenses. Healthy microbiome means less inflammation, fewer breakouts, and better response to active ingredients.</li>
+</ul>
+
+<div class="ss-pullquote">Clean skincare isn't about what we add &mdash; it's about what we refuse to include.</div>
+
+<h2>What We Leave Out (and Why)</h2>
+
+<p>Our formula is defined as much by what's absent as by what's present. Here's what you'll never find in a Sun &amp; Spice product:</p>
+
+<ul>
+  <li><strong>Alcohol (Denatured)</strong>Cheap filler that gives products a quick-drying feel but strips the skin barrier, causes chronic dehydration, and triggers rebound oil production. Over time, alcohol-based products actually accelerate skin aging and worsen the pigmentation issues they claim to treat.</li>
+  <li><strong>Parabens</strong>Synthetic preservatives linked to hormone disruption. They mimic estrogen in the body and have been found in breast tissue samples. We use natural preservation methods instead &mdash; there are better ways to keep a formula stable without introducing endocrine disruptors.</li>
+  <li><strong>Synthetic Fragrance</strong>The word "fragrance" on a label can hide hundreds of undisclosed chemicals, many of which are known sensitizers and allergens. Synthetic fragrance is the single most common cause of contact dermatitis in skincare. Our products smell like their ingredients &mdash; turmeric, citrus, chamomile &mdash; because that's all that's in them.</li>
+  <li><strong>Sulfates (SLS/SLES)</strong>Aggressive surfactants that create the foaming lather people associate with "clean" but actually damage the skin barrier, strip natural oils, and cause irritation. Coco glucoside does the same job without the collateral damage.</li>
+  <li><strong>Mineral Oil</strong>A petroleum byproduct that sits on top of the skin and creates an artificial occlusive barrier. While it prevents water loss, it also prevents the skin from breathing and can trap bacteria and impurities underneath. Plant-derived alternatives like vegetable glycerin achieve the same hydration without sealing in problems.</li>
+</ul>
+
+<h2>The Ayurvedic Philosophy</h2>
+
+<p>In Ayurveda, skincare is not about adding foreign substances to the body. It's about supporting the body's innate intelligence with ingredients the skin already recognizes. Every plant extract, every fruit acid, every probiotic compound in our formula has a biological analog that your skin already produces or interacts with naturally.</p>
+
+<p>That's why our pads work without irritation, without adjustment periods, and without the "purging" that synthetic active products often cause. Your skin doesn't need to learn how to process turmeric or chamomile or vitamin C. It already knows. We're just giving it more of what it needs.</p>
+
+<p>This is what clean beauty actually means: not a marketing label, but a genuine commitment to formulating with ingredients that your skin recognizes as allies, not invaders.</p>
 
 </div>
   `,

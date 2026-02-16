@@ -1,0 +1,601 @@
+<script src="{{ 'tone-mixer-game.js' | asset_url }}" type="module"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<tone-mixer-game-component
+  class="section"
+  style="
+    display: block;
+    {%- render 'spacing-style', settings: section.settings %};
+  "
+>
+  <!-- Start screen -->
+  <div class="tm-overlay" id="tm-startScreen">
+    <div class="tm-modal">
+      <h1>Tone Mixer</h1>
+      <div class="tm-tagline">Catch the Perfect Formula</div>
+      <p>Ingredients are falling! Catch the right ones to build our Turmeric Toner formula &#8212; but dodge the bad stuff!</p>
+      <div class="tm-rules">
+        <div class="tm-rule">
+          <div class="tm-rule-icon">&#129523;</div>
+          <div class="tm-rule-text"><strong>Move the bowl</strong> left & right to catch falling ingredients</div>
+        </div>
+        <div class="tm-rule">
+          <div class="tm-rule-icon">&#9989;</div>
+          <div class="tm-rule-text"><strong>Good ingredients</strong> fill the formula bar &#8212; fill it to produce a batch!</div>
+        </div>
+        <div class="tm-rule">
+          <div class="tm-rule-icon">&#9760;&#65039;</div>
+          <div class="tm-rule-text"><strong>Bad ingredients</strong> contaminate your mix and cost a life</div>
+        </div>
+        <div class="tm-rule">
+          <div class="tm-rule-icon">&#9889;</div>
+          <div class="tm-rule-text"><strong>Catch streaks</strong> for combo multipliers &#8212; don't miss!</div>
+        </div>
+      </div>
+      <div class="tm-legend">
+        <div class="tm-legend-item"><div class="tm-legend-dot" style="background:#E8A830"></div> Turmeric</div>
+        <div class="tm-legend-item"><div class="tm-legend-dot" style="background:#7BC67B"></div> Good</div>
+        <div class="tm-legend-item"><div class="tm-legend-dot" style="background:#D9534F"></div> Bad &#8212; dodge!</div>
+      </div>
+      <button class="tm-btn-play" id="tm-startBtn">Start Mixing &#10024;</button>
+    </div>
+  </div>
+
+  <!-- Game Over -->
+  <div class="tm-overlay tm-hidden" id="tm-endScreen">
+    <div class="tm-modal">
+      <h1 id="tm-endTitle">Game Over</h1>
+      <div class="tm-big-score-label">Score</div>
+      <div class="tm-big-score" id="tm-endScore">0</div>
+      <div class="tm-end-stats">
+        <div class="tm-end-stat"><div class="tm-num" id="tm-endCaught">0</div><div class="tm-lbl">Caught</div></div>
+        <div class="tm-end-stat"><div class="tm-num" id="tm-endBatches">0</div><div class="tm-lbl">Level</div></div>
+        <div class="tm-end-stat"><div class="tm-num" id="tm-endCombo">0</div><div class="tm-lbl">Best Combo</div></div>
+      </div>
+      <p id="tm-endMsg"></p>
+      <button class="tm-btn-play" id="tm-restartBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Pause -->
+  <div class="tm-overlay tm-hidden" id="tm-pauseScreen">
+    <div class="tm-modal">
+      <h1>Paused</h1>
+      <p>Your toner is steeping &#10024;</p>
+      <div class="tm-pause-btns">
+        <button class="tm-btn-play" id="tm-resumeBtn">Resume</button>
+        <button class="tm-btn-quit" id="tm-quitBtn">Stop Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level Up -->
+  <div class="tm-overlay tm-hidden tm-overlay-top" id="tm-levelUpScreen">
+    <div class="tm-modal">
+      <h1 id="tm-levelUpTitle">Level 2</h1>
+      <p id="tm-levelUpMsg">Batch complete!</p>
+      <div class="tm-level-emoji" id="tm-levelUpEmoji">&#129524;</div>
+      <p class="tm-level-hint" id="tm-levelUpHint"></p>
+      <button class="tm-btn-play" id="tm-levelUpBtn">Keep Mixing &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Game UI -->
+  <div class="tm-app">
+    <div class="tm-header">
+      <div class="tm-logo">Tone Mixer<small>Catch the Perfect Formula</small></div>
+      <button class="tm-btn-icon" id="tm-pauseBtn">&#9208;</button>
+    </div>
+
+    <div class="tm-stats">
+      <div class="tm-stat">
+        <div class="tm-stat-lbl">Score</div>
+        <div class="tm-stat-val tm-val-score" id="tm-scoreVal">0</div>
+      </div>
+      <div class="tm-stat">
+        <div class="tm-stat-lbl">Lives</div>
+        <div class="tm-stat-val tm-val-lives" id="tm-livesVal">3</div>
+        <div class="tm-hearts" id="tm-heartsRow"></div>
+      </div>
+      <div class="tm-stat">
+        <div class="tm-stat-lbl">Combo</div>
+        <div class="tm-stat-val tm-val-combo" id="tm-comboVal">x1</div>
+      </div>
+      <div class="tm-stat">
+        <div class="tm-stat-lbl">Level</div>
+        <div class="tm-stat-val tm-val-level" id="tm-levelVal">1</div>
+      </div>
+    </div>
+
+    <div class="tm-formula-wrap">
+      <div class="tm-formula-label">
+        <span>Formula Progress</span>
+        <span class="tm-formula-pct" id="tm-formulaPct">0%</span>
+      </div>
+      <div class="tm-formula-bar-outer">
+        <div class="tm-formula-bar-fill" id="tm-formulaBar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="tm-game-area" id="tm-gameArea">
+      <canvas id="tm-gameCanvas"></canvas>
+    </div>
+  </div>
+</tone-mixer-game-component>
+
+{% stylesheet %}
+  tone-mixer-game-component {
+    --tm-primary: #C4A0C9;
+    --tm-primary-light: #E0CCE3;
+    --tm-primary-dark: #9B7AA0;
+    --tm-primary-deep: #7A5E80;
+    --tm-turmeric: #E8A830;
+    --tm-turmeric-light: #FFD76A;
+    --tm-turmeric-dark: #C08820;
+    --tm-good: #5CB85C;
+    --tm-bad: #D9534F;
+    --tm-bg: #FFFCF8;
+    --tm-card: #FFF9F2;
+    --tm-text: #2D1F33;
+    --tm-text-dim: #9888A0;
+
+    position: relative;
+    z-index: var(--layer-base, 0);
+    display: block;
+    height: 80vh;
+    height: 80svh;
+    max-height: 750px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--tm-bg);
+    color: var(--tm-text);
+  }
+
+  .tm-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* HEADER */
+  .tm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px 6px;
+    z-index: 10;
+  }
+
+  .tm-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--tm-primary-deep);
+    line-height: 1.1;
+  }
+
+  .tm-logo small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.5rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tm-text-dim);
+  }
+
+  .tm-btn-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1.5px solid var(--tm-primary-light);
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    color: var(--tm-primary-dark);
+    transition: all 0.2s;
+  }
+
+  .tm-btn-icon:hover { background: var(--tm-primary-light); }
+
+  /* STATS */
+  .tm-stats {
+    display: flex;
+    gap: 6px;
+    padding: 4px 16px 8px;
+    z-index: 10;
+  }
+
+  .tm-stat {
+    flex: 1;
+    background: white;
+    border: 1px solid rgba(196,160,201,0.12);
+    border-radius: 12px;
+    padding: 6px 4px;
+    text-align: center;
+  }
+
+  .tm-stat-lbl {
+    font-size: 0.45rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--tm-text-dim);
+  }
+
+  .tm-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1.1;
+  }
+
+  .tm-val-score { color: var(--tm-good); }
+  .tm-val-lives { color: var(--tm-bad); }
+  .tm-val-combo { color: var(--tm-turmeric); }
+  .tm-val-level { color: var(--tm-primary-dark); }
+
+  .tm-hearts { display: flex; gap: 2px; justify-content: center; margin-top: 1px; }
+  .tm-heart { font-size: 0.6rem; transition: all 0.2s; }
+  .tm-heart.tm-lost { opacity: 0.15; transform: scale(0.7); }
+
+  /* FORMULA BAR */
+  .tm-formula-wrap { padding: 0 16px 8px; z-index: 10; }
+
+  .tm-formula-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+
+  .tm-formula-label span {
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--tm-text-dim);
+  }
+
+  .tm-formula-pct {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--tm-turmeric-dark);
+  }
+
+  .tm-formula-bar-outer {
+    width: 100%;
+    height: 14px;
+    background: rgba(196,160,201,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(196,160,201,0.1);
+    position: relative;
+  }
+
+  .tm-formula-bar-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, var(--tm-turmeric-light), var(--tm-turmeric), var(--tm-turmeric-dark));
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+  }
+
+  .tm-formula-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent);
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* GAME AREA */
+  .tm-game-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    touch-action: none;
+  }
+
+  .tm-game-area canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* OVERLAYS */
+  .tm-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,252,248,0.95);
+    backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    transition: opacity 0.4s;
+  }
+
+  .tm-overlay.tm-hidden { opacity: 0; pointer-events: none; }
+  .tm-overlay-top { z-index: 550; }
+
+  .tm-modal {
+    background: white;
+    border: 1px solid rgba(196,160,201,0.15);
+    border-radius: 28px;
+    padding: 32px 28px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(100,60,120,0.06);
+  }
+
+  .tm-modal h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: var(--tm-primary-deep);
+    margin-bottom: 4px;
+  }
+
+  .tm-tagline {
+    font-size: 0.55rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--tm-text-dim);
+    margin-bottom: 16px;
+  }
+
+  .tm-modal p {
+    color: var(--tm-text-dim);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .tm-level-emoji { font-size: 3rem; margin: 8px 0; }
+  .tm-level-hint { font-size: 0.75rem; color: var(--tm-text-dim); }
+
+  .tm-big-score-label {
+    font-size: 0.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tm-text-dim);
+  }
+
+  .tm-big-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--tm-turmeric-dark);
+    line-height: 1;
+    margin: 6px 0 2px;
+  }
+
+  .tm-end-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 14px 0;
+  }
+
+  .tm-end-stat { text-align: center; }
+
+  .tm-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--tm-text);
+  }
+
+  .tm-lbl {
+    font-size: 0.45rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--tm-text-dim);
+  }
+
+  .tm-btn-play {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 16px;
+    padding: 15px 36px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--tm-primary), var(--tm-primary-dark));
+    color: white;
+    box-shadow: 0 6px 24px rgba(196,160,201,0.3);
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .tm-btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(196,160,201,0.5);
+  }
+
+  .tm-rules { text-align: left; margin: 10px 0 14px; }
+
+  .tm-rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .tm-rule-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 8px;
+    background: var(--tm-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  .tm-rule-text {
+    color: var(--tm-text-dim);
+    font-size: 0.76rem;
+    line-height: 1.4;
+  }
+
+  .tm-rule-text strong { color: var(--tm-text); }
+
+  .tm-legend {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .tm-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.7rem;
+    color: var(--tm-text-dim);
+  }
+
+  .tm-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .tm-pause-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+
+  .tm-btn-quit {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    border: 2px solid var(--tm-bad);
+    background: transparent;
+    color: var(--tm-bad);
+    border-radius: 14px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .tm-btn-quit:hover { background: var(--tm-bad); color: white; }
+
+  /* EFFECTS (appended to body) */
+  .tm-catch-flash {
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--layer-sticky, 8);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    animation: tm-catchPop 0.9s ease-out forwards;
+    white-space: nowrap;
+  }
+
+  @keyframes tm-catchPop {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-55px) scale(1.05); opacity: 0; }
+  }
+
+  .tm-spark {
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--layer-sticky, 8);
+    animation: tm-sparkFly 0.6s ease-out forwards;
+  }
+
+  @keyframes tm-sparkFly {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+  }
+
+  .tm-screen-flash {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    animation: tm-flashFade 0.3s ease-out forwards;
+  }
+
+  @keyframes tm-flashFade {
+    0% { opacity: 0.3; }
+    100% { opacity: 0; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-height: 700px) {
+    .tm-stat { padding: 4px 3px; }
+    .tm-stat-val { font-size: 1rem; }
+    .tm-modal { padding: 24px 20px; }
+    .tm-modal h1 { font-size: 1.5rem; }
+    .tm-btn-play { padding: 12px 28px; font-size: 0.85rem; }
+    .tm-logo { font-size: 1rem; }
+  }
+
+  @media (max-height: 560px) {
+    tone-mixer-game-component { height: 100vh; height: 100svh; max-height: none; }
+    .tm-app { padding: 0; }
+    .tm-header { padding: 4px 12px 2px; }
+    .tm-stats { padding: 2px 12px 4px; }
+    .tm-formula-wrap { padding: 0 12px 4px; }
+    .tm-stat { padding: 3px 3px; }
+    .tm-stat-lbl { font-size: 0.4rem; }
+    .tm-stat-val { font-size: 0.85rem; }
+    .tm-hearts { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Tone Mixer Game",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tone Mixer Game"
+    }
+  ]
+}
+{% endschema %}

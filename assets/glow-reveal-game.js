@@ -5,25 +5,24 @@
 
 class GlowRevealGame extends HTMLElement {
   connectedCallback() {
-    // CONFIG
-    this.GRID = 6;
-    this.BOMB_COUNT = 5;
-    this.BONUS_COUNT = 4;
-    this.START_PADS = 18;
-    this.BRUSH_RADIUS = 22;
+    // CONFIG — responsive grid
+    const isMobile = window.innerWidth < 600;
+    this.COLS = isMobile ? 4 : 6;
+    this.ROWS = isMobile ? 5 : 6;
+    this.BOMB_COUNT = isMobile ? 4 : 5;
+    this.BONUS_COUNT = isMobile ? 3 : 4;
+    this.BRUSH_RADIUS = isMobile ? 26 : 22;
     this.REVEAL_THRESHOLD = 0.45;
     this.SAMPLE_POINTS = 12;
 
     this.state = {
       tiles: [],
-      pads: this.START_PADS,
       lives: 3,
       maxLives: 3,
       score: 0,
       totalGlow: 0,
       revealedGlow: 0,
       bombsHit: 0,
-      padsUsed: 0,
       playing: false,
       paused: false,
       pressing: false,
@@ -57,18 +56,15 @@ class GlowRevealGame extends HTMLElement {
     this.startScreen = this.querySelector('#gr-startScreen');
     this.endScreen = this.querySelector('#gr-endScreen');
     this.pauseScreen = this.querySelector('#gr-pauseScreen');
-    this.padsVal = this.querySelector('#gr-padsVal');
     this.livesVal = this.querySelector('#gr-livesVal');
     this.scoreVal = this.querySelector('#gr-scoreVal');
     this.glowVal = this.querySelector('#gr-glowVal');
     this.progressBar = this.querySelector('#gr-progressBar');
     this.heartsRow = this.querySelector('#gr-heartsRow');
-    this.restockBtn = this.querySelector('#gr-restockBtn');
     this.endTitle = this.querySelector('#gr-endTitle');
     this.endScore = this.querySelector('#gr-endScore');
     this.endGlow = this.querySelector('#gr-endGlow');
     this.endBombs = this.querySelector('#gr-endBombs');
-    this.endPads = this.querySelector('#gr-endPads');
     this.endMsg = this.querySelector('#gr-endMsg');
   }
 
@@ -155,7 +151,6 @@ class GlowRevealGame extends HTMLElement {
     // Buttons
     this.querySelector('#gr-startBtn').addEventListener('click', () => this.startGame());
     this.querySelector('#gr-restartBtn').addEventListener('click', () => this.startGame());
-    this.querySelector('#gr-restockBtn').addEventListener('click', () => this.restockPads());
     this.querySelector('#gr-pauseBtn').addEventListener('click', () => this.togglePause());
     this.querySelector('#gr-resumeBtn').addEventListener('click', () => this.togglePause());
     this.querySelector('#gr-quitBtn').addEventListener('click', () => this.quitGame());
@@ -178,8 +173,8 @@ class GlowRevealGame extends HTMLElement {
     this.skinC.height = this.coverC.height = Math.round(rect.height * this.dpr);
     this.skinCtx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     this.coverCtx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-    this.state.tileW = this.state.canvasW / this.GRID;
-    this.state.tileH = this.state.canvasH / this.GRID;
+    this.state.tileW = this.state.canvasW / this.COLS;
+    this.state.tileH = this.state.canvasH / this.ROWS;
     if (this.state.playing) {
       this.drawSkin();
       this.drawCoverFull();
@@ -190,12 +185,12 @@ class GlowRevealGame extends HTMLElement {
 
   generateTiles() {
     this.state.tiles = [];
-    const total = this.GRID * this.GRID;
+    const total = this.COLS * this.ROWS;
     const types = [];
 
     for (let i = 0; i < this.BOMB_COUNT; i++) types.push('bomb');
-    const bonusTypes = ['bonus-pads', 'bonus-score', 'bonus-glow'];
-    for (let i = 0; i < this.BONUS_COUNT; i++) types.push(bonusTypes[i % 3]);
+    const bonusTypes = ['bonus-score', 'bonus-glow'];
+    for (let i = 0; i < this.BONUS_COUNT; i++) types.push(bonusTypes[i % bonusTypes.length]);
     while (types.length < total) types.push('glow');
 
     for (let i = types.length - 1; i > 0; i--) {
@@ -208,8 +203,8 @@ class GlowRevealGame extends HTMLElement {
     for (let i = 0; i < total; i++) {
       this.state.tiles.push({
         type: types[i],
-        row: Math.floor(i / this.GRID),
-        col: i % this.GRID,
+        row: Math.floor(i / this.COLS),
+        col: i % this.COLS,
         revealed: false,
       });
     }
@@ -238,35 +233,71 @@ class GlowRevealGame extends HTMLElement {
     S.tiles.forEach(tile => {
       const cx = (tile.col + 0.5) * S.tileW;
       const cy = (tile.row + 0.5) * S.tileH;
+      const minDim = Math.min(S.tileW, S.tileH);
 
       if (tile.type === 'glow') {
-        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, S.tileW * 0.38);
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, minDim * 0.38);
         g.addColorStop(0, 'rgba(255,240,210,0.5)');
         g.addColorStop(1, 'transparent');
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc(cx, cy, S.tileW * 0.38, 0, Math.PI * 2);
+        ctx.arc(cx, cy, minDim * 0.38, 0, Math.PI * 2);
         ctx.fill();
-        ctx.font = `${S.tileW * 0.32}px serif`;
+        ctx.font = `${minDim * 0.32}px serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('\u2728', cx, cy);
+      } else if (tile.type === 'bomb') {
+        // Draw bomb as canvas shapes (Safari mobile doesn't render bomb emoji on canvas)
+        const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, minDim * 0.42);
+        bg.addColorStop(0, 'rgba(220,60,60,0.12)');
+        bg.addColorStop(1, 'transparent');
+        ctx.fillStyle = bg;
+        ctx.beginPath();
+        ctx.arc(cx, cy, minDim * 0.42, 0, Math.PI * 2);
+        ctx.fill();
+        // Bomb body
+        const r = minDim * 0.17;
+        ctx.fillStyle = '#3A3A3A';
+        ctx.beginPath();
+        ctx.arc(cx, cy + r * 0.15, r, 0, Math.PI * 2);
+        ctx.fill();
+        // Fuse stem
+        ctx.strokeStyle = '#5A5A5A';
+        ctx.lineWidth = Math.max(1.5, r * 0.15);
+        ctx.beginPath();
+        ctx.moveTo(cx + r * 0.5, cy - r * 0.65);
+        ctx.quadraticCurveTo(cx + r * 1.1, cy - r * 1.5, cx + r * 0.3, cy - r * 1.4);
+        ctx.stroke();
+        // Spark glow
+        ctx.fillStyle = '#FF6B35';
+        ctx.beginPath();
+        ctx.arc(cx + r * 0.3, cy - r * 1.4, r * 0.22, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#FFD700';
+        ctx.beginPath();
+        ctx.arc(cx + r * 0.3, cy - r * 1.4, r * 0.12, 0, Math.PI * 2);
+        ctx.fill();
+        // Highlight
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.beginPath();
+        ctx.arc(cx - r * 0.3, cy - r * 0.1, r * 0.28, 0, Math.PI * 2);
+        ctx.fill();
       } else {
-        const emojiMap = { 'bomb': '\uD83D\uDCA3', 'bonus-pads': '\uD83E\uDDF4', 'bonus-score': '\uD83D\uDC8E', 'bonus-glow': '\uD83C\uDF1F' };
+        // Bonus tiles
         const colorMap = {
-          'bomb': 'rgba(220,60,60,0.1)',
-          'bonus-pads': 'rgba(196,160,201,0.15)',
           'bonus-score': 'rgba(240,176,48,0.12)',
           'bonus-glow': 'rgba(93,173,226,0.12)',
         };
-        const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, S.tileW * 0.42);
+        const emojiMap = { 'bonus-score': '\uD83D\uDC8E', 'bonus-glow': '\uD83C\uDF1F' };
+        const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, minDim * 0.42);
         bg.addColorStop(0, colorMap[tile.type]);
         bg.addColorStop(1, 'transparent');
         ctx.fillStyle = bg;
         ctx.beginPath();
-        ctx.arc(cx, cy, S.tileW * 0.42, 0, Math.PI * 2);
+        ctx.arc(cx, cy, minDim * 0.42, 0, Math.PI * 2);
         ctx.fill();
-        ctx.font = `${S.tileW * 0.38}px serif`;
+        ctx.font = `${minDim * 0.38}px serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(emojiMap[tile.type], cx, cy);
@@ -275,8 +306,10 @@ class GlowRevealGame extends HTMLElement {
 
     ctx.strokeStyle = 'rgba(180,140,100,0.06)';
     ctx.lineWidth = 1;
-    for (let i = 1; i < this.GRID; i++) {
+    for (let i = 1; i < this.COLS; i++) {
       ctx.beginPath(); ctx.moveTo(i * S.tileW, 0); ctx.lineTo(i * S.tileW, h); ctx.stroke();
+    }
+    for (let i = 1; i < this.ROWS; i++) {
       ctx.beginPath(); ctx.moveTo(0, i * S.tileH); ctx.lineTo(w, i * S.tileH); ctx.stroke();
     }
   }
@@ -436,7 +469,7 @@ class GlowRevealGame extends HTMLElement {
   }
 
   scratchAt(px, py) {
-    if (!this.state.playing || this.state.paused || this.state.pads <= 0) return;
+    if (!this.state.playing || this.state.paused) return;
 
     if (this.state.lastX !== null && this.state.lastY !== null) {
       this.scratchLine(this.state.lastX, this.state.lastY, px, py);
@@ -462,7 +495,7 @@ class GlowRevealGame extends HTMLElement {
       let transparent = 0;
       let total = 0;
 
-      const sampleStep = Math.max(3, Math.floor(S.tileW * this.dpr / this.SAMPLE_POINTS));
+      const sampleStep = Math.max(3, Math.floor(Math.min(S.tileW, S.tileH) * this.dpr / this.SAMPLE_POINTS));
       const startPx = Math.floor(tx * this.dpr) + sampleStep;
       const endPx = Math.floor((tx + S.tileW) * this.dpr) - sampleStep;
       const startPy = Math.floor(ty * this.dpr) + sampleStep;
@@ -484,8 +517,6 @@ class GlowRevealGame extends HTMLElement {
 
   revealTile(tile) {
     tile.revealed = true;
-    this.state.pads--;
-    this.state.padsUsed++;
 
     const ctx = this.coverCtx;
     ctx.save();
@@ -513,12 +544,6 @@ class GlowRevealGame extends HTMLElement {
         this.area.classList.add('gr-shake');
         setTimeout(() => this.area.classList.remove('gr-shake'), 400);
         break;
-      case 'bonus-pads':
-        this.state.pads += 3;
-        this.state.score += 5;
-        this.spawnFloat(screenX, screenY, '+3 PADS', '#9B7AA0');
-        this.spawnSparks(screenX, screenY);
-        break;
       case 'bonus-score':
         this.state.score += 50;
         this.spawnFloat(screenX, screenY, '+50 \uD83D\uDC8E', '#D4A843');
@@ -545,8 +570,8 @@ class GlowRevealGame extends HTMLElement {
     const ctx = this.coverCtx;
     dirs.forEach(([dr, dc]) => {
       const nr = tile.row + dr, nc = tile.col + dc;
-      if (nr < 0 || nr >= this.GRID || nc < 0 || nc >= this.GRID) return;
-      const ni = nr * this.GRID + nc;
+      if (nr < 0 || nr >= this.ROWS || nc < 0 || nc >= this.COLS) return;
+      const ni = nr * this.COLS + nc;
       const neighbor = this.state.tiles[ni];
       if (!neighbor.revealed && neighbor.type === 'glow') {
         neighbor.revealed = true;
@@ -564,13 +589,11 @@ class GlowRevealGame extends HTMLElement {
   /* ==================== GAME FLOW ==================== */
 
   startGame() {
-    this.state.pads = this.START_PADS;
     this.state.lives = 3;
     this.state.maxLives = 3;
     this.state.score = 0;
     this.state.revealedGlow = 0;
     this.state.bombsHit = 0;
-    this.state.padsUsed = 0;
     this.state.playing = true;
     this.state.paused = false;
     this.state.lastX = null;
@@ -593,7 +616,7 @@ class GlowRevealGame extends HTMLElement {
     }
     if (this.state.revealedGlow >= this.state.totalGlow) {
       this.state.playing = false;
-      this.state.score += this.state.lives * 25 + this.state.pads * 5;
+      this.state.score += this.state.lives * 25;
       setTimeout(() => this.showEnd(true), 300);
     }
   }
@@ -604,24 +627,14 @@ class GlowRevealGame extends HTMLElement {
     const pct = this.state.totalGlow > 0 ? Math.round((this.state.revealedGlow / this.state.totalGlow) * 100) : 0;
     this.endGlow.textContent = pct + '%';
     this.endBombs.textContent = this.state.bombsHit;
-    this.endPads.textContent = this.state.padsUsed;
     let msg;
     if (won) {
       msg = this.state.bombsHit === 0 ? "Flawless glow-up! Not a single breakout! \uD83C\uDFC6" : "Beautiful radiance achieved! Your skin is glowing.";
     } else {
-      msg = pct > 50 ? "So close! Over halfway to full glow \u2014 try again!" : "Those breakouts got you. Grab more pads and try again!";
+      msg = pct > 50 ? "So close! Over halfway to full glow \u2014 try again!" : "Those breakouts got you. Try again!";
     }
     this.endMsg.textContent = msg;
     this.endScreen.classList.remove('gr-hidden');
-  }
-
-  restockPads() {
-    if (!this.state.playing || this.state.paused || this.state.lives <= 1) return;
-    this.state.lives--;
-    this.state.pads += 5;
-    this.updateUI();
-    this.area.style.boxShadow = '0 0 30px 10px rgba(196,160,201,0.3)';
-    setTimeout(() => this.area.style.boxShadow = '', 400);
   }
 
   togglePause() {
@@ -640,7 +653,6 @@ class GlowRevealGame extends HTMLElement {
   /* ==================== UI ==================== */
 
   updateUI() {
-    this.padsVal.textContent = this.state.pads;
     this.livesVal.textContent = this.state.lives;
     this.scoreVal.textContent = this.state.score;
     const pct = this.state.totalGlow > 0 ? Math.round((this.state.revealedGlow / this.state.totalGlow) * 100) : 0;
@@ -653,8 +665,6 @@ class GlowRevealGame extends HTMLElement {
       h.textContent = '\u2764\uFE0F';
       this.heartsRow.appendChild(h);
     }
-    this.restockBtn.disabled = this.state.lives <= 1 || !this.state.playing;
-    this.cursor.classList.toggle('gr-empty', this.state.pads <= 0);
   }
 
   /* ==================== EFFECTS ==================== */

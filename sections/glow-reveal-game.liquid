@@ -32,10 +32,6 @@
           <div class="gr-rule-icon">&#128163;</div>
           <div class="gr-rule-text"><strong>Breakout bombs</strong> are hidden &#8212; hit one and lose a life</div>
         </div>
-        <div class="gr-rule">
-          <div class="gr-rule-icon">&#129524;</div>
-          <div class="gr-rule-text"><strong>Each reveal uses a pad</strong> &#8212; restock if you run low (costs a life)</div>
-        </div>
       </div>
       <button class="gr-btn-play" id="gr-startBtn">Start Scratching &#10024;</button>
     </div>
@@ -50,7 +46,6 @@
       <div class="gr-end-stats">
         <div class="gr-end-stat"><div class="gr-num" id="gr-endGlow">0%</div><div class="gr-lbl">Glow</div></div>
         <div class="gr-end-stat"><div class="gr-num" id="gr-endBombs">0</div><div class="gr-lbl">Bombs Hit</div></div>
-        <div class="gr-end-stat"><div class="gr-num" id="gr-endPads">0</div><div class="gr-lbl">Pads Used</div></div>
       </div>
       <p id="gr-endMsg"></p>
       <button class="gr-btn-play" id="gr-restartBtn">Play Again</button>
@@ -78,10 +73,6 @@
 
     <div class="gr-stats">
       <div class="gr-stat-pill">
-        <div class="gr-label">Pads</div>
-        <div class="gr-value gr-value-pads" id="gr-padsVal">18</div>
-      </div>
-      <div class="gr-stat-pill">
         <div class="gr-label">Lives</div>
         <div class="gr-value gr-value-lives" id="gr-livesVal">3</div>
         <div class="gr-hearts" id="gr-heartsRow"></div>
@@ -105,12 +96,6 @@
       <canvas id="gr-coverCanvas"></canvas>
     </div>
 
-    <div class="gr-controls">
-      <button class="gr-btn-restock" id="gr-restockBtn">
-        &#128722; Restock Pads (+5)
-        <span class="gr-sub">Costs 1 life</span>
-      </button>
-    </div>
   </div>
 </glow-reveal-game-component>
 
@@ -132,6 +117,7 @@
     --gr-red: #D95050;
 
     position: relative;
+    z-index: var(--layer-base, 0);
     display: block;
     height: 80vh;
     height: 80svh;
@@ -231,7 +217,6 @@
     line-height: 1;
   }
 
-  .gr-value-pads { color: var(--gr-turmeric-dark); }
   .gr-value-lives { color: var(--gr-red); }
   .gr-value-score { color: var(--gr-green); }
   .gr-value-glow { color: var(--gr-gold); }
@@ -261,16 +246,14 @@
   .gr-scratch-area {
     position: relative;
     width: 100%;
-    max-width: min(100%, calc(100vh - 280px));
-    aspect-ratio: 1 / 1;
+    flex: 1;
+    min-height: 0;
     border-radius: 20px;
     overflow: hidden;
     border: 2px solid rgba(196,160,201,0.2);
     box-shadow: 0 8px 40px rgba(196,160,201,0.12);
     cursor: none;
     touch-action: none;
-    flex-shrink: 1;
-    min-height: 0;
   }
 
   .gr-scratch-area canvas {
@@ -321,58 +304,6 @@
   .gr-pad-cursor.gr-pressing .gr-pad-shape {
     transform: scale(0.82);
     box-shadow: 0 2px 6px rgba(200,140,30,0.25), inset 0 1px 3px rgba(0,0,0,0.12);
-  }
-
-  .gr-pad-cursor.gr-empty .gr-pad-shape {
-    background: radial-gradient(circle at 35% 35%, #eee, #ccc);
-    border-color: #aaa;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    opacity: 0.5;
-  }
-
-  /* CONTROLS */
-  .gr-controls {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    max-width: 540px;
-  }
-
-  .gr-btn-restock {
-    flex: 1;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 600;
-    font-size: 0.82rem;
-    border: none;
-    border-radius: 14px;
-    padding: 13px 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: linear-gradient(135deg, var(--gr-primary), var(--gr-primary-dark));
-    color: white;
-    box-shadow: 0 4px 16px rgba(196,160,201,0.3);
-  }
-
-  .gr-btn-restock:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(196,160,201,0.45);
-  }
-
-  .gr-btn-restock:active { transform: translateY(0); }
-
-  .gr-sub {
-    display: block;
-    font-size: 0.55rem;
-    font-weight: 300;
-    opacity: 0.8;
-    margin-top: 1px;
-  }
-
-  .gr-btn-restock:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-    transform: none !important;
-    box-shadow: none !important;
   }
 
   /* OVERLAYS */
@@ -536,7 +467,7 @@
   .gr-float-text {
     position: fixed;
     pointer-events: none;
-    z-index: 999;
+    z-index: var(--layer-sticky, 8);
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
     font-size: 0.95rem;
@@ -551,7 +482,7 @@
   .gr-spark {
     position: fixed;
     pointer-events: none;
-    z-index: 998;
+    z-index: var(--layer-sticky, 8);
     font-size: 1rem;
     animation: gr-sparkFly 0.7s ease-out forwards;
   }

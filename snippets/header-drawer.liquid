@@ -504,6 +504,7 @@
                             class="menu-drawer__featured-content menu-drawer__featured-content--childlist"
                             style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};"
                           >
+                            <p class="menu-drawer__featured-label">Shop</p>
                             <ul class="menu-drawer__featured-content-list list-unstyled">
                               {% if featured_collections.size > 0 %}
                                 {%- for collection in featured_collections limit: max_featured_items -%}
@@ -604,6 +605,7 @@
           class="menu-drawer__featured-content"
           style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};"
         >
+          <p class="menu-drawer__featured-label">Shop</p>
           <ul class="menu-drawer__featured-content-list menu-drawer__animated-element list-unstyled">
             {% if top_level_featured_collections.size > 0 %}
               {%- for collection in top_level_featured_collections limit: max_featured_items -%}
@@ -744,7 +746,9 @@
     left: 0;
     width: 100vw;
     height: 100dvh;
-    backdrop-filter: brightness(0.75);
+    background: rgb(0 0 0 / 0.25);
+    backdrop-filter: brightness(0.75) blur(2px);
+    -webkit-backdrop-filter: brightness(0.75) blur(2px);
     z-index: var(--layer-heightened);
     opacity: 0;
     transition: opacity var(--drawer-animation-speed) ease;
@@ -881,9 +885,7 @@
   }
 
   .menu-drawer-container[open] .menu-drawer__animated-element {
-    animation: menu-drawer-nav-open var(--drawer-animation-speed) ease-in-out;
-    animation-delay: calc(var(--drawer-animation-speed) + (var(--menu-drawer-animation-index) - 1) * 0.1s);
-    animation-fill-mode: backwards;
+    animation: none;
   }
 
   .menu-drawer__menu details,

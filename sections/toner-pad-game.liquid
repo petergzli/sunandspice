@@ -131,6 +131,7 @@
     --tp-pad-deep: #8B7518;
 
     position: relative;
+    z-index: var(--layer-base, 0);
     display: block;
     height: 80vh;
     height: 80svh;
@@ -611,7 +612,7 @@
   .tp-sparkle {
     position: fixed;
     pointer-events: none;
-    z-index: 999;
+    z-index: var(--layer-sticky, 8);
     font-size: 1.2rem;
     animation: tp-sparkle-fly 0.8s ease-out forwards;
   }
@@ -624,7 +625,7 @@
   .tp-penalty-flash {
     position: fixed;
     pointer-events: none;
-    z-index: 998;
+    z-index: var(--layer-sticky, 8);
     font-size: 1rem;
     font-weight: 700;
     color: var(--tp-red, #E05555);
@@ -639,7 +640,7 @@
   .tp-score-pop {
     position: fixed;
     pointer-events: none;
-    z-index: 998;
+    z-index: var(--layer-sticky, 8);
     font-size: 1.1rem;
     font-weight: 700;
     color: #9B7AA0;

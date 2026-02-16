@@ -69,17 +69,6 @@
     </div>
   </div>
 
-  <!-- Level Up -->
-  <div class="tm-overlay tm-hidden tm-overlay-top" id="tm-levelUpScreen">
-    <div class="tm-modal">
-      <h1 id="tm-levelUpTitle">Level 2</h1>
-      <p id="tm-levelUpMsg">Batch complete!</p>
-      <div class="tm-level-emoji" id="tm-levelUpEmoji">&#129524;</div>
-      <p class="tm-level-hint" id="tm-levelUpHint"></p>
-      <button class="tm-btn-play" id="tm-levelUpBtn">Keep Mixing &rarr;</button>
-    </div>
-  </div>
-
   <!-- Game UI -->
   <div class="tm-app">
     <div class="tm-header">
@@ -329,7 +318,6 @@
   }
 
   .tm-overlay.tm-hidden { opacity: 0; pointer-events: none; }
-  .tm-overlay-top { z-index: 550; }
 
   .tm-modal {
     background: white;
@@ -364,9 +352,6 @@
     line-height: 1.6;
     margin-bottom: 14px;
   }
-
-  .tm-level-emoji { font-size: 3rem; margin: 8px 0; }
-  .tm-level-hint { font-size: 0.75rem; color: var(--tm-text-dim); }
 
   .tm-big-score-label {
     font-size: 0.5rem;

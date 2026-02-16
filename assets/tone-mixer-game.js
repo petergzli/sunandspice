@@ -94,7 +94,6 @@ class ToneMixerGame extends HTMLElement {
     this.startScreen = this.querySelector('#tm-startScreen');
     this.endScreen = this.querySelector('#tm-endScreen');
     this.pauseScreen = this.querySelector('#tm-pauseScreen');
-    this.levelUpScreen = this.querySelector('#tm-levelUpScreen');
     this.scoreVal = this.querySelector('#tm-scoreVal');
     this.livesVal = this.querySelector('#tm-livesVal');
     this.comboVal = this.querySelector('#tm-comboVal');
@@ -108,10 +107,6 @@ class ToneMixerGame extends HTMLElement {
     this.endBatches = this.querySelector('#tm-endBatches');
     this.endCombo = this.querySelector('#tm-endCombo');
     this.endMsg = this.querySelector('#tm-endMsg');
-    this.levelUpTitle = this.querySelector('#tm-levelUpTitle');
-    this.levelUpEmoji = this.querySelector('#tm-levelUpEmoji');
-    this.levelUpMsg = this.querySelector('#tm-levelUpMsg');
-    this.levelUpHint = this.querySelector('#tm-levelUpHint');
   }
 
   bindEvents() {
@@ -153,7 +148,6 @@ class ToneMixerGame extends HTMLElement {
     this.querySelector('#tm-pauseBtn').addEventListener('click', () => this.togglePause());
     this.querySelector('#tm-resumeBtn').addEventListener('click', () => this.togglePause());
     this.querySelector('#tm-quitBtn').addEventListener('click', () => this.quitGame());
-    this.querySelector('#tm-levelUpBtn').addEventListener('click', () => this.dismissLevelUp());
   }
 
   /* ==================== CANVAS ==================== */
@@ -267,7 +261,11 @@ class ToneMixerGame extends HTMLElement {
         S.formula = 0;
         S.score += 50 + S.level * 25;
         S.level++;
-        this.showLevelUp();
+        if (S.level >= 4 && (S.level - 1) % 3 === 0 && S.lives < 5) {
+          S.lives++; S.maxLives = Math.max(S.maxLives, S.lives);
+        }
+        this.applyLevelConfig();
+        this.flashScreen('rgba(232,168,48,0.15)');
       }
     }
     this.updateUI();
@@ -504,44 +502,11 @@ class ToneMixerGame extends HTMLElement {
     this.startScreen.classList.add('tm-hidden');
     this.endScreen.classList.add('tm-hidden');
     this.pauseScreen.classList.add('tm-hidden');
-    this.levelUpScreen.classList.add('tm-hidden');
 
     this.resize();
     this.updateUI();
     if (S.animId) cancelAnimationFrame(S.animId);
     S.animId = requestAnimationFrame(() => this.loop());
-  }
-
-  showLevelUp() {
-    const S = this.state;
-    S.paused = true;
-    S.drops = [];
-    const cfg = this.getLevelConfig(S.level);
-
-    let lifeBonus = false;
-    if (S.level >= 4 && (S.level - 1) % 3 === 0 && S.lives < 5) {
-      S.lives++; S.maxLives = Math.max(S.maxLives, S.lives); lifeBonus = true;
-    }
-
-    this.levelUpTitle.textContent = `Level ${S.level} \u2014 ${cfg.name}`;
-    this.levelUpEmoji.textContent = cfg.emoji;
-    this.levelUpMsg.textContent =
-      S.level <= 2 ? 'Batch complete! Ready for the next one?'
-      : S.level <= 5 ? "Great mixing! It's getting faster..."
-      : S.level <= 8 ? 'Incredible! Only the best get this far.'
-      : "You're a legend. This is the endgame.";
-    this.levelUpHint.textContent = (lifeBonus ? '\u2764\uFE0F +1 Life Bonus!  \u2022  ' : '') + cfg.hint;
-
-    this.levelUpScreen.classList.remove('tm-hidden');
-    this.flashScreen('rgba(232,168,48,0.15)');
-    this.updateUI();
-  }
-
-  dismissLevelUp() {
-    this.levelUpScreen.classList.add('tm-hidden');
-    this.state.paused = false;
-    this.applyLevelConfig();
-    this.updateUI();
   }
 
   showEnd() {
@@ -572,7 +537,6 @@ class ToneMixerGame extends HTMLElement {
   quitGame() {
     this.state.paused = false;
     this.pauseScreen.classList.add('tm-hidden');
-    this.levelUpScreen.classList.add('tm-hidden');
     this.state.playing = false;
     this.showEnd();
   }

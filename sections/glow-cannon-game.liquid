@@ -1,0 +1,533 @@
+<script src="{{ 'glow-cannon-game.js' | asset_url }}" type="module"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{%- assign gc_product = section.settings.product -%}
+<glow-cannon-game-component
+  class="section"
+  style="
+    display: block;
+    {%- render 'spacing-style', settings: section.settings %};
+  "
+  {% if gc_product.featured_image %}data-product-image="{{ gc_product.featured_image | image_url: width: 200 }}"{% endif %}
+>
+  <!-- Start screen -->
+  <div class="gc-overlay" id="gc-startScreen">
+    <div class="gc-modal">
+      <h1>Glow Cannon</h1>
+      <div class="gc-tagline">Turmeric Pad Shooter</div>
+      <p>Aim your cannon and launch turmeric glow pads at dark spots, acne, and discoloration. Clear the skin to advance!</p>
+      <div class="gc-rules">
+        <div class="gc-rule">
+          <div class="gc-rule-icon">&#127919;</div>
+          <div class="gc-rule-text"><strong>Aim & shoot</strong> &#8212; tap or click where you want to fire your turmeric pad</div>
+        </div>
+        <div class="gc-rule">
+          <div class="gc-rule-icon">&#127919;</div>
+          <div class="gc-rule-text"><strong>Hit dark spots</strong> to treat them &#8212; stubborn ones need multiple hits</div>
+        </div>
+        <div class="gc-rule">
+          <div class="gc-rule-icon">&#129524;</div>
+          <div class="gc-rule-text"><strong>60 pads per pouch</strong> &#8212; running low? Restock for $32, just like the real thing</div>
+        </div>
+        <div class="gc-rule">
+          <div class="gc-rule-icon">&#10024;</div>
+          <div class="gc-rule-text"><strong>Clear all spots</strong> and new waves keep coming &#8212; how far can you go?</div>
+        </div>
+      </div>
+      <button class="gc-btn-play" id="gc-startBtn">Start Shooting &#10024;</button>
+    </div>
+  </div>
+
+  <!-- Game Over -->
+  <div class="gc-overlay gc-hidden" id="gc-endScreen">
+    <div class="gc-modal">
+      <h1 id="gc-endTitle">Game Over</h1>
+      <div class="gc-big-score-label">Score</div>
+      <div class="gc-big-score" id="gc-endScore">0</div>
+      <div class="gc-end-stats">
+        <div class="gc-end-stat"><div class="gc-num" id="gc-endWave">0</div><div class="gc-lbl">Wave</div></div>
+        <div class="gc-end-stat"><div class="gc-num" id="gc-endCleared">0</div><div class="gc-lbl">Cleared</div></div>
+        <div class="gc-end-stat"><div class="gc-num" id="gc-endAccuracy">0%</div><div class="gc-lbl">Accuracy</div></div>
+        <div class="gc-end-stat"><div class="gc-num" id="gc-endPouches">1</div><div class="gc-lbl">Pouches</div></div>
+      </div>
+      <p id="gc-endMsg"></p>
+      <button class="gc-btn-play" id="gc-restartBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Pause -->
+  <div class="gc-overlay gc-hidden" id="gc-pauseScreen">
+    <div class="gc-modal">
+      <h1>Paused</h1>
+      <p>Cannon cooling down &#10024;</p>
+      <div class="gc-pause-btns">
+        <button class="gc-btn-play" id="gc-resumeBtn">Resume</button>
+        <button class="gc-btn-quit" id="gc-quitBtn">Stop Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game UI -->
+  <div class="gc-app">
+    <div class="gc-header">
+      <div class="gc-logo">Glow Cannon<small>Turmeric Pad Shooter</small></div>
+      <button class="gc-btn-icon" id="gc-pauseBtn">&#9208;</button>
+    </div>
+
+    <div class="gc-stats">
+      <div class="gc-stat">
+        <div class="gc-stat-lbl">Score</div>
+        <div class="gc-stat-val gc-val-score" id="gc-scoreVal">0</div>
+      </div>
+      <div class="gc-stat">
+        <div class="gc-stat-lbl">Wave</div>
+        <div class="gc-stat-val gc-val-wave" id="gc-waveVal">1</div>
+      </div>
+      <div class="gc-stat">
+        <div class="gc-stat-lbl">Pads</div>
+        <div class="gc-stat-val gc-val-pads" id="gc-padsVal">60</div>
+        <div class="gc-pouch-info" id="gc-pouchInfo">POUCH 1 &bull; $32 spent</div>
+      </div>
+      <div class="gc-stat">
+        <div class="gc-stat-lbl">Spots</div>
+        <div class="gc-stat-val gc-val-spots" id="gc-spotsVal">0</div>
+      </div>
+    </div>
+
+    <div class="gc-restock-wrap">
+      <button class="gc-btn-restock" id="gc-restockBtn" style="display:none">&#129524; Restock Pouch &#8212; $32 <span style="font-weight:400;opacity:0.7">(+60 pads)</span></button>
+    </div>
+
+    <div class="gc-game-area" id="gc-gameArea">
+      <canvas id="gc-gameCanvas"></canvas>
+    </div>
+  </div>
+</glow-cannon-game-component>
+
+{% stylesheet %}
+  glow-cannon-game-component {
+    --gc-primary: #C4A0C9;
+    --gc-primary-light: #E0CCE3;
+    --gc-primary-dark: #9B7AA0;
+    --gc-primary-deep: #7A5E80;
+    --gc-turmeric: #E8A830;
+    --gc-turmeric-light: #FFD76A;
+    --gc-turmeric-dark: #C08820;
+    --gc-good: #5CB85C;
+    --gc-bad: #D9534F;
+    --gc-bg: #FFFCF8;
+    --gc-text: #2D1F33;
+    --gc-text-dim: #9888A0;
+
+    position: relative;
+    z-index: var(--layer-base, 0);
+    display: block;
+    height: 100vh;
+    height: 100svh;
+    max-height: 800px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gc-bg);
+    color: var(--gc-text);
+  }
+
+  .gc-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* HEADER */
+  .gc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px 4px;
+    z-index: 10;
+  }
+
+  .gc-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--gc-primary-deep);
+    line-height: 1.1;
+  }
+
+  .gc-logo small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.48rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gc-text-dim);
+  }
+
+  .gc-btn-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1.5px solid var(--gc-primary-light);
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: var(--gc-primary-dark);
+    transition: all 0.2s;
+  }
+
+  .gc-btn-icon:hover { background: var(--gc-primary-light); }
+
+  /* STATS */
+  .gc-stats {
+    display: flex;
+    gap: 6px;
+    padding: 4px 16px 6px;
+    z-index: 10;
+  }
+
+  .gc-stat {
+    flex: 1;
+    background: white;
+    border: 1px solid rgba(196,160,201,0.12);
+    border-radius: 12px;
+    padding: 5px 4px;
+    text-align: center;
+  }
+
+  .gc-stat-lbl {
+    font-size: 0.42rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gc-text-dim);
+  }
+
+  .gc-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1.1;
+  }
+
+  .gc-val-score { color: var(--gc-good); }
+  .gc-val-wave { color: var(--gc-primary-dark); }
+  .gc-val-pads { color: var(--gc-turmeric-dark); }
+  .gc-val-spots { color: var(--gc-bad); }
+
+  .gc-pouch-info {
+    font-size: 0.4rem;
+    color: var(--gc-text-dim);
+    letter-spacing: 1px;
+    margin-top: 1px;
+  }
+
+  /* RESTOCK */
+  .gc-restock-wrap {
+    padding: 0 16px 4px;
+    z-index: 10;
+  }
+
+  .gc-btn-restock {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    background: linear-gradient(135deg, var(--gc-turmeric-light), var(--gc-turmeric));
+    color: #6B4400;
+    box-shadow: 0 3px 12px rgba(232,168,48,0.25);
+    transition: all 0.2s;
+    animation: gc-pulse 1s ease infinite;
+  }
+
+  @keyframes gc-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  /* GAME AREA */
+  .gc-game-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    cursor: crosshair;
+    touch-action: none;
+  }
+
+  .gc-game-area canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* OVERLAYS */
+  .gc-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,252,248,0.95);
+    backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    transition: opacity 0.4s;
+  }
+
+  .gc-overlay.gc-hidden { opacity: 0; pointer-events: none; }
+
+  .gc-modal {
+    background: white;
+    border: 1px solid rgba(196,160,201,0.15);
+    border-radius: 28px;
+    padding: 30px 26px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(100,60,120,0.06);
+  }
+
+  .gc-modal h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gc-primary-deep);
+    margin-bottom: 4px;
+  }
+
+  .gc-tagline {
+    font-size: 0.5rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gc-text-dim);
+    margin-bottom: 14px;
+  }
+
+  .gc-modal p {
+    color: var(--gc-text-dim);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .gc-end-product-img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 auto 8px;
+    border-radius: 12px;
+  }
+
+  .gc-big-score-label {
+    font-size: 0.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gc-text-dim);
+  }
+
+  .gc-big-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--gc-turmeric-dark);
+    line-height: 1;
+    margin: 6px 0 2px;
+  }
+
+  .gc-end-stats {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 14px 0;
+  }
+
+  .gc-end-stat { text-align: center; }
+
+  .gc-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--gc-text);
+  }
+
+  .gc-lbl {
+    font-size: 0.42rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gc-text-dim);
+  }
+
+  .gc-btn-play {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border: none;
+    border-radius: 16px;
+    padding: 14px 36px;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--gc-primary), var(--gc-primary-dark));
+    color: white;
+    box-shadow: 0 6px 24px rgba(196,160,201,0.3);
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .gc-btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(196,160,201,0.5);
+  }
+
+  .gc-rules { text-align: left; margin: 8px 0 12px; }
+
+  .gc-rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .gc-rule-icon {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    border-radius: 8px;
+    background: #FFF5E8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  .gc-rule-text {
+    color: var(--gc-text-dim);
+    font-size: 0.74rem;
+    line-height: 1.4;
+  }
+
+  .gc-rule-text strong { color: var(--gc-text); }
+
+  .gc-pause-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+
+  .gc-btn-quit {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    border: 2px solid var(--gc-bad);
+    background: transparent;
+    color: var(--gc-bad);
+    border-radius: 14px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .gc-btn-quit:hover { background: var(--gc-bad); color: white; }
+
+  /* EFFECTS (appended to body) */
+  .gc-float-text {
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--layer-sticky, 8);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    animation: gc-floatUp 0.9s ease-out forwards;
+    white-space: nowrap;
+  }
+
+  @keyframes gc-floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-50px) scale(1.1); opacity: 0; }
+  }
+
+  .gc-spark {
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--layer-sticky, 8);
+    animation: gc-sparkFly 0.6s ease-out forwards;
+  }
+
+  @keyframes gc-sparkFly {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-height: 700px) {
+    .gc-stat { padding: 4px 3px; }
+    .gc-stat-val { font-size: 0.95rem; }
+    .gc-modal { padding: 24px 20px; }
+    .gc-modal h1 { font-size: 1.5rem; }
+    .gc-btn-play { padding: 12px 28px; font-size: 0.85rem; }
+    .gc-logo { font-size: 1rem; }
+  }
+
+  @media (max-height: 560px) {
+    glow-cannon-game-component { height: 100vh; height: 100svh; max-height: none; }
+    .gc-header { padding: 4px 12px 2px; }
+    .gc-stats { padding: 2px 12px 4px; }
+    .gc-stat { padding: 3px 3px; }
+    .gc-stat-lbl { font-size: 0.4rem; }
+    .gc-stat-val { font-size: 0.85rem; }
+    .gc-pouch-info { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Glow Cannon Game",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Featured product"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Glow Cannon Game"
+    }
+  ]
+}
+{% endschema %}

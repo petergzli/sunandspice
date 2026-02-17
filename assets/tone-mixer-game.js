@@ -6,7 +6,7 @@
 class ToneMixerGame extends HTMLElement {
   connectedCallback() {
     this.GOOD = [
-      { name: 'Turmeric',           emoji: '🌿', color: '#E8A830', points: 15, star: true },
+      { name: 'Turmeric',           emoji: '🫚', color: '#E8A830', points: 15, star: true },
       { name: 'Turmeric Extract',   emoji: '✨', color: '#D4960A', points: 20, star: true },
       { name: 'Chamomile',          emoji: '🌼', color: '#F0D060', points: 10 },
       { name: 'Vitamin C',          emoji: '🍊', color: '#F0882A', points: 12 },
@@ -22,7 +22,7 @@ class ToneMixerGame extends HTMLElement {
     ];
 
     this.BAD = [
-      { name: 'Alcohol',     emoji: '🚫', color: '#D9534F' },
+      { name: 'Alcohol',     emoji: '🍺', color: '#D9534F' },
       { name: 'Parabens',    emoji: '☠️',  color: '#C04040' },
       { name: 'Fragrance',   emoji: '💨', color: '#B04848' },
       { name: 'Sulfates',    emoji: '⚠️',  color: '#D05050' },
@@ -175,7 +175,7 @@ class ToneMixerGame extends HTMLElement {
       this.GOOD.forEach(g => { weighted.push(g); if (g.star) weighted.push(g); });
       item = weighted[Math.floor(Math.random() * weighted.length)];
     }
-    const size = 36 + Math.random() * 8;
+    const size = 48 + Math.random() * 8;
     S.drops.push({
       x: 20 + Math.random() * (this.cw - 40),
       y: -size, size,
@@ -313,23 +313,27 @@ class ToneMixerGame extends HTMLElement {
       ctx.translate(d.x, d.y);
       ctx.rotate(Math.sin(d.wobble * 2) * d.rotation);
 
-      const bubbleR = d.size / 2 + 4;
+      const bubbleR = d.size / 2 + 6;
       ctx.beginPath(); ctx.arc(0, 0, bubbleR, 0, Math.PI * 2);
-      ctx.fillStyle = d.isBad ? 'rgba(217,83,79,0.12)' : d.item.star ? 'rgba(232,168,48,0.15)' : 'rgba(92,184,92,0.1)';
+      ctx.fillStyle = d.isBad ? 'rgba(217,83,79,0.25)' : d.item.star ? 'rgba(232,168,48,0.3)' : 'rgba(92,184,92,0.2)';
       ctx.fill();
 
       ctx.beginPath(); ctx.arc(0, 0, bubbleR, 0, Math.PI * 2);
-      ctx.strokeStyle = d.isBad ? 'rgba(217,83,79,0.4)' : d.item.star ? 'rgba(232,168,48,0.5)' : 'rgba(92,184,92,0.3)';
-      ctx.lineWidth = 2; ctx.stroke();
+      ctx.strokeStyle = d.isBad ? 'rgba(217,83,79,0.7)' : d.item.star ? 'rgba(232,168,48,0.75)' : 'rgba(92,184,92,0.6)';
+      ctx.lineWidth = 2.5; ctx.stroke();
 
-      ctx.font = `${d.size * 0.65}px serif`;
+      // White backing so emoji is crisp on top of colored bubble
+      ctx.beginPath(); ctx.arc(0, 0, d.size * 0.38, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fill();
+
+      ctx.font = `${d.size * 0.8}px serif`;
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillText(d.item.emoji, 0, 1);
 
-      ctx.font = `700 ${Math.max(9, d.size * 0.24)}px DM Sans, sans-serif`;
-      ctx.fillStyle = d.isBad ? d.item.color : '#4A3A2A';
-      ctx.globalAlpha = 0.85;
-      ctx.fillText(d.item.name, 0, bubbleR + 11);
+      ctx.font = `800 ${Math.max(11, d.size * 0.3)}px DM Sans, sans-serif`;
+      ctx.fillStyle = d.isBad ? '#B03030' : '#2A1F10';
+      ctx.fillText(d.item.name, 0, bubbleR + 13);
       ctx.restore();
     });
 
@@ -520,7 +524,12 @@ class ToneMixerGame extends HTMLElement {
   showEnd() {
     const S = this.state;
     const won = S.batches > 0;
-    this.endTitle.textContent = won ? '\uD83E\uDDF4 Great Run!' : 'Game Over';
+    const productImg = this.dataset.productImage;
+    if (won && productImg) {
+      this.endTitle.innerHTML = `<img src="${productImg}" alt="" class="tm-end-product-img"> Great Run!`;
+    } else {
+      this.endTitle.textContent = won ? 'Great Run!' : 'Game Over';
+    }
     this.endScore.textContent = S.score;
     this.endCaught.textContent = S.caught;
     this.endBatches.textContent = S.level;

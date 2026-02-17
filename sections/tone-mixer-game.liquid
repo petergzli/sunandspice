@@ -1,12 +1,14 @@
 <script src="{{ 'tone-mixer-game.js' | asset_url }}" type="module"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+{%- assign tm_product = section.settings.product -%}
 <tone-mixer-game-component
   class="section"
   style="
     display: block;
     {%- render 'spacing-style', settings: section.settings %};
   "
+  {% if tm_product.featured_image %}data-product-image="{{ tm_product.featured_image | image_url: width: 200 }}"{% endif %}
 >
   <!-- Start screen -->
   <div class="tm-overlay" id="tm-startScreen">
@@ -353,6 +355,15 @@
     margin-bottom: 14px;
   }
 
+  .tm-end-product-img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 auto 8px;
+    border-radius: 12px;
+  }
+
   .tm-big-score-label {
     font-size: 0.5rem;
     letter-spacing: 2px;
@@ -489,7 +500,7 @@
     z-index: var(--layer-sticky, 8);
     font-family: 'DM Sans', sans-serif;
     font-weight: 800;
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     animation: tm-catchPop 0.9s ease-out forwards;
     white-space: nowrap;
   }
@@ -552,6 +563,11 @@
   "name": "Tone Mixer Game",
   "tag": "section",
   "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Featured product"
+    },
     {
       "type": "header",
       "content": "Section padding"

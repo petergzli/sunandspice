@@ -177,7 +177,7 @@ class GlowCannonGame extends HTMLElement {
         hp: type.hp, maxHp: type.hp,
         hitFlash: 0, cleared: false,
         growthScale: 0.3,
-        growthRate: 0.0008 + Math.random() * 0.0004 + this.state.wave * 0.0001,
+        growthRate: 0.002 + Math.random() * 0.001 + this.state.wave * 0.0003,
         maxScale: 2.5,
       });
     }
@@ -758,7 +758,7 @@ class GlowCannonGame extends HTMLElement {
         hp: type.hp, maxHp: type.hp,
         hitFlash: 0, cleared: false,
         growthScale: 0.15,
-        growthRate: 0.0008 + Math.random() * 0.0005 + S.wave * 0.00015,
+        growthRate: 0.002 + Math.random() * 0.001 + S.wave * 0.0004,
         maxScale: 2.5,
       });
     }

@@ -118,11 +118,18 @@
                 "custom_width_mobile": 100
               },
               "blocks": {}
+            },
+            "social_proof_badge": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<div class='sp-badge'><div class='sp-badge__avatars'><div class='sp-badge__avatar'><img src='https://cdn.shopify.com/s/files/1/0769/2386/3273/files/steph-testimonial.jpg?v=1772433619' alt='Customer' width='44' height='44' loading='lazy'></div><div class='sp-badge__avatar'><img src='https://cdn.shopify.com/s/files/1/0769/2386/3273/files/aly-testimonial.png?v=1772433569' alt='Customer' width='44' height='44' loading='lazy'></div><div class='sp-badge__avatar'><img src='https://cdn.shopify.com/s/files/1/0769/2386/3273/files/serena-testimonial.png?v=1772433531' alt='Customer' width='44' height='44' loading='lazy'></div></div><div class='sp-badge__info'><div class='sp-badge__stars'>{% for i in (1..5) %}<div class='sp-badge__star'><svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='2'><path d='M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z'/></svg></div>{% endfor %}</div><span class='sp-badge__text'>Exceptional: 4.8 out of 5 Stars</span></div></div><style>.sp-badge{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:8px;margin-bottom:12px;}.sp-badge__avatars{display:flex;}.sp-badge__avatar{width:44px;height:44px;border-radius:50%;border:2px solid #fff;overflow:hidden;flex-shrink:0;}.sp-badge__avatar+.sp-badge__avatar{margin-left:-12px;}.sp-badge__avatar-ph{width:100%;height:100%;background:rgba(255,255,255,0.3);}.sp-badge__info{display:flex;flex-direction:column;gap:4px;}.sp-badge__stars{display:flex;gap:2px;}.sp-badge__star{background:rgba(255,255,255,0.25);padding:3px;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#fff;}.sp-badge__text{font-size:0.8125rem;font-family:var(--font-body--family);font-weight:500;color:#fff;}@media(max-width:749px){.sp-badge{gap:10px;}.sp-badge__avatar{width:36px;height:36px;}.sp-badge__text{font-size:0.75rem;}}</style>"
+              }
             }
           },
           "block_order": [
             "text_headline",
             "text_subtext",
+            "social_proof_badge",
             "button_H9gpTf"
           ]
         }
@@ -392,6 +399,50 @@
         "gap": 0,
         "color_scheme": "scheme-1",
         "padding-block-start": 24,
+        "padding-block-end": 56
+      }
+    },
+    "testimonials_section": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/steph-testimonial.jpg",
+            "stars": 5,
+            "quote": "I've been using the Turmeric Glow Pads for two weeks and the difference is incredible. My dark spots have visibly faded and my skin feels so smooth.",
+            "author": "Priya K."
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/aly-testimonial.png",
+            "stars": 5,
+            "quote": "Finally a natural product that actually works! My skin has never looked brighter. These pads are now a non-negotiable in my routine.",
+            "author": "Aisha T."
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/serena-testimonial.png",
+            "stars": 5,
+            "quote": "These pads are a game-changer. Gentle enough for daily use but with powerful results. My complexion is more even and radiant than ever.",
+            "author": "Mei L."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ],
+      "settings": {
+        "heading": "What Our Customers Say",
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding-block-start": 56,
         "padding-block-end": 56
       }
     },
@@ -786,6 +837,7 @@
     "tagline_section",
     "social_proof",
     "product_list_fa6P9H",
+    "testimonials_section",
     "scrolling_banner"
   ]
 }
